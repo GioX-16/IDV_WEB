@@ -1,0 +1,330 @@
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', serif;
+    line-height: 1.6;
+    color: #1e3a8a;
+    background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1e3a8a;
+}
+
+.logo-flame {
+    font-size: 1.2rem;
+    color: #f97316;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #1e3a8a;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #f97316;
+}
+
+.nav-btn {
+    background: #ffffff;
+    color: #1e3a8a;
+    padding: 0.5rem 1.5rem;
+    border: 2px solid #F7941E;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: #1e3a8a;
+    color: #ffffff;
+    border: 2px solid #1e3a8a;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background: #1e3a8a;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+    position: relative;
+    background-image: url('../images/HERO_BANNER1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 1;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.hero-title {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #142157;
+    line-height: 1.2;
+}
+
+.title-line {
+    display: block;
+}
+
+.hero-btn {
+    background: #ffffff;
+    color: #1e3a8a;
+    border: 2px solid #F7941E;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+
+.hero-btn:hover {
+    background: #1e3a8a;
+    color: #ffffff;
+    border: 2px solid #1e3a8a;
+    transform: translateY(-2px);
+}
+
+.church-seal {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.seal-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.seal-content {
+    text-align: center;
+    color: #1e3a8a;
+    font-size: 0.7rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.seal-text {
+    display: block;
+}
+
+/* Hero Image Section */
+.hero-photo {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: contain;
+    justify-self: center;
+}
+
+.church-logo {
+    position: absolute;
+    top: -20px;
+    right: -30px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-width: 200px;
+}
+
+.logo-flame-large {
+    font-size: 2rem;
+    color: #f97316;
+    margin-bottom: 0.5rem;
+}
+
+.logo-text-large {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.logo-iglesia {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1e3a8a;
+    font-style: italic;
+}
+
+.logo-del {
+    font-size: 0.8rem;
+    color: #1e3a8a;
+}
+
+.logo-dios {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1e3a8a;
+}
+
+.logo-viviente {
+    font-size: 1.3rem;
+    color: #1e3a8a;
+    font-style: italic;
+}
+
+.logo-bible {
+    font-size: 1.5rem;
+    color: #1e3a8a;
+    margin-top: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 2rem 0;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-btn {
+        align-self: center;
+    }
+    
+    .church-logo {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-top: 1rem;
+    }
+    
+    .church-seal {
+        align-self: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    .hero-container {
+        padding: 0 1rem;
+    }
+}
