@@ -125,7 +125,7 @@ body {
     display: flex;
     align-items: center;
     padding-top: 100px;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     position: relative;
     background-image: url("../images/HERO_BANNER1.png");
     background-size: cover;
@@ -140,11 +140,11 @@ body {
     padding: 0 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 1rem;
     align-items: center;
     position: relative;
     z-index: 2;
-    min-height: 90vh;
+    min-height: 80vh;
 }
 
 .hero::before {
@@ -229,7 +229,7 @@ body {
 
 /* Hero Image Section */
 .hero-photo {
-    width: 120%;
+    width: 125%;
     max-width: 1200px; /* TAMAÑO DE LA IMAGEN PASTORES - Puedes cambiar este valor */
     height: auto;
     object-fit: contain;
@@ -278,7 +278,7 @@ body {
 }
 
 .text-section h2 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     margin-bottom: 20px;
     letter-spacing: 2px;
 }
@@ -291,7 +291,7 @@ body {
     display: inline-block;
     margin-top: 30px;
     padding: 12px 30px;
-    background: linear-gradient(to right, #f7941e, #f7941e);
+    background: linear-gradient(to right, #f7941e, #e8c068);
     color: white;
     border-radius: 12px;
     text-decoration: none;
@@ -300,7 +300,7 @@ body {
 }
 
 .button:hover {
-    background: linear-gradient(to right, #142157, #142157);
+    background: linear-gradient(to right, #408dcc, #142157);
 }
 
 .image-section {
@@ -318,7 +318,7 @@ body {
 
 .video-section {
     position: relative;
-    height: 90vh;
+    height: 100vh;
     width: 100%;
     overflow: hidden;
 }
@@ -340,102 +340,128 @@ body {
     text-align: center;
     top: 50%;
     transform: translateY(-50%);
-    padding: 0 20px;
+    padding: 0 0px;
 }
+
+/* --- --- CONTENEDOR PRINCIPAL --- --- */
+
+.contenedor {
+	max-width: 1200px;
+	width: 100%;
+	margin: auto;
+}
+
+.contenido-principal {
+	margin-bottom: 50px;
+	display: flex;
+	align-items: center;
+}
+
+.contenido-principal__imagen {
+	vertical-align: top;
+	margin-right: 20px;
+	width: 50%;
+	max-width: 550px;
+}
+
+.contenido-principal__contenedor {
+	width: 50%;
+}
+
+.contenido-principal__titulo {
+	font-weight: normal;
+	font-size: 45px;
+}
+
+.contenido-principal__resumen {
+	font-family: 'Times New Roman', sans-serif;
+	line-height: 30px;
+	color: #060606;
+}
+
 
 /* Carousel Section */
 
-.ministerios {
-    text-align: center;
-    padding: 60px 10%;
-    background-color: #ffffff;
-    font-family: "Times New Roman", serif;
+.carousel__contenedor {
+	position: relative;
 }
 
-.ministerios h2 {
-    font-size: 2.5rem;
-    margin-bottom: 30px;
-    letter-spacing: 2px;
+.carousel__anterior,
+.carousel__siguiente {
+	position: absolute;
+	display: block;
+	width: 30px;
+	height: 30px;
+	border: none;
+	top: calc(50% - 35px);
+	cursor: pointer;
+	line-height: 100px;
+	text-align: center;
+	background: none;
+	color: #142157;
+	opacity: 100%;
 }
 
-.carousel-container {
-    position: relative;
-    overflow: hidden;
-    max-width: 700px;
-    margin: 0 auto;
-    border-radius: 20px;
-    background-color: #f9f9f9;
-    padding: 60px;
+.carousel__anterior:hover,
+.carousel__siguiente:hover {
+	opacity: 100%;
 }
 
-.carousel-slide {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+.carousel__anterior {
+	left: -40px;
 }
 
-.carousel-item {
-    min-width: 100%;
-    box-sizing: border-box;
-    padding: 5px;
+.carousel__siguiente {
+	right: -40px;
 }
 
-.carousel-item img {
-    width: 100%;
-    border-radius: 5px;
-    object-fit: cover;
+.carousel__lista {
+	overflow: hidden;
+    border-radius: 10px;
 }
 
-/* BACKGROUND CAROUSEL */
-
-.ministerios {
-    text-align: center;
-    padding: 60px 10%;
-    background: linear-gradient(
-            to bottom right,
-            #f4f4f4 0%,
-            /* Negro con opacidad al 80% */ #ef9424 100% /* Gris claro con opacidad al 40% */
-        ),
-        url("../images/Backg_Carousel.png"); /* Cambia esta ruta a la de tu imagen */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #080808; /* Esto mejora contraste del texto sobre el fondo */
-    font-family: "Times New Roman", serif;
+.carousel__elemento {
+	text-align: center;
+    justify-content: space-between;
 }
 
-/* Controles */
-.carousel-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    gap: 10px;
+.carousel__elemento p{
+    color: #142157;
 }
 
-.carousel-controls button {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
+.carousel__elemento img{
+    justify-content: space-between;
 }
 
-/* Dots */
-.indicators {
-    display: flex;
-    gap: 8px;
+.carousel__indicadores .glider-dot {
+	display: block;
+	width: 30px;
+	height: 4px;
+	background: #031568;
+	opacity: .10;
+	border-radius: 10;
 }
 
-.dot {
-    width: 12px;
-    height: 12px;
-    background: #ccc;
-    border-radius: 50%;
-    display: inline-block;
-    cursor: pointer;
+.carousel__indicadores .glider-dot:hover {
+	opacity: .9;
 }
 
-.dot.active {
-    background: orange;
+.carousel__indicadores .glider-dot.active {
+	opacity: 4;
+}
+
+@media screen and (max-width: 800px) {
+	body {
+		padding: 40px 0;
+	}
+
+	.contenido-principal {
+		flex-direction: column;
+	}
+
+	.contenido-principal > * {
+		width: 100%;
+	}
 }
 
 /* SERVICIOS SECTION  */

@@ -82,61 +82,36 @@ window.addEventListener("scroll", () => {
     }
 });
 
-const slide = document.querySelector(".carousel-slide");
-const totalSlides = document.querySelectorAll(".carousel-item").length;
-const indicatorsContainer = document.querySelector(".indicators");
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
+// Carousel Js Glider
 
-let index = 0;
-let interval;
-
-
-// Crear puntos dinámicos
-for (let i = 0; i < totalSlides; i++) {
-    const dot = document.createElement("span");
-    dot.classList.add("dot");
-    if (i === 0) dot.classList.add("active");
-    dot.addEventListener("click", () => {
-        index = i;
-        updateCarousel();
-        resetInterval();
-    });
-    indicatorsContainer.appendChild(dot);
-}
-
-const dots = document.querySelectorAll(".dot");
-
-function updateCarousel() {
-    slide.style.transform = `translateX(-${index * 100}%)`;
-    dots.forEach((dot) => dot.classList.remove("active"));
-    dots[index].classList.add("active");
-}
-
-function nextSlide() {
-    index = (index + 1) % totalSlides;
-    updateCarousel();
-}
-
-function prevSlide() {
-    index = (index - 1 + totalSlides) % totalSlides;
-    updateCarousel();
-}
-
-function resetInterval() {
-    clearInterval(interval);
-    interval = setInterval(nextSlide, 5000);
-}
-
-nextBtn.addEventListener("click", () => {
-    nextSlide();
-    resetInterval();
+window.addEventListener("load", function () {
+	new Glider(document.querySelector(".carousel__lista"), {
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		dots: ".carousel__indicadores",
+		arrows: {
+			prev: ".carousel__anterior",
+			next: ".carousel__siguiente",
+		},
+		responsive: [
+			{
+				// screens greater than >= 775px
+				breakpoint: 450,
+				settings: {
+					// Set to `auto` and provide item width to adjust to viewport
+					slidesToShow: 2,
+					slidesToScroll: 2,
+				},
+			},
+			{
+				// screens greater than >= 1024px
+				breakpoint: 800,
+				settings: {
+					slidesToShow: 4,
+					slidesToScroll: 4,
+				},
+			},
+		],
+	});
 });
 
-prevBtn.addEventListener("click", () => {
-    prevSlide();
-    resetInterval();
-});
-
-// Auto slide
-interval = setInterval(nextSlide, 5000);

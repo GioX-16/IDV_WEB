@@ -5,6 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Iglesia del Dios Viviente - IDV</title>
         <link rel="stylesheet" href="Styles/Style.css">
+        <!-- Font Awesome CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1.7.3/glider.min.css">
     </head>
     <body>
         <!-- Navbar -->
@@ -64,20 +68,14 @@
                     <p>
                         Somos la Iglesia del Dios Viviente, una comunidad de fe
                         que forma parte de la cadena de iglesias menonitas en
-                        Nicaragua.
-                        <br><br>
-                        Nuestro compromiso es vivir y compartir el Evangelio de
+                        Nicaragua.Nuestro compromiso es vivir y compartir el
+                        Evangelio de
                         Jesucristo, cumpliendo el llamado de
                         <br><br>
                         <strong>Mateo 28:19-20:</strong><br>
                         <em style="color: #f28c28;">“Id y haced discípulos a
                             todas las naciones…”</em>
                         <br><br>
-                        Creemos en una iglesia activa, guiada por el Espíritu
-                        Santo, donde cada miembro puede crecer, servir y llevar
-                        el mensaje de salvación a otros. Somos una familia
-                        espiritual que busca honrar a Dios en todo lo que hace,
-                        con amor, unidad y verdad.
                     </p>
                     <a href="#" class="button">CONOCER MAS</a>
                 </div>
@@ -99,35 +97,63 @@
 
         <!-- Carousel section -->>
 
-        <section class="ministerios">
-            <h2>MINISTERIOS</h2>
-            <div class="carousel-container">
-                <div class="carousel-slide">
-                    <div class="carousel-item"><img src="./images/1.webp"
-                            alt="Ministerio 1" /></div>
-                    <div class="carousel-item"><img src="./images/1.webp"
-                            alt="Ministerio 2" /></div>
-                    <div class="carousel-item"><img src="./images/1.webp"
-                            alt="Ministerio 3" /></div>
-                    <div class="carousel-item"><img src="./images/1.webp"
-                            alt="Ministerio 4" /></div>
-                    <div class="carousel-item"><img src="./images/1.webp"
-                            alt="Ministerio 5" /></div>
-                    <div class="carousel-item"><img src="./images/1.webp"
-                            alt="Ministerio 6" /></div>
-                    <div class="carousel-item"><img src="./images/1.webp"
-                            alt="Ministerio 7" /></div>
+        <div class="contenedor">
+            <main class="contenido-principal">
+                <img src="/images/Iglesialogo.png" alt="Dome of the German Bundestag" class="contenido-principal__imagen">
+                <div class="contenido-principal__contenedor">
+                    <h1 class="contenido-principal__titulo">Ministerios De Nuestra Iglesia</h1>
+                    <p class="contenido-principal__resumen">
+                        En nuestra iglesia ofrecemos ministerios centrados en la Biblia que buscan edificar nuestra comunidad y fomentar el crecimiento espiritual. A través de la adoración, el discipulado y la evangelización, cada miembro puede desarrollar sus dones al servicio de Dios y los demás. Te invitamos a unirte a nosotros en este camino de fe y amor
+                    </p>
                 </div>
-
-                <div class="carousel-controls">
-                    <button id="prev">&#8592;</button>
-                    <div class="indicators">
-                        <!-- Los puntos se generarán automáticamente con JS -->
+            </main>
+    
+            <div class="carousel">
+                <div class="carousel__contenedor">
+                    <button aria-label="Anterior" class="carousel__anterior">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+    
+                    <div class="carousel__lista">
+                        <div class="carousel__elemento">
+                            <img src="/images/1.webp" alt="MM">
+                            <p>Ministerio de Musica</p>
+                        </div>
+                        <div class="carousel__elemento">
+                            <img src="/images/1.webp" alt="MD">
+                            <p>Ministerio de Danza</p>
+                        </div>
+                        <div class="carousel__elemento">
+                            <img src="/images/1.webp" alt="MDR">
+                            <p>Ministerio de Dorcas</p>
+                        </div>
+                        <div class="carousel__elemento">
+                            <img src="/images/1.webp" alt="Concilio">
+                            <p>Concilio</p>
+                        </div>
+        
+                        <div class="carousel__elemento">
+                            <img src="/images/1.webp" alt="MCL">
+                            <p>Ministerio de Celulas</p>
+                        </div>
+                        <div class="carousel__elemento">
+                            <img src="/images/1.webp" alt="MDML">
+                            <p>Ministerio Dominical</p>
+                        </div>
+                        <div class="carousel__elemento">
+                            <img src="/images/1.webp" alt="MU">
+                            <p>Ministerio de Ujieres</p>
+                        </div>
                     </div>
-                    <button id="next">&#8594;</button>
+    
+                    <button aria-label="Siguiente" class="carousel__siguiente">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
+    
+                <div role="tablist" class="carousel__indicadores"></div>
             </div>
-        </section>
+        </div>
 
         <!-- Servicios Section -->>
 
@@ -179,6 +205,9 @@
             </div>
         </section>
 
+
+        <script src="https://cdn.jsdelivr.net/npm/glider-js@1.7.3/glider.min.js"></script>
+        <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
         <script src="JS/index.js"></script>
     </body>
 </html>
