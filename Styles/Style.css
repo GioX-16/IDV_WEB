@@ -450,6 +450,8 @@ body {
 	opacity: 4;
 }
 
+/* RESPONSIVE DE CARRUSEL */
+
 @media screen and (max-width: 800px) {
 	body {
 		padding: 40px 0;
