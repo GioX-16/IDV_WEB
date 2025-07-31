@@ -115,3 +115,36 @@ window.addEventListener("load", function () {
 	});
 });
 
+
+
+/* Contact Section */
+
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    alert('¡Mensaje enviado exitosamente!');
+    this.reset();
+});  
+
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const form = this;
+    const sendBtn = form.querySelector('.send-btn');
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Enviando...';
+
+    emailjs.sendForm('service_6qmzkop', 'template_oljtbxh', form)
+    .then(() => {
+        alert('¡Mensaje enviado con éxito!');
+        form.reset();
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Send Message';
+    })
+.catch((error) => {
+        console.error('Error:', error);
+        alert('Hubo un error al enviar el mensaje. Intenta nuevamente.');
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Send Message'; });
+});
+
+

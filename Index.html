@@ -3,13 +3,18 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>IDV</title>
+        <title>Iglesia IDV</title>
         <link rel="stylesheet" href="Styles/Style.css">
         <link rel="icon" href="/images/ico_web/Logo_Circular_ico.ico">
         <!-- Font Awesome CDN -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1.7.3/glider.min.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+            integrity="sha512-..." crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/glider-js@1.7.3/glider.min.css">
     </head>
     <body>
         <!-- Navbar -->
@@ -100,21 +105,30 @@
 
         <div class="contenedor">
             <main class="contenido-principal">
-                <img src="/images/Iglesialogo.png" alt="Dome of the German Bundestag" class="contenido-principal__imagen">
+                <img src="/images/Iglesialogo.png"
+                    alt="Dome of the German Bundestag"
+                    class="contenido-principal__imagen">
                 <div class="contenido-principal__contenedor">
-                    <h1 class="contenido-principal__titulo">Ministerios De Nuestra Iglesia</h1>
+                    <h1 class="contenido-principal__titulo">Ministerios De
+                        Nuestra Iglesia</h1>
                     <p class="contenido-principal__resumen">
-                        En nuestra iglesia ofrecemos ministerios centrados en la Biblia que buscan edificar nuestra comunidad y fomentar el crecimiento espiritual. A través de la adoración, el discipulado y la evangelización, cada miembro puede desarrollar sus dones al servicio de Dios y los demás. Te invitamos a unirte a nosotros en este camino de fe y amor
+                        En nuestra iglesia ofrecemos ministerios centrados en la
+                        Biblia que buscan edificar nuestra comunidad y fomentar
+                        el crecimiento espiritual. A través de la adoración, el
+                        discipulado y la evangelización, cada miembro puede
+                        desarrollar sus dones al servicio de Dios y los demás.
+                        Te invitamos a unirte a nosotros en este camino de fe y
+                        amor
                     </p>
                 </div>
             </main>
-    
+
             <div class="carousel">
                 <div class="carousel__contenedor">
                     <button aria-label="Anterior" class="carousel__anterior">
                         <i class="fas fa-chevron-left"></i>
                     </button>
-    
+
                     <div class="carousel__lista">
                         <div class="carousel__elemento">
                             <img src="/images/1.webp" alt="MM">
@@ -132,7 +146,7 @@
                             <img src="/images/1.webp" alt="Concilio">
                             <p>Concilio</p>
                         </div>
-        
+
                         <div class="carousel__elemento">
                             <img src="/images/1.webp" alt="MCL">
                             <p>Ministerio de Celulas</p>
@@ -146,12 +160,12 @@
                             <p>Ministerio de Ujieres</p>
                         </div>
                     </div>
-    
+
                     <button aria-label="Siguiente" class="carousel__siguiente">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
-    
+
                 <div role="tablist" class="carousel__indicadores"></div>
             </div>
         </div>
@@ -206,9 +220,69 @@
             </div>
         </section>
 
+        <!-- SECTION CONTACT -->
 
-        <script src="https://cdn.jsdelivr.net/npm/glider-js@1.7.3/glider.min.js"></script>
-        <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+        <section class="contact-section">
+            <div class="contact-container">
+                <!-- Columna izquierda -->
+                <div class="form-side">
+                    <h2 class="title">CONTACTANOS</h2>
+
+                    <form class="contact-form" id="contactForm">
+                        <input type="text" placeholder="Nombre" name="name"
+                            required />
+                        <input type="email" placeholder="Correo" name="email"
+                            required />
+                        <input type="text" placeholder="Asunto" name="subject"
+                            required />
+                        <textarea placeholder="Mensaje" name="message" rows="5"
+                            required></textarea>
+                        <button type="submit" class="send-btn">Send
+                            Message</button>
+                    </form>
+
+                    <div class="contact-buttons">
+                        <a
+                            href="https://wa.me/50589952187?text=Hola%20Dios%20les%20bendiga!"
+                            target="_blank" class="btn whatsapp">
+                            <img
+                                src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" />
+                            Whatsapp
+                        </a>
+                        <a
+                            href="https://www.facebook.com/groups/748036509059137"
+                            target="_blank" class="btn facebook">
+                            <img
+                                src="https://img.icons8.com/color/48/000000/facebook-new.png" />
+                            Facebook
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Columna derecha (imagen PNG) -->
+                <div class="image-side">
+                    <img src="/images/Mapa_idv.png" alt="Mapa contacto" />
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <!-- EmailJS SDK -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+        </script>
+
+        <!-- clave pública -->
+        <script>
+            emailjs.init("GAX0Ct7MZ1GNoj58P"); // <--  Public Key
+        </script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/glider-js@1.7.3/glider.min.js"></script>
+        <script src="https://kit.fontawesome.com/2c36e9b7b1.js"
+            crossorigin="anonymous"></script>
         <script src="JS/index.js"></script>
     </body>
 </html>
