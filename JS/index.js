@@ -1,19 +1,19 @@
-// Funcionalidad del menú hamburguesa
-const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector(".nav-menu");
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
 
-hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
 });
 
-// Cerrar menú al hacer clic en un enlace
-document.querySelectorAll(".nav-link").forEach((n) =>
-    n.addEventListener("click", () => {
-        hamburger.classList.remove("active");
-        navMenu.classList.remove("active");
-    })
-);
+// Opcional: cerrar menú al hacer clic en un enlace
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
+});
+
 
 // Animación suave para el scroll
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -85,34 +85,34 @@ window.addEventListener("scroll", () => {
 // Carousel Js Glider
 
 window.addEventListener("load", function () {
-	new Glider(document.querySelector(".carousel__lista"), {
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		dots: ".carousel__indicadores",
-		arrows: {
-			prev: ".carousel__anterior",
-			next: ".carousel__siguiente",
-		},
-		responsive: [
-			{
-				// screens greater than >= 775px
-				breakpoint: 450,
-				settings: {
-					// Set to `auto` and provide item width to adjust to viewport
-					slidesToShow: 2,
-					slidesToScroll: 2,
-				},
-			},
-			{
-				// screens greater than >= 1024px
-				breakpoint: 800,
-				settings: {
-					slidesToShow: 4,
-					slidesToScroll: 4,
-				},
-			},
-		],
-	});
+    new Glider(document.querySelector(".carousel__lista"), {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: ".carousel__indicadores",
+        arrows: {
+            prev: ".carousel__anterior",
+            next: ".carousel__siguiente",
+        },
+        responsive: [
+            {
+                // screens greater than >= 775px
+                breakpoint: 450,
+                settings: {
+                    // Set to `auto` and provide item width to adjust to viewport
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                },
+            },
+            {
+                // screens greater than >= 1024px
+                breakpoint: 800,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                },
+            },
+        ],
+    });
 });
 
 
@@ -123,7 +123,7 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
     alert('¡Mensaje enviado exitosamente!');
     this.reset();
-});  
+});
 
 document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -134,17 +134,18 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
     sendBtn.textContent = 'Enviando...';
 
     emailjs.sendForm('service_6qmzkop', 'template_oljtbxh', form)
-    .then(() => {
-        alert('¡Mensaje enviado con éxito!');
-        form.reset();
-        sendBtn.disabled = false;
-        sendBtn.textContent = 'Send Message';
-    })
-.catch((error) => {
-        console.error('Error:', error);
-        alert('Hubo un error al enviar el mensaje. Intenta nuevamente.');
-        sendBtn.disabled = false;
-        sendBtn.textContent = 'Send Message'; });
+        .then(() => {
+            alert('¡Mensaje enviado con éxito!');
+            form.reset();
+            sendBtn.disabled = false;
+            sendBtn.textContent = 'Send Message';
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Hubo un error al enviar el mensaje. Intenta nuevamente.');
+            sendBtn.disabled = false;
+            sendBtn.textContent = 'Send Message';
+        });
 });
 
 
