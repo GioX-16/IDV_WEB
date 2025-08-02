@@ -85,26 +85,24 @@ window.addEventListener("scroll", () => {
 // Carousel Js Glider
 
 window.addEventListener("load", function () {
-    new Glider(document.querySelector(".carousel__lista"), {
+    const glider = new Glider(document.querySelector(".carousel__lista"), {
         slidesToShow: 1,
         slidesToScroll: 1,
         dots: ".carousel__indicadores",
+        duration: 0.5,
         arrows: {
             prev: ".carousel__anterior",
             next: ".carousel__siguiente",
         },
         responsive: [
             {
-                // screens greater than >= 775px
                 breakpoint: 450,
                 settings: {
-                    // Set to `auto` and provide item width to adjust to viewport
                     slidesToShow: 2,
                     slidesToScroll: 2,
                 },
             },
             {
-                // screens greater than >= 1024px
                 breakpoint: 800,
                 settings: {
                     slidesToShow: 4,
@@ -113,7 +111,32 @@ window.addEventListener("load", function () {
             },
         ],
     });
+
+    // === Autoplay ===
+    let autoplayInterval;
+    const autoplaySpeed = 15000; // cada 3 segundos
+    const carousel = document.querySelector(".carousel__lista");
+
+    function startAutoplay() {
+        autoplayInterval = setInterval(() => {
+            glider.scrollItem(glider.slide + 1);
+        }, autoplaySpeed);
+    }
+
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+    }
+
+    // Iniciar autoplay al cargar
+    startAutoplay();
+
+    // Detener autoplay al pasar el mouse o tocar
+    carousel.addEventListener("mouseenter", stopAutoplay);
+    carousel.addEventListener("mouseleave", startAutoplay);
+    carousel.addEventListener("touchstart", stopAutoplay);
+    carousel.addEventListener("touchend", startAutoplay);
 });
+
 
 
 

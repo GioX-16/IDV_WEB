@@ -465,8 +465,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* mantiene el video cubriendo sin deformarse */
-    z-index: -1; /* lo envía al fondo */
+    object-fit: cover;
+    /* mantiene el video cubriendo sin deformarse */
+    z-index: -1;
+    /* lo envía al fondo */
 }
 
 .video-overlay-content {
@@ -479,12 +481,67 @@ body {
     padding: 0 0px;
 }
 
+.video-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    margin-top: 100px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.video-overlay-content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    max-width: 90%;
+}
+
+@media (max-width: 768px) {
+    .video-section {
+        height: 80vh;
+        margin-top: 60px;
+    }
+
+    .video-overlay-content {
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-section {
+        height: 70vh;
+        margin-top: 40px;
+    }
+
+    .video-overlay-content {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+}
+
+
 
 /* SECTION TIMELINE */
 .lineatiempo {
     width: 100%;
     min-height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/images/Bg_Layer_Timeline.png");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(9, 9, 9, 0.7)), url("/images/Img_Iglesia.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -508,32 +565,38 @@ body {
 }
 
 @keyframes movedown {
-    0%{
+    0% {
         opacity: 0%;
         transform: translateY(-30px);
     }
-    100%{
+
+    100% {
         opacity: 100%;
         transform: translateY(0px);
     }
 }
 
-.container:nth-child(1){
+.container:nth-child(1) {
     animation-delay: 0s;
 }
-.container:nth-child(2){
+
+.container:nth-child(2) {
     animation-delay: 1s;
 }
-.container:nth-child(3){
+
+.container:nth-child(3) {
     animation-delay: 2s;
 }
-.container:nth-child(4){
+
+.container:nth-child(4) {
     animation-delay: 3s;
 }
-.container:nth-child(5){
+
+.container:nth-child(5) {
     animation-delay: 4s;
 }
-.container:nth-child(6){
+
+.container:nth-child(6) {
     animation-delay: 5s;
 }
 
@@ -551,7 +614,8 @@ body {
 
 .timeline {
     position: relative;
-    z-index: 1; /* Para que el ::after no se tape */
+    z-index: 1;
+    /* Para que el ::after no se tape */
 }
 
 .timeline::after {
@@ -566,13 +630,14 @@ body {
     margin-left: -3px;
     z-index: -1;
     animation: moveline 6s linear forwards;
-}  
+}
 
-@keyframes moveline{
-    0%{
+@keyframes moveline {
+    0% {
         height: 0;
     }
-    100%{
+
+    100% {
         height: 100;
     }
 
@@ -613,7 +678,7 @@ body {
     left: -25px;
 }
 
-.left-container-arrow{
+.left-container-arrow {
     height: 0;
     width: 0;
     position: absolute;
@@ -625,7 +690,7 @@ body {
     right: -15px;
 }
 
-.right-container-arrow{
+.right-container-arrow {
     height: 0;
     width: 0;
     position: absolute;
@@ -647,10 +712,12 @@ body {
         padding-left: 80px;
         padding-right: 25px;
     }
-    .text-box{
+
+    .text-box {
         font-size: 13px;
     }
-    .text-box small{
+
+    .text-box small {
         margin-bottom: 10px;
     }
 
@@ -658,17 +725,19 @@ body {
         left: 0;
     }
 
-    .left-container img, .right-container img{
+    .left-container img,
+    .right-container img {
         left: 10px;
     }
 
-    .left-container-arrow, .right-container-arrow{
+    .left-container-arrow,
+    .right-container-arrow {
         border-right: 15px solid #fefefe;
         border-left: 0;
         left: -15px;
     }
 
-    .timeline{
+    .timeline {
         margin: 50px auto;
     }
 
@@ -684,42 +753,7 @@ body {
 
 /* --- --- MINISTERIOS CONTENEDOR PRINCIPAL --- --- */
 
-.contenedor {
-    max-width: 1200px;
-    width: 100%;
-    margin: auto;
-}
-
-.contenido-principal {
-    margin-bottom: 50px;
-    display: flex;
-    align-items: center;
-}
-
-.contenido-principal__imagen {
-    vertical-align: top;
-    margin-right: 20px;
-    width: 50%;
-    max-width: 550px;
-}
-
-.contenido-principal__contenedor {
-    width: 50%;
-}
-
-.contenido-principal__titulo {
-    font-weight: normal;
-    font-size: 45px;
-}
-
-.contenido-principal__resumen {
-    font-family: "Times New Roman", sans-serif;
-    line-height: 30px;
-    color: #060606;
-}
-
-/* MINISTERIO SECTION */
-
+/* Contenedor general */
 .contenedor {
     max-width: 1200px;
     width: 100%;
@@ -728,7 +762,7 @@ body {
     box-sizing: border-box;
 }
 
-/* ======= MAIN CONTENT ======= */
+/* Sección de presentación */
 .contenido-principal {
     display: flex;
     align-items: center;
@@ -766,7 +800,7 @@ body {
     text-align: justify;
 }
 
-/* ======= CAROUSEL SECTION ======= */
+/* Carrusel */
 .carousel__contenedor {
     position: relative;
     width: 100%;
@@ -775,11 +809,7 @@ body {
 
 .carousel__lista {
     display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    padding: 10px;
+    gap: 30px;
 }
 
 .carousel__elemento {
@@ -789,7 +819,6 @@ body {
     border-radius: 12px;
     padding: 10px;
     text-align: center;
-    scroll-snap-align: start;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -805,7 +834,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* Botones */
+/* Flechas */
 .carousel__anterior,
 .carousel__siguiente {
     position: absolute;
@@ -857,7 +886,7 @@ body {
     opacity: 1;
 }
 
-/* ======= RESPONSIVE ======= */
+/* Responsive */
 @media (max-width: 992px) {
     .contenido-principal {
         flex-direction: column;
@@ -891,6 +920,7 @@ body {
         font-size: 0.85rem;
     }
 }
+
 
 
 :root {
@@ -1137,6 +1167,7 @@ body {
         opacity: 0;
         transform: translateY(40px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1148,6 +1179,7 @@ body {
         opacity: 0;
         transform: translateX(40px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
