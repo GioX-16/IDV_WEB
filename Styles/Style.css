@@ -1038,13 +1038,145 @@ body {
     }
 }
 
+/* DOMNICAL SECTION */
+.escuela-section {
+    background-image: url("/images/Backg_Carousel.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: #000;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.escuela-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #000;
+}
+
+.escuela-content {
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+}
+
+.descripcion {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.horario {
+    font-weight: bold;
+    color: #f7941e;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+/* Galería principal */
+.escuela-imagenes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.imagen-card {
+    background: linear-gradient(to bottom, #f4f4f4 0%, #f7941e 100%);
+    border-radius: 12px;
+    padding: 1rem;
+    width: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.imagen-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.imagen-card span {
+    font-weight: bold;
+    color: #fff;
+}
+
+.imagen-card:hover {
+    transform: translateY(-6px);
+    background: #142157;
+}
+
+.imagen-card:hover span {
+    color: #fff;
+}
+
+/* Collage */
+.collage-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-auto-rows: 180px;
+    gap: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.collage-item {
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.collage-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.collage-item:hover {
+    transform: scale(1.05);
+}
+
+/* Animación */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .imagen-card {
+        width: 100%;
+        max-width: 340px;
+    }
+
+    .collage-container {
+        grid-auto-rows: 150px;
+    }
+}
 
 /* PASTORES SECTION */
 
 .pastores-section {
     text-align: center;
     padding: 4rem 2rem;
-    background-image: url('/images/Backg_Carousel.png');
+    background-image: url("/images/Backg_Carousel.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1106,7 +1238,6 @@ body {
 .pastor-card:hover p {
     color: #fff;
 }
-
 
 /* UBICATION SECTION */
 
