@@ -1038,12 +1038,82 @@ body {
     }
 }
 
+
+/* PASTORES SECTION */
+
+.pastores-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-image: url('/images/Backg_Carousel.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #000;
+}
+
+.pastores-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #000;
+}
+
+.pastores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.1rem;
+    justify-items: center;
+}
+
+.pastor-card {
+    background: linear-gradient(to bottom, #f4f4f4 0%, #f7941e 100%);
+    border-radius: 15px;
+    padding: 3rem 1rem;
+    width: 100%;
+    max-width: 260px;
+    transition: all 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pastor-card img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.pastor-card h3 {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    color: #000;
+}
+
+.pastor-card p {
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 0.2px;
+}
+
+.pastor-card:hover {
+    background-color: #142157;
+    background-image: none;
+    transform: translateY(-8px);
+}
+
+.pastor-card:hover h3,
+.pastor-card:hover p {
+    color: #fff;
+}
+
+
 /* UBICATION SECTION */
 
 .ubicacion-section {
     text-align: center;
     padding: 2rem 1rem;
-    background: #f9f9f9;
+    background-image: url(//images/Backg_Carousel.png);
     color: #333;
 }
 
