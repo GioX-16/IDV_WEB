@@ -454,6 +454,7 @@ body {
 .video-section {
     position: relative;
     height: 100vh;
+    margin-top: 100px;
     width: 100%;
     overflow: hidden;
 }
@@ -483,7 +484,7 @@ body {
 .lineatiempo {
     width: 100%;
     min-height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/images/BG_ANIVERSARIO.png");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/images/Bg_Layer_Timeline.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
