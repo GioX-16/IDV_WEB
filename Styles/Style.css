@@ -741,9 +741,8 @@ body {
     }
 }
 
-/* --- --- MINISTERIOS CONTENEDOR PRINCIPAL --- --- */
+/* --- MINISTERIOS SECTION --- */
 
-/* Contenedor general */
 .contenedor {
     max-width: 1200px;
     width: 100%;
@@ -794,12 +793,16 @@ body {
 .carousel__contenedor {
     position: relative;
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
 }
 
 .carousel__lista {
     display: flex;
     gap: 30px;
+    transition: transform 0.5s ease-in-out;
+    scroll-behavior: smooth;
 }
 
 .carousel__elemento {
@@ -810,6 +813,12 @@ body {
     padding: 10px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    scroll-snap-align: start;
+    transition: transform 0.3s ease;
+}
+
+.carousel__elemento:hover {
+    transform: scale(1.03);
 }
 
 .carousel__elemento img {
@@ -828,7 +837,7 @@ body {
 .carousel__anterior,
 .carousel__siguiente {
     position: absolute;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
     background: #ffffffcc;
     border: none;
@@ -840,6 +849,7 @@ body {
     cursor: pointer;
     z-index: 10;
     transition: background 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .carousel__anterior:hover,
@@ -864,16 +874,27 @@ body {
 }
 
 .carousel__indicadores .glider-dot {
-    width: 30px;
-    height: 4px;
-    background: #031568;
-    opacity: 0.2;
-    border-radius: 10px;
+    width: 10px;
+    height: 10px;
+    background: #112862;
+    opacity: 0.4;
+    border-radius: 50%;
     margin: 0 5px;
+    transition: opacity 0.3s ease;
 }
 
 .carousel__indicadores .glider-dot.active {
     opacity: 1;
+}
+
+/* Scrollbar oculto en navegadores webkit */
+.carousel__contenedor::-webkit-scrollbar {
+    height: 6px;
+}
+
+.carousel__contenedor::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
 }
 
 /* Responsive */
@@ -910,6 +931,11 @@ body {
         font-size: 0.85rem;
     }
 }
+
+
+
+
+/* CULTOS SECTION */
 
 :root {
     --color-fondo-card: #f0f0f5;
