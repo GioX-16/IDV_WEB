@@ -464,9 +464,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* mantiene el video cubriendo sin deformarse */
     z-index: -1;
-    /* lo envía al fondo */
 }
 
 .video-overlay-content {
@@ -1380,7 +1378,6 @@ body {
 .ubicacion-section {
     text-align: center;
     padding: 2rem 1rem;
-    background-image: url(//images/Backg_Carousel.png);
     color: #333;
 }
 
