@@ -82,63 +82,73 @@ window.addEventListener("scroll", () => {
     }
 });
 
-// Carousel Js Glider
+// MINISTERIOS SECTION
 
-window.addEventListener("load", function () {
-    const glider = new Glider(document.querySelector(".carousel__lista"), {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        dots: ".carousel__indicadores",
-        duration: 0.5,
-        arrows: {
-            prev: ".carousel__anterior",
-            next: ".carousel__siguiente",
-        },
-        responsive: [
-            {
-                breakpoint: 450,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                },
-            },
-            {
-                breakpoint: 800,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 4,
-                },
-            },
-        ],
-    });
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+const indicatorsContainer = document.querySelector('.indicators');
 
-    // === Autoplay ===
-    let autoplayInterval;
-    const autoplaySpeed = 15000; // cada 3 segundos
-    const carousel = document.querySelector(".carousel__lista");
+let index = 0;
+let autoPlayInterval;
 
-    function startAutoplay() {
-        autoplayInterval = setInterval(() => {
-            glider.scrollItem(glider.slide + 1);
-        }, autoplaySpeed);
-    }
-
-    function stopAutoplay() {
-        clearInterval(autoplayInterval);
-    }
-
-    // Iniciar autoplay al cargar
-    startAutoplay();
-
-    // Detener autoplay al pasar el mouse o tocar
-    carousel.addEventListener("mouseenter", stopAutoplay);
-    carousel.addEventListener("mouseleave", startAutoplay);
-    carousel.addEventListener("touchstart", stopAutoplay);
-    carousel.addEventListener("touchend", startAutoplay);
+// Crear indicadores
+slides.forEach((_, i) => {
+    const btn = document.createElement('button');
+    if (i === 0) btn.classList.add('active');
+    btn.addEventListener('click', () => goToSlide(i));
+    indicatorsContainer.appendChild(btn);
 });
 
+const indicators = indicatorsContainer.querySelectorAll('button');
 
+function updateSlides() {
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active', 'left', 'right');
+        if (i === index) {
+            slide.classList.add('active');
+        } else if (i === (index - 1 + slides.length) % slides.length) {
+            slide.classList.add('left');
+        } else if (i === (index + 1) % slides.length) {
+            slide.classList.add('right');
+        }
+    });
 
+    indicators.forEach(btn => btn.classList.remove('active'));
+    indicators[index].classList.add('active');
+}
+
+function goToSlide(i) {
+    index = i;
+    updateSlides();
+    resetAutoPlay();
+}
+
+function nextSlide() {
+    index = (index + 1) % slides.length;
+    updateSlides();
+}
+
+function prevSlideFunc() {
+    index = (index - 1 + slides.length) % slides.length;
+    updateSlides();
+}
+
+prevBtn.addEventListener('click', prevSlideFunc);
+nextBtn.addEventListener('click', nextSlide);
+
+// AutoPlay
+function startAutoPlay() {
+    autoPlayInterval = setInterval(nextSlide, 4000);
+}
+
+function resetAutoPlay() {
+    clearInterval(autoPlayInterval);
+    startAutoPlay();
+}
+
+updateSlides();
+startAutoPlay();
 
 /* Contact Section */
 
