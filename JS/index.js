@@ -150,6 +150,90 @@ function resetAutoPlay() {
 updateSlides();
 startAutoPlay();
 
+/* Video Section - Mobile Compatibility */
+
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.querySelector('.background-video');
+    const videoSection = document.querySelector('.video-section');
+    const fallback = document.querySelector('.video-fallback');
+    
+    if (video) {
+        let videoFailed = false;
+        let fallbackTimeout;
+
+        // Función para activar el fallback
+        function activateFallback() {
+            if (!videoFailed) {
+                videoFailed = true;
+                videoSection.classList.add('video-fallback-active');
+                console.log('Activando imagen de respaldo para el video');
+            }
+        }
+
+        // Detectar si el video no se puede cargar
+        video.addEventListener('error', function() {
+            console.log('Error al cargar el video, activando fallback');
+            activateFallback();
+        });
+
+        // Timeout para activar fallback si el video no se carga en 5 segundos
+        fallbackTimeout = setTimeout(function() {
+            if (video.readyState < 2) { // HAVE_CURRENT_DATA
+                console.log('Video no se cargó a tiempo, activando fallback');
+                activateFallback();
+            }
+        }, 5000);
+
+        // Forzar la reproducción en móviles
+        video.addEventListener('loadeddata', function() {
+            clearTimeout(fallbackTimeout);
+            video.play().catch(function(error) {
+                console.log('Error al reproducir video automáticamente:', error);
+                // Si falla la reproducción automática, intentar con interacción del usuario
+                document.addEventListener('touchstart', function() {
+                    video.play().catch(function(err) {
+                        console.log('Error al reproducir video:', err);
+                        activateFallback();
+                    });
+                }, { once: true });
+            });
+        });
+
+        // Manejar cambios de visibilidad de la página
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                video.pause();
+            } else if (!videoFailed) {
+                video.play().catch(function(error) {
+                    console.log('Error al reanudar video:', error);
+                    activateFallback();
+                });
+            }
+        });
+
+        // Asegurar que el video se reproduzca cuando sea visible
+        const videoObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting && !videoFailed) {
+                    video.play().catch(function(error) {
+                        console.log('Error al reproducir video en viewport:', error);
+                        activateFallback();
+                    });
+                } else if (!videoFailed) {
+                    video.pause();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        videoObserver.observe(video);
+
+        // Detectar si el video se puede reproducir después de la carga
+        video.addEventListener('canplay', function() {
+            clearTimeout(fallbackTimeout);
+        });
+    }
+});
+
 /* Contact Section */
 
 document.getElementById('contactForm').addEventListener('submit', function (e) {

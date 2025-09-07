@@ -4,6 +4,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
         <title>Iglesia del Dios Viviente</title>
         <link rel="stylesheet" href="Styles/Style.css">
@@ -121,10 +124,24 @@
 
         <!-- SECCION DE VIDEO -->>
         <section class="video-section" id="aniversarioo">
-            <video autoplay muted loop playsinline class="background-video">
+            <video 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                webkit-playsinline 
+                preload="metadata"
+                class="background-video" 
+                poster="./images/HERO_BANNER1.png"
+                disablePictureInPicture
+                controlsList="nodownload nofullscreen noremoteplayback">
                 <source src="./videos/Armonia.mp4" type="video/mp4">
                 Tu navegador no soporta videos HTML5.
             </video>
+            <!-- Fallback de imagen para cuando el video no se pueda reproducir -->
+            <div class="video-fallback" style="display: none;">
+                <img src="./images/HERO_BANNER1.png" alt="Imagen de respaldo" class="fallback-image">
+            </div>
         </section>
 
         <!-- SECCION LINEA TIEMPO -->

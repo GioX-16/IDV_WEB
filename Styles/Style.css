@@ -496,6 +496,9 @@ body {
     height: 100%;
     object-fit: cover;
     z-index: -1;
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .video-overlay-content {
@@ -511,6 +514,18 @@ body {
     .video-section {
         height: 80vh;
         margin-top: 60px;
+        position: relative;
+    }
+
+    .background-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        /* Mejorar compatibilidad móvil - se maneja via atributos HTML */
     }
 
     .video-overlay-content {
@@ -523,12 +538,56 @@ body {
     .video-section {
         height: 70vh;
         margin-top: 40px;
+        position: relative;
+    }
+
+    .background-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        /* Asegurar reproducción en móviles - se maneja via atributos HTML */
     }
 
     .video-overlay-content {
         font-size: 0.9rem;
         padding: 0.5rem;
     }
+}
+
+/* Estilos adicionales para mejorar compatibilidad móvil */
+@media (max-width: 1024px) {
+    .background-video {
+        /* Asegurar que el video se reproduzca en tablets - se maneja via atributos HTML */
+    }
+}
+
+/* Fallback de imagen para video */
+.video-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.fallback-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Mostrar fallback cuando el video no se puede reproducir */
+.video-section.video-fallback-active .background-video {
+    display: none;
+}
+
+.video-section.video-fallback-active .video-fallback {
+    display: block;
 }
 
 /* SECTION TIMELINE */
