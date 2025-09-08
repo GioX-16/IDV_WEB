@@ -561,7 +561,7 @@ body {
 /* Estilos adicionales para mejorar compatibilidad móvil */
 @media (max-width: 1024px) {
     .background-video {
-        /* Asegurar que el video se reproduzca en tablets - se maneja via atributos HTML */
+        display: none;
     }
 }
 
@@ -594,7 +594,7 @@ body {
 .lineatiempo {
     width: 100%;
     min-height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(9, 9, 9, 0.7)), url("/images/Img_Iglesia.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(9, 9, 9, 0.7)), url("../img/bgTL.svg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
