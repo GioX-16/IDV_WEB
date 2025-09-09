@@ -126,7 +126,7 @@ body {
     padding-top: 100px;
     padding-bottom: 1rem;
     position: relative;
-    background-image: url("../images/HERO_BANNER1.png");
+    background-image: url("../img/HERO_BANNER1.svg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -525,7 +525,7 @@ body {
         height: 100%;
         object-fit: cover;
         z-index: -1;
-        /* Mejorar compatibilidad móvil - se maneja via atributos HTML */
+        
     }
 
     .video-overlay-content {
@@ -549,7 +549,7 @@ body {
         height: 100%;
         object-fit: cover;
         z-index: -1;
-        /* Asegurar reproducción en móviles - se maneja via atributos HTML */
+        
     }
 
     .video-overlay-content {
@@ -956,7 +956,7 @@ body {
     width: 100%;
     min-height: 100vh;
     margin: 20px 0;
-    background-image: url("../images/Backg_Carousel.png");
+    background-image: url("../img/bgcarousel.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -1071,7 +1071,7 @@ body {
 
 /* DOMNICAL SECTION */
 .escuela-section {
-    background-image: url("/images/Backg_Carousel.png");
+    background-image: url("../img/bgcarousel.svg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1317,7 +1317,7 @@ body {
 .pastores-section {
     text-align: center;
     padding: 4rem 2rem;
-    background-image: url("/images/Backg_Carousel.png");
+    background-image: url("../img/bgcarousel.svg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
