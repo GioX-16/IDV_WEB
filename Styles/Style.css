@@ -145,7 +145,7 @@ body {
 }
 
 .hero-container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
     display: grid;
@@ -154,7 +154,7 @@ body {
     align-items: center;
     position: relative;
     z-index: 2;
-    min-height: 80vh;
+    min-height: 70vh;
 }
 
 .hero-content {
@@ -164,7 +164,7 @@ body {
     align-items: flex-start;
     justify-content: center;
     max-width: 500px;
-    margin-left: -2rem;
+    margin-left: 6rem;
     z-index: 3;
 }
 
