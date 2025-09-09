@@ -447,147 +447,36 @@ body {
     }
 }
 
-/* VIDEO SECTION */
+/* VIDEO SECTION - SIMPLIFICADO */
 
 .video-section {
-    position: relative;
-    height: 100vh;
-    margin-top: 100px;
-    width: 100%;
-    overflow: hidden;
-}
-
-.background-video {
-    position: static;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-}
-
-.video-overlay-content {
-    position: relative;
-    z-index: 1;
-    color: white;
-    text-align: center;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 0 0px;
-}
-
-.video-section {
-    position: relative;
     width: 100%;
     height: 100vh;
     margin-top: 100px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
 }
 
 .background-video {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -1;
-    will-change: transform;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
+    display: block;
 }
 
-.video-overlay-content {
-    position: relative;
-    z-index: 1;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    max-width: 90%;
-}
-
+/* Responsive para móvil */
 @media (max-width: 768px) {
     .video-section {
-        height: 80vh;
+        height: 60vh;
         margin-top: 60px;
-        position: relative;
-    }
-
-    .background-video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: -1;
-        
-    }
-
-    .video-overlay-content {
-        font-size: 1rem;
-        padding: 0.5rem;
     }
 }
 
 @media (max-width: 480px) {
     .video-section {
-        height: 70vh;
+        height: 50vh;
         margin-top: 40px;
-        position: relative;
     }
-
-    .background-video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: -1;
-        
-    }
-
-    .video-overlay-content {
-        font-size: 0.9rem;
-        padding: 0.5rem;
-    }
-}
-
-/* Estilos adicionales para mejorar compatibilidad móvil */
-@media (max-width: 1024px) {
-    .background-video {
-        display: none;
-    }
-}
-
-/* Fallback de imagen para video */
-.video-fallback {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-
-.fallback-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Mostrar fallback cuando el video no se puede reproducir */
-.video-section.video-fallback-active .background-video {
-    display: none;
-}
-
-.video-section.video-fallback-active .video-fallback {
-    display: block;
 }
 
 /* SECTION TIMELINE */
