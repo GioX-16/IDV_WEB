@@ -154,7 +154,7 @@ body {
 .hero-content {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     align-items: flex-start;
     justify-content: center;
     max-width: 500px;
@@ -163,7 +163,7 @@ body {
 }
 
 .hero-title {
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(1rem, 5vw, 3rem);
     font-weight: bold;
     color: #142157;
     line-height: 1.2;
@@ -220,7 +220,7 @@ body {
 /* -------- IMAGEN -------- */
 .hero-photo {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     height: auto;
     object-fit: contain;
     justify-self: center;
