@@ -119,27 +119,20 @@ body {
 }
 
 /* Hero Section */
+/* ---------------- HERO SECTION ---------------- */
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 100px;
-    padding-bottom: 1rem;
     position: relative;
-    background-image: url("../img/HERO_BANNER1.svg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
+    padding: 100px 1rem 1rem;
+    background: url("../img/HERO_BANNER1.svg") center/cover no-repeat;
 }
 
 .hero::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(255, 255, 255, 0.2);
     z-index: 1;
 }
@@ -147,16 +140,17 @@ body {
 .hero-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 2rem;
     align-items: center;
     position: relative;
     z-index: 2;
     min-height: 70vh;
+    padding: 0 1rem;
 }
 
+/* -------- CONTENIDO -------- */
 .hero-content {
     display: flex;
     flex-direction: column;
@@ -169,7 +163,7 @@ body {
 }
 
 .hero-title {
-    font-size: 4rem;
+    font-size: clamp(2rem, 5vw, 4rem);
     font-weight: bold;
     color: #142157;
     line-height: 1.2;
@@ -200,6 +194,7 @@ body {
     transform: translateY(-2px);
 }
 
+/* -------- SELLO -------- */
 .church-seal {
     display: flex;
     align-items: center;
@@ -209,35 +204,31 @@ body {
 }
 
 .seal-image {
-    width: 100px;
-    height: 100px;
+    width: clamp(60px, 10vw, 100px);
+    height: auto;
     object-fit: contain;
 }
 
 .seal-content {
     text-align: center;
     color: #1e3a8a;
-    font-size: 0.7rem;
+    font-size: clamp(0.5rem, 2vw, 0.7rem);
     font-weight: bold;
     line-height: 1.2;
 }
 
-.seal-text {
-    display: block;
-}
-
+/* -------- IMAGEN -------- */
 .hero-photo {
-    width: 125%;
-    max-width: 1400px;
+    width: 100%;
+    max-width: 600px;
     height: auto;
     object-fit: contain;
     justify-self: center;
-    align-self: center;
-    margin-top: 0;
-    transform: scale(1.1);
+    transform: scale(1.05);
     z-index: 2;
 }
 
+/* -------- LOGO -------- */
 .church-logo {
     position: absolute;
     top: -20px;
@@ -257,70 +248,36 @@ body {
     margin-bottom: 0.5rem;
 }
 
-/* -------- RESPONSIVE -------- */
-
-/* Pantallas muy grandes (más de 1400px) */
-@media (min-width: 1400px) {
-    .hero-title {
-        font-size: 3.5rem;
-    }
-    
-    .hero-content {
-        max-width: 500px;
-    }
-    
-    .hero-photo {
-        width: 120%;
-        transform: scale(1.05);
-    }
-}
-
-/* Laptops y pantallas medianas (1024px - 1400px) */
-@media (max-width: 1400px) and (min-width: 1025px) {
-    .hero-title {
-        font-size: 3.2rem;
-    }
-    
-    .hero-content {
-        max-width: 450px;
-        margin-left: -1rem;
-    }
-    
-    .hero-photo {
-        width: 110%;
-        transform: scale(1.05);
-    }
-    
-    .hero-container {
-        gap: 1.5rem;
-    }
-}
-
-/* Tablets grandes y laptops pequeñas (768px - 1024px) */
-@media (max-width: 1024px) and (min-width: 769px) {
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 1024px) {
     .hero-container {
         grid-template-columns: 1fr;
+        text-align: center;
         min-height: auto;
-        padding: 0 2rem;
     }
 
     .hero-content {
-        max-width: 100%;
-        margin-left: 0;
+        margin: 0 auto;
         align-items: center;
         text-align: center;
     }
 
     .hero-title {
-        font-size: 2.8rem;
+        font-size: clamp(1.8rem, 5vw, 3rem);
+        text-align: center;
     }
 
     .hero-btn {
         align-self: center;
     }
 
+    .church-seal {
+        justify-content: center;
+    }
+
     .hero-photo {
-        width: 85%;
+        width: 90%;
+        max-width: 400px;
         margin: 2rem auto 0;
         transform: scale(1);
     }
@@ -335,68 +292,30 @@ body {
     }
 }
 
-/* Tablets medianas (600px - 768px) */
-@media (max-width: 768px) and (min-width: 601px) {
-    .hero-container {
-        padding: 0 1.5rem;
-    }
-    
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-photo {
-        width: 80%;
-    }
-}
-
-/* Móviles grandes (480px - 600px) */
-@media (max-width: 600px) and (min-width: 481px) {
-    .hero-title {
-        font-size: 2.2rem;
-        line-height: 1.3;
-    }
-
-    .hero-btn {
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
-    }
-
-    .seal-image {
-        width: 70px;
-        height: 70px;
-    }
-
-    .seal-content {
-        font-size: 0.6rem;
-    }
-}
-
-/* Móviles pequeños (hasta 480px) */
 @media (max-width: 480px) {
+    .hero {
+        padding: 80px 1rem 1rem;
+        background-position: center;
+        background-size: cover;
+    }
+
     .hero-title {
         font-size: 1.8rem;
         line-height: 1.2;
     }
 
     .hero-btn {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
     }
 
     .seal-image {
         width: 60px;
         height: 60px;
     }
-
-    .seal-content {
-        font-size: 0.5rem;
-    }
-    
-    .hero-container {
-        padding: 0 1rem;
-    }
 }
+
+
 
 /* CONGREGACION SECCION */
 
@@ -861,6 +780,7 @@ body {
 .prev {
     margin-right: 10px;
 }
+
 .next {
     margin-left: 10px;
 }
@@ -891,9 +811,11 @@ body {
     .slide img {
         height: 250px;
     }
+
     .slide.left {
         transform: translateX(-50%) scale(0.9);
     }
+
     .slide.right {
         transform: translateX(50%) scale(0.9);
     }
@@ -903,6 +825,7 @@ body {
     .slide img {
         height: 200px;
     }
+
     .prev,
     .next {
         font-size: 1.5rem;
