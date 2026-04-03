@@ -1,3 +1,6 @@
+/* EmailJS Initialization */
+emailjs.init("GAX0Ct7MZ1GNoj58P");
+
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
@@ -70,15 +73,22 @@ if (heroBtn) {
     });
 }
 
-// Navbar con efecto de transparencia al hacer scroll
+// Navbar con efecto de transparencia al hacer scroll (optimizado con throttle)
+let ticking = false;
 window.addEventListener("scroll", () => {
-    const navbar = document.querySelector(".navbar");
-    if (window.scrollY > 100) {
-        navbar.style.background = "rgba(255, 255, 255, 0.98)";
-        navbar.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
-    } else {
-        navbar.style.background = "rgba(255, 255, 255, 0.95)";
-        navbar.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const navbar = document.querySelector(".navbar");
+            if (window.scrollY > 100) {
+                navbar.style.background = "rgba(255, 255, 255, 0.98)";
+                navbar.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
+            } else {
+                navbar.style.background = "rgba(255, 255, 255, 0.95)";
+                navbar.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+            }
+            ticking = false;
+        });
+        ticking = true;
     }
 });
 
@@ -164,12 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* Contact Section */
-
-document.getElementById('contactForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    alert('¡Mensaje enviado exitosamente!');
-    this.reset();
-});
 
 document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
