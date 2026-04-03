@@ -1,22 +1,18 @@
-/* EmailJS Initialization */
-emailjs.init("GAX0Ct7MZ1GNoj58P");
-
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
 });
 
 // Opcional: cerrar menú al hacer clic en un enlace
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+        hamburger.classList.remove("active");
+        navMenu.classList.remove("active");
     });
 });
-
 
 // Animación suave para el scroll
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -92,40 +88,68 @@ window.addEventListener("scroll", () => {
     }
 });
 
+// FECHA DEL EVENTO (cámbiala según el año actual)
+const fechaEvento = new Date("Sep 12, 2025 18:00:00").getTime();
+
+const x = setInterval(function () {
+    const ahora = new Date().getTime();
+    const distancia = fechaEvento - ahora;
+
+    const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor(
+        (distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+    document.getElementById("dias").innerHTML = dias < 10 ? "0" + dias : dias;
+    document.getElementById("horas").innerHTML = horas < 10 ? "0" + horas : horas;
+    document.getElementById("minutos").innerHTML =
+        minutos < 10 ? "0" + minutos : minutos;
+    document.getElementById("segundos").innerHTML =
+        segundos < 10 ? "0" + segundos : segundos;
+
+    if (distancia < 0) {
+        clearInterval(x);
+        document.querySelector(".contador").innerHTML =
+            "¡El aniversario ha comenzado! 🎉";
+    }
+}, 1000);
+
 // MINISTERIOS SECTION
 
-const slides = document.querySelectorAll('.slide');
-const prevBtn = document.querySelector('.prev');
-const nextBtn = document.querySelector('.next');
-const indicatorsContainer = document.querySelector('.indicators');
+const slides = document.querySelectorAll(".slide");
+const prevBtn = document.querySelector(".prev");
+const nextBtn = document.querySelector(".next");
+const indicatorsContainer = document.querySelector(".indicators");
 
 let index = 0;
 let autoPlayInterval;
 
 // Crear indicadores
 slides.forEach((_, i) => {
-    const btn = document.createElement('button');
-    if (i === 0) btn.classList.add('active');
-    btn.addEventListener('click', () => goToSlide(i));
+    const btn = document.createElement("button");
+    if (i === 0) btn.classList.add("active");
+    btn.addEventListener("click", () => goToSlide(i));
     indicatorsContainer.appendChild(btn);
 });
 
-const indicators = indicatorsContainer.querySelectorAll('button');
+const indicators = indicatorsContainer.querySelectorAll("button");
 
 function updateSlides() {
     slides.forEach((slide, i) => {
-        slide.classList.remove('active', 'left', 'right');
+        slide.classList.remove("active", "left", "right");
         if (i === index) {
-            slide.classList.add('active');
+            slide.classList.add("active");
         } else if (i === (index - 1 + slides.length) % slides.length) {
-            slide.classList.add('left');
+            slide.classList.add("left");
         } else if (i === (index + 1) % slides.length) {
-            slide.classList.add('right');
+            slide.classList.add("right");
         }
     });
 
-    indicators.forEach(btn => btn.classList.remove('active'));
-    indicators[index].classList.add('active');
+    indicators.forEach((btn) => btn.classList.remove("active"));
+    indicators[index].classList.add("active");
 }
 
 function goToSlide(i) {
@@ -144,8 +168,8 @@ function prevSlideFunc() {
     updateSlides();
 }
 
-prevBtn.addEventListener('click', prevSlideFunc);
-nextBtn.addEventListener('click', nextSlide);
+prevBtn.addEventListener("click", prevSlideFunc);
+nextBtn.addEventListener("click", nextSlide);
 
 // AutoPlay
 function startAutoPlay() {
@@ -162,13 +186,13 @@ startAutoPlay();
 
 /* Video Section - Simplificado */
 
-document.addEventListener('DOMContentLoaded', function() {
-    const video = document.querySelector('.background-video');
-    
+document.addEventListener("DOMContentLoaded", function () {
+    const video = document.querySelector(".background-video");
+
     if (video) {
         // Intentar reproducir el video automáticamente
-        video.play().catch(function(error) {
-            console.log('El video no se puede reproducir automáticamente:', error);
+        video.play().catch(function (error) {
+            console.log("El video no se puede reproducir automáticamente:", error);
         });
     }
 });
@@ -177,27 +201,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
-
-    const form = this;
-    const sendBtn = form.querySelector('.send-btn');
-    sendBtn.disabled = true;
-    sendBtn.textContent = 'Enviando...';
-
-    emailjs.sendForm('service_6qmzkop', 'template_oljtbxh', form)
-        .then(() => {
-            alert('¡Mensaje enviado con éxito!');
-            form.reset();
-            sendBtn.disabled = false;
-            sendBtn.textContent = 'Send Message';
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            alert('Hubo un error al enviar el mensaje. Intenta nuevamente.');
-            sendBtn.disabled = false;
-            sendBtn.textContent = 'Send Message';
-        });
+    alert('¡Mensaje enviado exitosamente!');
+    this.reset();
 });
 
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
 
+    const form = this;
+    const sendBtn = form.querySelector(".send-btn");
+    sendBtn.disabled = true;
+    sendBtn.textContent = "Enviando...";
 
-
+    emailjs
+        .sendForm("service_6qmzkop", "template_oljtbxh", form)
+        .then(() => {
+            alert("¡Mensaje enviado con éxito!");
+            form.reset();
+            sendBtn.disabled = false;
+            sendBtn.textContent = "Send Message";
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("Hubo un error al enviar el mensaje. Intenta nuevamente.");
+            sendBtn.disabled = false;
+            sendBtn.textContent = "Send Message";
+        });
+});
