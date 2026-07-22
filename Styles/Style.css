@@ -31,7 +31,7 @@
     --font-heading: 'Playfair Display', Georgia, serif;
     --font-body: 'Inter', -apple-system, sans-serif;
     --max-width: 1200px;
-    --nav-height: 75px;
+    --nav-height: 80px;
 }
 
 /* ----- Reset ----- */
@@ -156,30 +156,36 @@ ul {
 }
 
 /* ============================================
-   NAVBAR
+   NAVBAR - Floating Pill Design
    ============================================ */
 .navbar {
     position: fixed;
-    top: 0;
-    width: 100%;
+    top: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
+    max-width: 1100px;
     z-index: 1000;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    transition: var(--transition);
-    height: var(--nav-height);
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 100px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 62px;
 }
 
 .navbar.scrolled {
-    background: rgba(255,255,255,0.98);
-    box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+    background: rgba(255,255,255,0.96);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    border-color: rgba(255,255,255,0.5);
 }
 
 .nav-container {
-    max-width: var(--max-width);
+    max-width: 1060px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -197,7 +203,7 @@ ul {
 }
 
 .logo-image {
-    width: 140px;
+    width: 110px;
     height: auto;
     object-fit: contain;
 }
@@ -205,12 +211,12 @@ ul {
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .nav-link {
     font-family: var(--font-body);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
     color: var(--primary-dark);
     position: relative;
@@ -222,10 +228,12 @@ ul {
     content: '';
     position: absolute;
     bottom: -2px;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 0;
     height: 2px;
     background: var(--accent);
+    border-radius: 2px;
     transition: width 0.3s ease;
 }
 
@@ -238,13 +246,13 @@ ul {
 }
 
 .nav-btn {
-    background: transparent;
-    color: var(--primary-dark);
-    padding: 0.6rem 1.8rem;
-    border: 2px solid var(--accent);
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    color: var(--white);
+    padding: 0.5rem 1.5rem;
+    border: none;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: var(--transition);
 }
 
@@ -253,30 +261,29 @@ ul {
 }
 
 .nav-btn:hover {
-    background: var(--primary-dark);
-    color: var(--white);
-    border-color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(247,148,30,0.3);
 }
 
 .hamburger {
     display: none;
     flex-direction: column;
     cursor: pointer;
-    gap: 5px;
+    gap: 4px;
     padding: 5px;
     z-index: 1001;
 }
 
 .bar {
-    width: 26px;
-    height: 2.5px;
+    width: 24px;
+    height: 2px;
     background: var(--primary-dark);
     border-radius: 2px;
     transition: var(--transition);
 }
 
 .hamburger.active .bar:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 6px);
+    transform: rotate(45deg) translate(4px, 5px);
 }
 
 .hamburger.active .bar:nth-child(2) {
@@ -284,7 +291,7 @@ ul {
 }
 
 .hamburger.active .bar:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -6px);
+    transform: rotate(-45deg) translate(4px, -5px);
 }
 
 /* ============================================
@@ -295,14 +302,17 @@ ul {
     display: flex;
     align-items: center;
     position: relative;
-    padding-top: var(--nav-height);
+    padding-top: calc(var(--nav-height) + 1.5rem);
     background: url("../img/HERO_BANNER1.svg") center/cover no-repeat fixed;
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(20,33,87,0.85) 0%, rgba(30,58,138,0.6) 50%, rgba(247,148,30,0.3) 100%);
+    background:
+        radial-gradient(ellipse 1200px 800px at 30% 50%, rgba(20,33,87,0.9) 0%, rgba(30,58,138,0.6) 50%, transparent 80%),
+        radial-gradient(ellipse 800px 600px at 80% 80%, rgba(247,148,30,0.15) 0%, transparent 60%),
+        linear-gradient(170deg, rgba(15,27,74,0.95) 0%, rgba(20,33,87,0.8) 40%, rgba(30,58,138,0.5) 70%, rgba(247,148,30,0.15) 100%);
     z-index: 1;
 }
 
@@ -433,22 +443,10 @@ ul {
    CONGREGACION
    ============================================ */
 .congregacion {
-    background: linear-gradient(135deg, var(--white) 0%, var(--off-white) 100%);
-}
-
-.section-bg-shape {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    opacity: 0.04;
-    pointer-events: none;
-}
-
-.shape-1 {
-    top: -200px;
-    right: -200px;
-    background: var(--primary);
+    background:
+        radial-gradient(ellipse 800px 600px at 0% 50%, rgba(247,148,30,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 400px at 100% 0%, rgba(20,33,87,0.05) 0%, transparent 70%),
+        linear-gradient(160deg, #fcfcfc 0%, #f8f5f2 50%, #f0ece8 100%);
 }
 
 .text-section blockquote {
@@ -538,7 +536,9 @@ ul {
    ANIVERSARIO
    ============================================ */
 .aniversario-section {
-    background: linear-gradient(135deg, var(--off-white) 0%, #fff8e7 100%);
+    background:
+        radial-gradient(ellipse 900px 500px at 50% 0%, rgba(212,175,55,0.08) 0%, transparent 70%),
+        linear-gradient(160deg, #faf8f5 0%, #f5efe4 40%, #ede4d3 100%);
     padding: 4rem 0;
 }
 
@@ -739,7 +739,10 @@ ul {
 .video-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(20,33,87,0.7) 0%, rgba(30,58,138,0.5) 100%);
+    background:
+        radial-gradient(ellipse 900px 600px at 30% 50%, rgba(20,33,87,0.8) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 400px at 70% 80%, rgba(247,148,30,0.1) 0%, transparent 60%),
+        linear-gradient(170deg, rgba(15,27,74,0.7) 0%, rgba(20,33,87,0.5) 50%, rgba(30,58,138,0.3) 100%);
     z-index: 1;
 }
 
@@ -768,7 +771,11 @@ ul {
    CREENCIAS (NEW)
    ============================================ */
 .creencias-section {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+    background:
+        radial-gradient(ellipse 1000px 600px at 50% -20%, rgba(247,148,30,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 800px 500px at 80% 80%, rgba(45,75,168,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 600px 400px at 20% 100%, rgba(20,33,87,0.3) 0%, transparent 60%),
+        linear-gradient(170deg, #142157 0%, #1b2d6e 30%, #1e3a8a 55%, #1b2d6e 80%, #142157 100%);
     position: relative;
 }
 
@@ -776,8 +783,8 @@ ul {
     content: '';
     position: absolute;
     inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.5;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.4;
 }
 
 .creencias-grid {
@@ -840,10 +847,11 @@ ul {
    LINEA DE TIEMPO
    ============================================ */
 .lineatiempo {
-    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url("../img/bgTL.svg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background:
+        radial-gradient(ellipse 800px 500px at 20% 30%, rgba(247,148,30,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 600px 400px at 80% 70%, rgba(45,75,168,0.1) 0%, transparent 60%),
+        linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+        url("../img/bgTL.svg") center/cover fixed;
 }
 
 .timeline {
@@ -977,7 +985,10 @@ ul {
    MINISTERIOS
    ============================================ */
 .ministerios {
-    background: linear-gradient(135deg, var(--off-white) 0%, var(--white) 100%);
+    background:
+        radial-gradient(ellipse 700px 500px at 80% 20%, rgba(247,148,30,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 500px at 20% 80%, rgba(20,33,87,0.03) 0%, transparent 70%),
+        linear-gradient(160deg, #fcfcfc 0%, #f8f5f2 100%);
 }
 
 .carousel-wrapper {
@@ -1084,7 +1095,10 @@ ul {
    SERVICIOS
    ============================================ */
 .servicios {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 70%, #0f1b4a 100%);
+    background:
+        radial-gradient(ellipse 900px 500px at 30% 0%, rgba(247,148,30,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 700px 500px at 70% 100%, rgba(45,75,168,0.1) 0%, transparent 60%),
+        linear-gradient(170deg, #0f1b4a 0%, #142157 25%, #1e3a8a 50%, #1b2d6e 75%, #0f1b4a 100%);
     position: relative;
 }
 
@@ -1093,7 +1107,7 @@ ul {
     position: absolute;
     inset: 0;
     background: url("../img/bgcarousel.svg") center/cover no-repeat;
-    opacity: 0.08;
+    opacity: 0.05;
     mix-blend-mode: overlay;
 }
 
@@ -1162,7 +1176,10 @@ ul {
    ESCUELA DOMINICAL
    ============================================ */
 .escuela-section {
-    background: linear-gradient(135deg, var(--off-white) 0%, var(--white) 100%);
+    background:
+        radial-gradient(ellipse 600px 400px at 30% 0%, rgba(247,148,30,0.05) 0%, transparent 70%),
+        radial-gradient(ellipse 800px 600px at 70% 100%, rgba(20,33,87,0.04) 0%, transparent 70%),
+        linear-gradient(160deg, #fafafa 0%, #f5f2ef 60%, #efeae5 100%);
 }
 
 .escuela-content {
@@ -1272,7 +1289,10 @@ ul {
    CELULAS
    ============================================ */
 .celulas-section {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, #0f1b4a 100%);
+    background:
+        radial-gradient(ellipse 800px 500px at 50% 0%, rgba(247,148,30,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 600px 600px at 20% 80%, rgba(45,75,168,0.12) 0%, transparent 60%),
+        linear-gradient(170deg, #0f1b4a 0%, #142157 40%, #1e3a8a 70%, #142157 100%);
     position: relative;
 }
 
@@ -1318,7 +1338,10 @@ ul {
    PASTORES
    ============================================ */
 .pastores-section {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, #0f1b4a 100%);
+    background:
+        radial-gradient(ellipse 700px 500px at 50% 0%, rgba(247,148,30,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 600px 400px at 80% 100%, rgba(30,58,138,0.2) 0%, transparent 60%),
+        linear-gradient(170deg, #0f1b4a 0%, #142157 50%, #1a2a6c 100%);
 }
 
 .pastores-grid {
@@ -1380,7 +1403,9 @@ ul {
    UBICACION
    ============================================ */
 .ubicacion-section {
-    background: var(--off-white);
+    background:
+        radial-gradient(ellipse 500px 400px at 50% 0%, rgba(247,148,30,0.04) 0%, transparent 70%),
+        linear-gradient(160deg, #f8f6f4 0%, #f2eee9 100%);
 }
 
 .map-container {
@@ -1396,7 +1421,9 @@ ul {
    CONTACTO
    ============================================ */
 .contact-section {
-    background: var(--white);
+    background:
+        radial-gradient(ellipse 700px 500px at 0% 50%, rgba(20,33,87,0.03) 0%, transparent 70%),
+        linear-gradient(160deg, #ffffff 0%, #faf8f6 100%);
 }
 
 .contact-grid {
@@ -1748,6 +1775,21 @@ ul {
 
 /* Mobile / 768px */
 @media (max-width: 768px) {
+    .navbar {
+        top: 0.8rem;
+        width: calc(100% - 1rem);
+        height: 56px;
+        border-radius: 50px;
+    }
+
+    .nav-container {
+        padding: 0 1rem;
+    }
+
+    .logo-image {
+        width: 95px;
+    }
+
     .hamburger {
         display: flex;
     }
@@ -1755,17 +1797,18 @@ ul {
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: var(--nav-height);
+        top: 0;
         flex-direction: column;
         background: rgba(255,255,255,0.98);
         backdrop-filter: blur(20px);
         width: 100%;
-        height: calc(100vh - var(--nav-height));
+        height: 100vh;
         transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        padding: 2rem;
-        gap: 1rem;
+        padding: 5rem 2rem 2rem;
+        gap: 0.5rem;
         align-items: center;
         justify-content: flex-start;
+        border-radius: 0;
     }
 
     .nav-menu.active {
@@ -1773,11 +1816,13 @@ ul {
     }
 
     .nav-link {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
+        padding: 0.5rem 0;
     }
 
     .nav-btn {
-        margin-top: 0.5rem;
+        margin-top: 0.75rem;
+        padding: 0.6rem 2rem;
     }
 
     .hero-container {
