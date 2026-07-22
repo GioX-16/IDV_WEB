@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     }
 
-    // ----- COUNTDOWN TIMER -----
-    const fechaEvento = new Date('Sep 12, 2025 18:00:00').getTime();
+    // ----- COUNTDOWN TIMER (51 ANIVERSARIO: Sep 14, 2026) -----
+    const fechaEvento = new Date('Sep 14, 2026 18:00:00').getTime();
     const diasEl = document.getElementById('dias');
     const horasEl = document.getElementById('horas');
     const minutosEl = document.getElementById('minutos');
@@ -110,15 +110,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    // ----- MINISTERIOS CAROUSEL -----
+    // ----- MINISTERIOS CAROUSEL (con touch swipe) -----
     const slides = document.querySelectorAll('.slide');
     const prevBtn = document.querySelector('.prev');
     const nextBtn = document.querySelector('.next');
     const indicatorsContainer = document.querySelector('.indicators');
+    const carousel = document.querySelector('.carousel');
 
     if (slides.length && prevBtn && nextBtn && indicatorsContainer) {
         let index = 0;
         let autoPlayInterval;
+        let touchStartX = 0;
+        let touchEndX = 0;
 
         slides.forEach((_, i) => {
             const btn = document.createElement('button');
@@ -141,10 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     slide.classList.add('right');
                 }
             });
-
-            indicators.forEach((btn, i) => {
-                btn.classList.toggle('active', i === index);
-            });
+            indicators.forEach((btn, i) => btn.classList.toggle('active', i === index));
         }
 
         function goToSlide(i) {
@@ -166,8 +166,25 @@ document.addEventListener('DOMContentLoaded', () => {
         prevBtn.addEventListener('click', prevSlideFunc);
         nextBtn.addEventListener('click', nextSlide);
 
+        // Touch swipe support
+        if (carousel) {
+            carousel.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            carousel.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) nextSlide();
+                    else prevSlideFunc();
+                    resetAutoPlay();
+                }
+            }, { passive: true });
+        }
+
         function startAutoPlay() {
-            autoPlayInterval = setInterval(nextSlide, 8000);
+            autoPlayInterval = setInterval(nextSlide, 7000);
         }
 
         function resetAutoPlay() {
@@ -178,11 +195,13 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSlides();
         startAutoPlay();
 
-        // Pause autoplay on hover
+        // Pause autoplay on hover/touch
         const carouselWrapper = document.querySelector('.carousel-wrapper');
         if (carouselWrapper) {
             carouselWrapper.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
             carouselWrapper.addEventListener('mouseleave', startAutoPlay);
+            carouselWrapper.addEventListener('touchstart', () => clearInterval(autoPlayInterval), { passive: true });
+            carouselWrapper.addEventListener('touchend', startAutoPlay, { passive: true });
         }
     }
 
