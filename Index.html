@@ -1,589 +1,615 @@
 <!DOCTYPE html>
 <html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Iglesia del Dios Viviente - Un Lugar Para Crecer en Fe y Amor. Managua, Nicaragua.">
+    <meta name="theme-color" content="#142157">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style"
-            content="black-translucent">
+    <title>Iglesia del Dios Viviente</title>
 
-        <title>Iglesia del Dios Viviente</title>
-        <link rel="stylesheet" href="Styles/Style.css">
-        <link rel="icon" href="/img/Logo_Circular_ico.ico">
-        <!-- Font Awesome CDN -->
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer" />
-        <link rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"
-            integrity="sha512-..." crossorigin="anonymous">
-        <link rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/glider-js@1.7.3/glider.min.css"
-            integrity="sha512-/Jp9wGwT8pGtf+9m/JqhAUnhc9VA4iLKJ9VwCWJPidd0yL2TSJzjXwzqZGcvrWxpQd9s5LFaMFTV3ylV3JEWcbw==" crossorigin="anonymous">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;600;700&display=swap"
-            rel="stylesheet">
+    <link rel="icon" href="/img/Logo_Circular_ico.ico">
 
-    </head>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <body>
-        <!-- Navbar -->
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <a href="#inicio" class="logo-link">
-                        <img loading="lazy" src="img/logoidv.svg"
-                            alt="Logo IDV"
-                            class="logo-image">
-                    </a>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="#congregacionn"
-                            class="nav-link">Congregacion</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#aniversarioo" class="nav-link">Iglesia</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#ministerioss" class="nav-link">Ministerios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#servicioss" class="nav-link">Horarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#ubicacionn" class="nav-link">Ubicacion</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#Contactoo"
-                            class="nav-link nav-btn">Contactanos</a>
-                    </li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="Styles/Style.css">
+</head>
+<body>
+
+    <!-- ===================== NAVBAR ===================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#inicio" class="nav-logo">
+                <img loading="lazy" src="img/logoidv.svg" alt="Logo IDV" class="logo-image">
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#congregacionn" class="nav-link">Congregacion</a></li>
+                <li class="nav-item"><a href="#aniversarioo" class="nav-link">Iglesia</a></li>
+                <li class="nav-item"><a href="#ministerioss" class="nav-link">Ministerios</a></li>
+                <li class="nav-item"><a href="#servicioss" class="nav-link">Horarios</a></li>
+                <li class="nav-item"><a href="#ubicacionn" class="nav-link">Ubicacion</a></li>
+                <li class="nav-item"><a href="#Contactoo" class="nav-link nav-btn">Contactanos</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================== HERO ===================== -->
+    <section id="inicio" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-container">
+            <div class="hero-content" data-aos="fade-right" data-aos-duration="1200">
+                <h1 class="hero-title">
+                    <span class="title-line">Un Lugar Para</span>
+                    <span class="title-line highlight">Crecer en</span>
+                    <span class="title-line">Fe y Amor</span>
+                </h1>
+                <p class="hero-subtitle">Iglesia del Dios Viviente · Managua, Nicaragua</p>
+                <a href="#lineatiempoo" class="hero-btn">
+                    <span>Conoce Nuestra Iglesia</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <div class="church-seal">
+                    <img loading="lazy" src="/img/convencionlogo.svg" alt="Sello Iglesia" class="seal-image">
                 </div>
             </div>
-        </nav>
-
-        <!-- SECCION HOME-->
-        <section id="inicio" class="hero">
-            <div class="hero-container">
-                <div class="hero-content">
-                    <h1 class="hero-title">
-                        <span class="title-line">Un Lugar Para</span>
-                        <span class="title-line">Crecer en</span>
-                        <span class="title-line">Fe y Amor</span>
-                    </h1>
-                    <a href="#lineatiempoo" class="hero-btn">Conoce Nuestra
-                        Iglesia</a>
-                    <div class="church-seal">
-                        <img loading="lazy" src="/img/convencionlogo.svg"
-                            alt="Sello Iglesia" class="seal-image">
-                    </div>
-                </div>
-                <img loading="lazy" src="img/pastoreshome.svg"
-                    alt="Familia de la Iglesia"
-                    class="hero-photo">
+            <div class="hero-visual" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                <img loading="lazy" src="img/pastoreshome.svg" alt="Familia de la Iglesia" class="hero-photo">
             </div>
-        </section>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>Descubre m&aacute;s</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
 
-        <!-- SECCION CONGREGACION -->>
-        <section class="congregacion" id="congregacionn">
-            <div class="congregacion-content">
+    <!-- ===================== CONGREGACION ===================== -->
+    <section class="section congregacion" id="congregacionn">
+        <div class="section-bg-shape shape-1"></div>
+        <div class="container">
+            <div class="grid-2" data-aos="fade-up" data-aos-duration="1000">
                 <div class="text-section">
-                    <h2>CONGREGACION</h2>
+                    <span class="section-tag">Qui&eacute;nes Somos</span>
+                    <h2 class="section-title">CONGREGACION</h2>
                     <p>
                         Somos la Iglesia del Dios Viviente, una comunidad de fe
                         que forma parte de la cadena de iglesias menonitas en
                         Nicaragua. Nuestro compromiso es vivir y compartir el
-                        Evangelio de
-                        Jesucristo, cumpliendo el llamado de
-                        <br><br>
-                        <strong>Mateo 28:19-20:</strong><br>
-                        <em style="color: #f28c28;">“Id y haced discípulos a
-                            todas las naciones…”</em>
-                        <br><br>
+                        Evangelio de Jesucristo, cumpliendo el llamado de
                     </p>
-                    <a href="#celulasidv" class="button">CONOCER MAS</a>
+                    <blockquote>
+                        <strong>Mateo 28:19-20</strong>
+                        <em>&ldquo;Id y haced disc&iacute;pulos a todas las naciones&hellip;&rdquo;</em>
+                    </blockquote>
+                    <a href="#celulasidv" class="button">
+                        Conocer M&aacute;s <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <div class="image-section">
-                    <img loading="lazy" src="/img/nosotrosimg.svg"
-                        alt="Imagen de la congregación" class="main-image" />
+                <div class="image-section" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="image-frame">
+                        <img loading="lazy" src="/img/nosotrosimg.svg" alt="Imagen de la congregaci&oacute;n" class="main-image">
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECCION DE ANIVERSARIO -->
-        <section class="aniversario">
-            <div class="corner top-left"></div>
-            <div class="corner top-right"></div>
-            <div class="corner bottom-left"></div>
-            <div class="corner bottom-right"></div>
+    <!-- ===================== ANIVERSARIO ===================== -->
+    <section class="section aniversario-section">
+        <div class="container">
+            <div class="aniversario" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="corner top-left"></div>
+                <div class="corner top-right"></div>
+                <div class="corner bottom-left"></div>
+                <div class="corner bottom-right"></div>
 
-            <h1>IGLESIA DEL DIOS VIVIENTE</h1>
-            <h2>Te invitamos a nuestro</h2>
+                <span class="aniv-label">IGLESIA DEL DIOS VIVIENTE</span>
+                <h2 class="aniv-invite">Te invitamos a nuestro</h2>
+                <div class="numero">
+                    <span class="num">50</span><span class="deg">°</span>
+                    <span class="aniv-text">Aniversario</span>
+                </div>
 
-            <div class="numero">50° Aniversario</div>
+                <div class="contador">
+                    <div class="contador-item">
+                        <span id="dias">00</span>
+                        <small>D&iacute;as</small>
+                    </div>
+                    <div class="contador-item">
+                        <span id="horas">00</span>
+                        <small>Hrs</small>
+                    </div>
+                    <div class="contador-item">
+                        <span id="minutos">00</span>
+                        <small>Min</small>
+                    </div>
+                    <div class="contador-item">
+                        <span id="segundos">00</span>
+                        <small>Seg</small>
+                    </div>
+                </div>
 
-            <!-- Contador regresivo -->
-            <div class="contador">
-                <span id="dias">00</span> Días
-                <span id="horas">00</span> Hrs
-                <span id="minutos">00</span> Min
-                <span id="segundos">00</span> Seg
+                <div class="fechas">
+                    <div class="fiesta">
+                        <p class="fiesta-dia">VIERNES</p>
+                        <p class="fecha-num">12</p>
+                        <small>6PM</small>
+                    </div>
+                    <div class="fiesta">
+                        <p class="fiesta-dia">S&Aacute;BADO</p>
+                        <p class="fecha-num">13</p>
+                        <small>5PM</small>
+                    </div>
+                    <div class="fiesta">
+                        <p class="fiesta-dia">DOMINGO</p>
+                        <p class="fecha-num">14</p>
+                        <small>9AM</small>
+                    </div>
+                </div>
+
+                <p class="aniv-verse">
+                    &ldquo;Antes bien, creced en la gracia y el conocimiento de nuestro
+                    Se&ntilde;or y Salvador Jesucristo.&rdquo;
+                    <br>
+                    <strong>2 Pedro 3:18</strong>
+                </p>
             </div>
+        </div>
+    </section>
 
-            <div class="fechas">
-                <div class="fiesta">
-                    <p>VIERNES</p>
-                    <p class="dia">12</p>
-                    <small>6PM</small>
+    <!-- ===================== VIDEO ===================== -->
+    <section class="section video-section" id="aniversarioo">
+        <div class="video-overlay"></div>
+        <video autoplay muted loop playsinline class="background-video">
+            <source src="/Videos/Armonia.mp4" type="video/mp4">
+        </video>
+        <div class="video-content" data-aos="fade-up" data-aos-duration="1000">
+            <h2>50 A&ntilde;os de fe, creciendo en su gracia</h2>
+            <p>Creciendo juntos en el amor de Cristo</p>
+        </div>
+    </section>
+
+    <!-- ===================== CREENCIAS (NEW) ===================== -->
+    <section class="section creencias-section" id="creencias">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag light">Nuestra Fe</span>
+                <h2 class="section-title light">En Qu&eacute; Creemos</h2>
+                <p class="section-desc light">
+                    Fundamentados en la Palabra de Dios, estos son los pilares de nuestra fe.
+                </p>
+            </div>
+            <div class="creencias-grid">
+                <div class="creencia-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="0">
+                    <div class="creencia-icon">
+                        <i class="fas fa-cross"></i>
+                    </div>
+                    <h3>Fe en Cristo</h3>
+                    <p>Creemos en Jesucristo como &uacute;nico Salvador y Se&ntilde;or.</p>
                 </div>
-                <div class="fiesta">
-                    <p>SÁBADO</p>
-                    <p class="dia">13</p>
-                    <small>5PM</small>
+                <div class="creencia-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <div class="creencia-icon">
+                        <i class="fas fa-bible"></i>
+                    </div>
+                    <h3>La Biblia</h3>
+                    <p>La Palabra de Dios es nuestra gu&iacute;a de fe y conducta.</p>
                 </div>
-                <div class="fiesta">
-                    <p>DOMINGO</p>
-                    <p class="dia">14</p>
-                    <small>9AM</small>
+                <div class="creencia-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="creencia-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Amor al Pr&oacute;jimo</h3>
+                    <p>Servir a los dem&aacute;s con el amor que Cristo nos ense&ntilde;&oacute;.</p>
+                </div>
+                <div class="creencia-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                    <div class="creencia-icon">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <h3>Unidad del Cuerpo</h3>
+                    <p>Somos un solo cuerpo en Cristo, edific&aacute;ndonos en amor.</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <h2>50 Años de fe, creciendo en su gracia</h2>
-            <p>
-                "Antes bien, creced en la gracia y el conocimiento de nuestro
-                Señor y Salvador Jesucristo.
-                A Él sea gloria ahora y hasta el día de la eternidad. Amén."
-                <br> <strong>2 Pedro 3:18</strong>
-            </p>
-        </section>
-
-        <!-- SECCION DE VIDEO -->
-        <section class="video-section" id="aniversarioo">
-            <video 
-                autoplay 
-                muted 
-                loop 
-                playsinline 
-                class="background-video">
-                <source src="/Videos/Armonia.mp4" type="video/mp4">
-                Tu navegador no soporta videos HTML5.
-            </video>
-        </section>
-
-        <!-- SECCION LINEA TIEMPO -->
-        <section class="lineatiempo" id="lineatiempoo">
-            <div class="timeline">
-
-                <div class="container left-container">
-                    <img src="/img/TLico1.svg" alt="imgIDV">
-                    <div class="text-box">
-                        <h2>Iglesia del Dios Viviente </h2>
-                        <small>1975 - 1985</small>
-                        <p>Perseverancia en la fe:
-                            Mantenerse firme en el camino de Dios aun cuando las
-                            pruebas y dificultades quieran desviarnos.
-                        </p>
-                        <span><br> 1 Corintios 2:9</span>
-                        <span class="left-container-arrow"></span>
-                    </div>
+    <!-- ===================== LINEA DE TIEMPO ===================== -->
+    <section class="section lineatiempo" id="lineatiempoo">
+        <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+            <span class="section-tag light">Nuestra Historia</span>
+            <h2 class="section-title light">L&iacute;nea de Tiempo</h2>
+        </div>
+        <div class="timeline" data-aos="fade-up" data-aos-duration="1000">
+            <div class="container left-container">
+                <img src="/img/TLico1.svg" alt="imgIDV">
+                <div class="text-box">
+                    <h2>Iglesia del Dios Viviente</h2>
+                    <small>1975 - 1985</small>
+                    <p>Perseverancia en la fe: Mantenerse firme en el camino de Dios aun cuando las pruebas y dificultades quieran desviarnos.</p>
+                    <span class="verse">1 Corintios 2:9</span>
+                    <span class="left-container-arrow"></span>
                 </div>
-
-                <div class="container right-container">
-                    <img src="/img/TLico2.svg" alt="imgIDV">
-                    <div class="text-box">
-                        <h2>Iglesia del Dios Viviente </h2>
-                        <small>1985 - 1995</small>
-                        <p>Amor verdadero: Mostrar un amor sincero que nace del
-                            corazón de Cristo
-                            y se refleja en nuestras acciones hacia los demás.
-                        </p>
-                        <span> <br> Colosenses 3:14</span>
-                        <span class="right-container-arrow"></span>
-                    </div>
-                </div>
-
-                <div class="container left-container">
-                    <img src="/img/TLico3.svg" alt="imgIDV">
-                    <div class="text-box">
-                        <h2>Iglesia del Dios Viviente </h2>
-                        <small>1995 - 2005</small>
-                        <p>Entrega total a Dios: Rendir nuestra vida,
-                            talentos y tiempo para servirle con gratitud y
-                            fidelidad.
-                        </p>
-                        <span> <br> Colosenses 3:23 </span>
-                        <span class="left-container-arrow"></span>
-                    </div>
-                </div>
-
-                <div class="container right-container">
-                    <img src="/img/TLico4.svg" alt="imgIDV">
-                    <div class="text-box">
-                        <h2>Iglesia del Dios Viviente </h2>
-                        <small>2005 - 2015</small>
-                        <p>Servicio a la iglesia: Trabajar con dedicación por el
-                            bienestar
-                            espiritual y material de la congregación.
-                        </p>
-                        <span> <br> 1 Pedro 4:10 </span>
-                        <span class="right-container-arrow"></span>
-                    </div>
-                </div>
-
-                <div class="container left-container">
-                    <img src="/img/TLico5.svg" alt="imgIDV">
-                    <div class="text-box">
-                        <h2>Iglesia del Dios Viviente </h2>
-                        <small>2015 - 2025</small>
-                        <p>Unidad en Cristo: Permanecer juntos como un solo
-                            cuerpo,
-                            fortaleciendo la fe de cada miembro y edificando la
-                            obra de Dios.
-                        </p>
-                        <span> <br> Efesios 4:3 </span>
-                        <span class="left-container-arrow"></span>
-                    </div>
-                </div>
-
             </div>
-        </section>
+            <div class="container right-container">
+                <img src="/img/TLico2.svg" alt="imgIDV">
+                <div class="text-box">
+                    <h2>Iglesia del Dios Viviente</h2>
+                    <small>1985 - 1995</small>
+                    <p>Amor verdadero: Mostrar un amor sincero que nace del coraz&oacute;n de Cristo y se refleja en nuestras acciones hacia los dem&aacute;s.</p>
+                    <span class="verse">Colosenses 3:14</span>
+                    <span class="right-container-arrow"></span>
+                </div>
+            </div>
+            <div class="container left-container">
+                <img src="/img/TLico3.svg" alt="imgIDV">
+                <div class="text-box">
+                    <h2>Iglesia del Dios Viviente</h2>
+                    <small>1995 - 2005</small>
+                    <p>Entrega total a Dios: Rendir nuestra vida, talentos y tiempo para servirle con gratitud y fidelidad.</p>
+                    <span class="verse">Colosenses 3:23</span>
+                    <span class="left-container-arrow"></span>
+                </div>
+            </div>
+            <div class="container right-container">
+                <img src="/img/TLico4.svg" alt="imgIDV">
+                <div class="text-box">
+                    <h2>Iglesia del Dios Viviente</h2>
+                    <small>2005 - 2015</small>
+                    <p>Servicio a la iglesia: Trabajar con dedicaci&oacute;n por el bienestar espiritual y material de la congregaci&oacute;n.</p>
+                    <span class="verse">1 Pedro 4:10</span>
+                    <span class="right-container-arrow"></span>
+                </div>
+            </div>
+            <div class="container left-container">
+                <img src="/img/TLico5.svg" alt="imgIDV">
+                <div class="text-box">
+                    <h2>Iglesia del Dios Viviente</h2>
+                    <small>2015 - 2025</small>
+                    <p>Unidad en Cristo: Permanecer juntos como un solo cuerpo, fortaleciendo la fe de cada miembro y edificando la obra de Dios.</p>
+                    <span class="verse">Efesios 4:3</span>
+                    <span class="left-container-arrow"></span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- SECCION MINISTERIOS -->>
-        <section class="ministerios" id="ministerioss">
-            <h2>MINISTERIOS</h2>
-
-            <div class="carousel-container">
-                <button class="prev">&#10094;</button>
-
+    <!-- ===================== MINISTERIOS ===================== -->
+    <section class="section ministerios" id="ministerioss">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag">Servicio</span>
+                <h2 class="section-title">MINISTERIOS</h2>
+                <p class="section-desc">
+                    Diferentes &aacute;reas de servicio para crecer espiritualmente y servir a Dios.
+                </p>
+            </div>
+            <div class="carousel-wrapper" data-aos="fade-up" data-aos-duration="1000">
+                <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
                 <div class="carousel">
-
-                    <div class="slide">
-                        <img src="/img/m1.svg" alt="Ministerio 1"
-                            loading="lazy">
-                    </div>
-                    <div class="slide">
-                        <img src="/img/m2.svg" alt="Ministerio 2"
-                            loading="lazy">
-                    </div>
-                    <div class="slide">
-                        <img src="/img/m3.svg" alt="Ministerio 3"
-                            loading="lazy">
-                    </div>
-                    <div class="slide">
-                        <img src="/img/m4.svg" alt="Ministerio 4"
-                            loading="lazy">
-                    </div>
-                    <div class="slide">
-                        <img src="/img/m5.svg" alt="Ministerio 5"
-                            loading="lazy">
-                    </div>
-                    <div class="slide">
-                        <img src="/img/m6.svg" alt="Ministerio 6"
-                            loading="lazy">
-                    </div>
+                    <div class="slide"><img src="/img/m1.svg" alt="Ministerio 1" loading="lazy"></div>
+                    <div class="slide"><img src="/img/m2.svg" alt="Ministerio 2" loading="lazy"></div>
+                    <div class="slide"><img src="/img/m3.svg" alt="Ministerio 3" loading="lazy"></div>
+                    <div class="slide"><img src="/img/m4.svg" alt="Ministerio 4" loading="lazy"></div>
+                    <div class="slide"><img src="/img/m5.svg" alt="Ministerio 5" loading="lazy"></div>
+                    <div class="slide"><img src="/img/m6.svg" alt="Ministerio 6" loading="lazy"></div>
                 </div>
-
-                <button class="next">&#10095;</button>
+                <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
             </div>
-
-            <!-- Indicadores -->
             <div class="indicators"></div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECCION CULTOS -->>
-        <section class="servicios" id="servicioss">
-            <h2>DIAS DE SERVICIO</h2>
-            <div class="cards">
+    <!-- ===================== SERVICIOS ===================== -->
+    <section class="section servicios" id="servicioss">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag light">Horarios</span>
+                <h2 class="section-title light">DIAS DE SERVICIO</h2>
+                <p class="section-desc light">Te esperamos con los brazos abiertos. &Uacute;nete a nosotros.</p>
+            </div>
+            <div class="cards" data-aos="fade-up" data-aos-duration="1000">
                 <div class="card">
-                    <h3>Culto de Oracion <span class="icon">✟</span></h3>
-                    <p>Culto Dedicado a la Adoracion a Dios. Clamando por
-                        peticiones de nuestros Hermanos.</p>
-                    <span class="hora">Martes - Hora: 6:00 PM - 8:00 PM</span>
+                    <div class="card-icon"><i class="fas fa-pray"></i></div>
+                    <h3>Culto de Oracion</h3>
+                    <p>Culto Dedicado a la Adoracion a Dios. Clamando por peticiones de nuestros Hermanos.</p>
+                    <span class="hora"><i class="far fa-clock"></i> Martes 6:00 PM - 8:00 PM</span>
                 </div>
                 <div class="card">
-                    <h3>Culto de Dorcas <span class="icon">✟</span></h3>
-                    <p>Culto Dirigido por Mujeres. Con el respaldo de nuestro
-                        Señor.</p>
-                    <span class="hora">Viernes - Hora: 6:00 PM - 8:00 PM</span>
+                    <div class="card-icon"><i class="fas fa-female"></i></div>
+                    <h3>Culto de Dorcas</h3>
+                    <p>Culto Dirigido por Mujeres. Con el respaldo de nuestro Se&ntilde;or.</p>
+                    <span class="hora"><i class="far fa-clock"></i> Viernes 6:00 PM - 8:00 PM</span>
                 </div>
-
                 <div class="card">
-                    <h3>Ayuno Congregacional <span class="icon">✟</span></h3>
+                    <div class="card-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>Ayuno Congregacional</h3>
                     <p>Ayuno congregacional para Crecimiento Espiritual.</p>
-                    <span class="hora">Miércoles - Hora: 9:00 AM - 2:00
-                        PM</span>
+                    <span class="hora"><i class="far fa-clock"></i> Mi&eacute;rcoles 9:00 AM - 2:00 PM</span>
                 </div>
-
                 <div class="card">
-                    <h3>Culto de Jovenes <span class="icon">✟</span></h3>
-                    <p>Para Jóvenes, Adolescentes. Servicio dedicado a nuestro
-                        Padre.</p>
-                    <span class="hora">Sábados - Hora: 6:00 PM - 8:00 PM</span>
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <h3>Culto de Jovenes</h3>
+                    <p>Para J&oacute;venes, Adolescentes. Servicio dedicado a nuestro Padre.</p>
+                    <span class="hora"><i class="far fa-clock"></i> S&aacute;bados 6:00 PM - 8:00 PM</span>
                 </div>
-
                 <div class="card">
-                    <h3>Estudios SEAN <span class="icon">✟</span></h3>
-                    <p>Los Estudios de SEAN son una serie de libros que enseñan
-                        sobre la Vida en Cristo.</p>
-                    <span class="hora">Jueves - Hora: 6:00 PM - 8:00 PM</span>
+                    <div class="card-icon"><i class="fas fa-book"></i></div>
+                    <h3>Estudios SEAN</h3>
+                    <p>Los Estudios de SEAN son una serie de libros que ense&ntilde;an sobre la Vida en Cristo.</p>
+                    <span class="hora"><i class="far fa-clock"></i> Jueves 6:00 PM - 8:00 PM</span>
                 </div>
-
                 <div class="card">
-                    <h3>Culto Evangelistico <span class="icon">✟</span></h3>
-                    <p>Culto Poderoso. Donde se adora, alaba y se aprende de
-                        nuestro Señor Dios Padre Hijo y Espíritu Santo.</p>
-                    <span class="hora">Domingo - Hora: 4:00 PM - 7:00 PM</span>
+                    <div class="card-icon"><i class="fas fa-church"></i></div>
+                    <h3>Culto Evangelistico</h3>
+                    <p>Culto Poderoso. Donde se adora, alaba y se aprende de nuestro Se&ntilde;or Dios.</p>
+                    <span class="hora"><i class="far fa-clock"></i> Domingo 4:00 PM - 7:00 PM</span>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECCION DOMINICAL -->
-        <section class="escuela-section">
-            <div class="escuela-content">
-                <h2>Escuela Dominical</h2>
+    <!-- ===================== ESCUELA DOMINICAL ===================== -->
+    <section class="section escuela-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag">Aprendizaje</span>
+                <h2 class="section-title">Escuela Dominical</h2>
+            </div>
+            <div class="escuela-content" data-aos="fade-up" data-aos-duration="1000">
                 <p class="descripcion">
                     Los servicios Dominical son para todas las edades, desde
-                    niños pequeños hasta adultos. Con diferentes maestros,
-                    dinámicas y aprendizaje del Señor.
+                    ni&ntilde;os peque&ntilde;os hasta adultos. Con diferentes maestros,
+                    din&aacute;micas y aprendizaje del Se&ntilde;or.
                 </p>
-                <p class="horario">🕒 Domingos de 9:00 am a 11:00 am</p>
+                <p class="horario"><i class="far fa-clock"></i> Domingos de 9:00 am a 11:00 am</p>
             </div>
 
-            <!-- Galería principal -->
-            <div class="escuela-imagenes">
-                <div class="imagen-card fade-in">
-                    <img loading="lazy" src="/img/MaestrosD.svg"
-                        alt="Maestros Escuela Dominical">
+            <div class="escuela-imagenes" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                <div class="imagen-card">
+                    <img loading="lazy" src="/img/MaestrosD.svg" alt="Maestros Escuela Dominical">
                     <span>Maestros de Escuela Dominical</span>
                 </div>
-                <div class="imagen-card fade-in">
-                    <img loading="lazy" src="/img/elizab.svg"
-                        alt="Líder Escuela Dominical">
-                    <span>Líder de Escuela Dominical</span>
+                <div class="imagen-card">
+                    <img loading="lazy" src="/img/elizab.svg" alt="L&iacute;der Escuela Dominical">
+                    <span>L&iacute;der de Escuela Dominical</span>
                 </div>
             </div>
 
-            <!-- Carrusel tipo carrete infinito -->
-            <div class="collage-marquee">
+            <div class="collage-marquee" data-aos="fade-up" data-aos-duration="1000">
                 <div class="collage-track">
-                    <div class="collage-item"><img loading="lazy"
-                            src="/img/imgD1.svg"
-                            alt="Collage 1" /></div>
-                    <div class="collage-item"><img loading="lazy"
-                            src="img/imgD2.svg"
-                            alt="Collage 2" /></div>
-                    <div class="collage-item"><img loading="lazy"
-                            src="/img/imgD3.svg"
-                            alt="Collage 3" /></div>
-                    <div class="collage-item"><img loading="lazy"
-                            src="img/imgD4.svg"
-                            alt="Collage 4" /></div>
-                    <div class="collage-item"><img loading="lazy"
-                            src="/img/imgD5.svg"
-                            alt="Collage 5" /></div>
-                    <div class="collage-item"><img loading="lazy"
-                            src="/img/imgD6.svg"
-                            alt="Collage 6" /></div>
-
-                    <!-- Duplicadas para efecto infinito -->
-                    <div class="collage-item"><img loading="lazy"
-                            src="/img/imgD1.svg"
-                            alt="Collage 1" /></div>
-                    <div class="collage-item"><img loading="lazy"
-                            src="/img/imgD2.svg"
-                            alt="Collage 2" /></div>
-                    <div class="collage-item"><img loading="lazy"
-                            src="/img/imgD3.svg"
-                            alt="Collage 3" /></div>
-                    <div class="collage-item"><img loading="lazy"
-                            src="/img/imgD4.svg"
-                            alt="Collage 4" /></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgD1.svg" alt="Collage 1"></div>
+                    <div class="collage-item"><img loading="lazy" src="img/imgD2.svg" alt="Collage 2"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgD3.svg" alt="Collage 3"></div>
+                    <div class="collage-item"><img loading="lazy" src="img/imgD4.svg" alt="Collage 4"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgD5.svg" alt="Collage 5"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgD6.svg" alt="Collage 6"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgD1.svg" alt="Collage 1"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgD2.svg" alt="Collage 2"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgD3.svg" alt="Collage 3"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgD4.svg" alt="Collage 4"></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECCION CELULAS -->
-        <section class="celulas_section" id="celulasidv">
-            <div class="descripcion_content">
-                <h2>Celulas IDV</h2>
-                <p class="descripcion">
-                    Los grupos de Celulas, son pequeños cultos dirigidos
-                    al Señor con la colaboración de hermanos y hermanas que
-                    abren las puertas de sus hogares a nuestros líderes y a
-                    Dios.
+    <!-- ===================== CELULAS IDV ===================== -->
+    <section class="section celulas-section" id="celulasidv">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag light">Grupos de Fe</span>
+                <h2 class="section-title light">Celulas IDV</h2>
+                <p class="section-desc light">
+                    Los grupos de Celulas, son peque&ntilde;os cultos dirigidos al Se&ntilde;or con la colaboraci&oacute;n de hermanos y hermanas que abren las puertas de sus hogares a nuestros l&iacute;deres y a Dios.
                 </p>
             </div>
 
-            <!-- Galería destacada -->
-            <div class="escuela-imagenes">
-                <div class="imagen-card fade-in">
-                    <img loading="lazy" src="/img/celulas.svg"
-                        alt="Grupo de Celulas">
+            <div class="escuela-imagenes" data-aos="fade-up" data-aos-duration="1000">
+                <div class="imagen-card">
+                    <img loading="lazy" src="/img/celulas.svg" alt="Grupo de Celulas">
                     <span>Grupo de Celulas</span>
                 </div>
-                <div class="imagen-card fade-in">
-                    <img loading="lazy" src="/img/lidercelulas.svg"
-                        alt="Líder Celulas">
-                    <span>Líder de las Celulas</span>
+                <div class="imagen-card">
+                    <img loading="lazy" src="/img/lidercelulas.svg" alt="L&iacute;der Celulas">
+                    <span>L&iacute;der de las Celulas</span>
                 </div>
             </div>
 
-            <!-- Galería dinámica -->
-            <div class="containercel">
-                <div class="box_cel animated"><img loading="lazy"
-                        src="/img/c1.svg"
-                        alt="img_celulas"></div>
-                <div class="box_cel animated"><img loading="lazy"
-                        src="/img/c2.svg"
-                        alt="img_celulas"></div>
-                <div class="box_cel animated"><img loading="lazy"
-                        src="/img/c3.svg"
-                        alt="img_celulas"></div>
-                <div class="box_cel animated"><img loading="lazy"
-                        src="/img/c4.svg"
-                        alt="img_celulas"></div>
-                <div class="box_cel animated"><img loading="lazy"
-                        src="/img/c5.svg"
-                        alt="img_celulas"></div>
-                <div class="box_cel animated"><img loading="lazy"
-                        src="/img/c6.svg"
-                        alt="img_celulas"></div>
-                <div class="box_cel animated"><img
-                        loading="lazy" src="/img/c7.svg"
-                        alt="img_celulas"></div>
-                <div class="box_cel animated"><img
-                        loading="lazy" src="/img/c8.svg"
-                        alt="img_celulas"></div>
-                <div class="box_cel animated"><img
-                        loading="lazy" src="/img/c9.svg"
-                        alt="img_celulas"></div>
+            <div class="containercel" data-aos="fade-up" data-aos-duration="1000">
+                <div class="box_cel"><img loading="lazy" src="/img/c1.svg" alt="img_celulas"></div>
+                <div class="box_cel"><img loading="lazy" src="/img/c2.svg" alt="img_celulas"></div>
+                <div class="box_cel"><img loading="lazy" src="/img/c3.svg" alt="img_celulas"></div>
+                <div class="box_cel"><img loading="lazy" src="/img/c4.svg" alt="img_celulas"></div>
+                <div class="box_cel"><img loading="lazy" src="/img/c5.svg" alt="img_celulas"></div>
+                <div class="box_cel"><img loading="lazy" src="/img/c6.svg" alt="img_celulas"></div>
+                <div class="box_cel"><img loading="lazy" src="/img/c7.svg" alt="img_celulas"></div>
+                <div class="box_cel"><img loading="lazy" src="/img/c8.svg" alt="img_celulas"></div>
+                <div class="box_cel"><img loading="lazy" src="/img/c9.svg" alt="img_celulas"></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECCION PASTORES -->
-        <section class="pastores-section">
-            <h2>Nuestros Pastores</h2>
-            <div class="pastores-grid">
-                <!-- Card 1 -->
+    <!-- ===================== PASTORES ===================== -->
+    <section class="section pastores-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag light">Liderazgo</span>
+                <h2 class="section-title light">Nuestros Pastores</h2>
+                <p class="section-desc light">Guiados por el Esp&iacute;ritu Santo, pastoreando con amor y dedicaci&oacute;n.</p>
+            </div>
+            <div class="pastores-grid" data-aos="fade-up" data-aos-duration="1000">
                 <div class="pastor-card">
-                    <img loading="lazy" src="/img/Rene.svg"
-                        alt="Pastor Rene Adolfo Garcia">
+                    <div class="pastor-img-wrapper">
+                        <img loading="lazy" src="/img/Rene.svg" alt="Pastor Rene Adolfo Garcia">
+                    </div>
                     <h3>Rene Adolfo Garcia</h3>
                     <p>PASTOR</p>
                 </div>
-
-                <!-- Card 2 -->
                 <div class="pastor-card">
-                    <img loading="lazy" src="/img/Mallen.svg"
-                        alt="Pastora Mallen Luna Lopez">
+                    <div class="pastor-img-wrapper">
+                        <img loading="lazy" src="/img/Mallen.svg" alt="Pastora Mallen Luna Lopez">
+                    </div>
                     <h3>Mallen Luna Lopez</h3>
                     <p>PASTORA</p>
                 </div>
-
-                <!-- Card 3 -->
                 <div class="pastor-card">
-                    <img loading="lazy" src="/img/Lester.svg"
-                        alt="Co. Pastor Lester Antonio Garcia">
+                    <div class="pastor-img-wrapper">
+                        <img loading="lazy" src="/img/Lester.svg" alt="Co. Pastor Lester Antonio Garcia">
+                    </div>
                     <h3>Lester Antonio Garcia</h3>
                     <p>CO. PASTOR</p>
                 </div>
-
-                <!-- Card 4 -->
                 <div class="pastor-card">
-                    <img loading="lazy" src="/img/Ena.svg"
-                        alt="Co. Pastora Ena Alexa Perez">
+                    <div class="pastor-img-wrapper">
+                        <img loading="lazy" src="/img/Ena.svg" alt="Co. Pastora Ena Alexa Perez">
+                    </div>
                     <h3>Ena Alexa Perez</h3>
                     <p>CO. PASTORA</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECCION UBICACION -->
-        <section class="ubicacion-section" id="ubicacionn">
-            <h2>¿Dónde estamos ubicados?</h2>
-            <p>Managua, Nicaragua, Villa Venezuela, Grupo E Occidental, A media
-                cuadra arriba del Comedor BEMI.</p>
-
-            <div class="map-container">
+    <!-- ===================== UBICACION ===================== -->
+    <section class="section ubicacion-section" id="ubicacionn">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag">Ubicaci&oacute;n</span>
+                <h2 class="section-title">¿D&oacute;nde estamos ubicados?</h2>
+                <p class="section-desc">Managua, Nicaragua, Villa Venezuela, Grupo E Occidental, A media cuadra arriba del Comedor BEMI.</p>
+            </div>
+            <div class="map-container" data-aos="fade-up" data-aos-duration="1000">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.109624760203!2d-86.212377!3d12.118143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f73fb07db3270ff%3A0xfdbbe030b18c33e5!2sVilla%20Venezuela%2C%20Managua%2C%20Nicaragua!5e0!3m2!1ses-419!2sni!4v1722615844236!5m2!1ses-419!2sni"
-                    width="100%" height="450" style="border:0;" allowfullscreen
-                    loading="lazy"
+                    width="100%" height="450" style="border:0;" allowfullscreen loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECTION CONTACT -->
-        <section class="contact-section" id="Contactoo">
-            <div class="contact-container">
-                <!-- Columna izquierda -->
+    <!-- ===================== CONTACTO ===================== -->
+    <section class="section contact-section" id="Contactoo">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag">Comunicaci&oacute;n</span>
+                <h2 class="section-title">CONTACTANOS</h2>
+                <p class="section-desc">Estaremos encantados de escucharte. Env&iacute;anos un mensaje.</p>
+            </div>
+            <div class="contact-grid" data-aos="fade-up" data-aos-duration="1000">
                 <div class="form-side">
-                    <h2 class="title">CONTACTANOS</h2>
-
                     <form class="contact-form" id="contactForm">
-                        <input type="text" placeholder="Nombre" name="name"
-                            required />
-                        <input type="email" placeholder="Correo" name="email"
-                            required />
-                        <input type="text" placeholder="Asunto" name="subject"
-                            required />
-                        <textarea placeholder="Mensaje" name="message" rows="5"
-                            required></textarea>
-                        <button type="submit" class="send-btn">Send
-                            Message</button>
+                        <div class="input-group">
+                            <input type="text" placeholder="Nombre" name="name" required />
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" placeholder="Correo" name="email" required />
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" placeholder="Asunto" name="subject" required />
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <div class="input-group textarea-group">
+                            <textarea placeholder="Mensaje" name="message" rows="5" required></textarea>
+                            <i class="fas fa-pen"></i>
+                        </div>
+                        <button type="submit" class="send-btn">
+                            <span>Enviar Mensaje</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
                     </form>
-
                     <div class="contact-buttons">
-                        <a
-                            href="https://wa.me/50589952187?text=Hola%20Dios%20les%20bendiga!"
-                            target="_blank"
-                            class="btn whatsapp">
-                            <img loading="lazy"
-                                src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" />
-                            Whatsapp
+                        <a href="https://wa.me/50589952187?text=Hola%20Dios%20les%20bendiga!" target="_blank" class="btn whatsapp">
+                            <i class="fab fa-whatsapp"></i> Whatsapp
                         </a>
-                        <a
-                            href="https://www.facebook.com/groups/748036509059137"
-                            target="_blank" class="btn facebook">
-                            <img loading="lazy"
-                                src="https://img.icons8.com/color/48/000000/facebook-new.png" />
-                            Facebook
+                        <a href="https://www.facebook.com/groups/748036509059137" target="_blank" class="btn facebook">
+                            <i class="fab fa-facebook-f"></i> Facebook
                         </a>
                     </div>
                 </div>
-
-                <!-- Columna derecha (imagen PNG) -->
-                <div class="image-side">
-                    <img src="/img/mapacontac.svg" alt="Mapa contacto" />
+                <div class="image-side" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="contact-image-frame">
+                        <img src="/img/mapacontac.svg" alt="Mapa contacto" loading="lazy">
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- EmailJS SDK -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
-        </script>
+    <!-- ===================== FOOTER (NEW) ===================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img loading="lazy" src="img/logoidv.svg" alt="Logo IDV" class="footer-logo">
+                    <p class="footer-desc">
+                        Iglesia del Dios Viviente &mdash; Un Lugar Para Crecer en Fe y Amor.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://wa.me/50589952187" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.facebook.com/groups/748036509059137" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://maps.google.com/?q=Villa+Venezuela+Managua+Nicaragua" target="_blank" aria-label="Ubicaci&oacute;n"><i class="fas fa-map-marker-alt"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces R&aacute;pidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#congregacionn">Congregacion</a></li>
+                        <li><a href="#ministerioss">Ministerios</a></li>
+                        <li><a href="#servicioss">Horarios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>M&aacute;s Informaci&oacute;n</h4>
+                    <ul>
+                        <li><a href="#aniversarioo">Iglesia</a></li>
+                        <li><a href="#ubicacionn">Ubicaci&oacute;n</a></li>
+                        <li><a href="#Contactoo">Contacto</a></li>
+                        <li><a href="#celulasidv">Celulas IDV</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Villa Venezuela, Managua</p>
+                    <p><i class="fas fa-phone"></i> +505 8995 2187</p>
+                    <p><i class="fas fa-envelope"></i> contacto@idv.org.ni</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Iglesia del Dios Viviente. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
 
-        <!-- AOS JS -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-        <script src="JS/index.js"></script>
-        <script>
+    <!-- ===================== SCRIPTS ===================== -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="JS/index.js"></script>
+    <script>
         AOS.init({
             duration: 1000,
             once: true,
+            offset: 120,
+            easing: 'ease-out-cubic'
         });
     </script>
-
-    </body>
-
+</body>
 </html>
