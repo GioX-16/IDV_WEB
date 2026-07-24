@@ -51,7 +51,10 @@ body {
     font-size: 16px;
     line-height: 1.7;
     color: var(--text-body);
-    background: var(--white);
+    background:
+        radial-gradient(ellipse 1200px 800px at 30% 50%, rgba(20,33,87,0.9) 0%, rgba(30,58,138,0.6) 50%, transparent 80%),
+        radial-gradient(ellipse 800px 600px at 80% 80%, rgba(247,148,30,0.15) 0%, transparent 60%),
+        linear-gradient(170deg, #0f1b4a 0%, #142157 40%, #1e3a8a 70%, #142157 100%) fixed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -303,16 +306,13 @@ ul {
     align-items: center;
     position: relative;
     padding-top: calc(var(--nav-height) + 1.5rem);
-    background: url("../img/HERO_BANNER1.svg") center/cover no-repeat fixed;
+    background: transparent;
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(ellipse 1200px 800px at 30% 50%, rgba(20,33,87,0.9) 0%, rgba(30,58,138,0.6) 50%, transparent 80%),
-        radial-gradient(ellipse 800px 600px at 80% 80%, rgba(247,148,30,0.15) 0%, transparent 60%),
-        linear-gradient(170deg, rgba(15,27,74,0.95) 0%, rgba(20,33,87,0.8) 40%, rgba(30,58,138,0.5) 70%, rgba(247,148,30,0.15) 100%);
+    background: transparent;
     z-index: 1;
 }
 
@@ -443,10 +443,7 @@ ul {
    CONGREGACION
    ============================================ */
 .congregacion {
-    background:
-        radial-gradient(ellipse 900px 600px at 0% 50%, rgba(247,148,30,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 700px 500px at 100% 0%, rgba(45,75,168,0.1) 0%, transparent 60%),
-        linear-gradient(170deg, #0f1b4a 0%, #142157 40%, #1b2d6e 100%);
+    background: transparent;
 }
 
 .text-section blockquote {
@@ -540,7 +537,7 @@ ul {
    ANIVERSARIO
    ============================================ */
 .aniversario-section {
-    background: #142157;
+    background: transparent;
     padding: 2.5rem 0;
 }
 
@@ -722,11 +719,7 @@ ul {
    CREENCIAS (NEW)
    ============================================ */
 .creencias-section {
-    background:
-        radial-gradient(ellipse 1000px 600px at 50% -20%, rgba(247,148,30,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 800px 500px at 80% 80%, rgba(45,75,168,0.15) 0%, transparent 60%),
-        radial-gradient(ellipse 600px 400px at 20% 100%, rgba(20,33,87,0.3) 0%, transparent 60%),
-        linear-gradient(170deg, #142157 0%, #1b2d6e 30%, #1e3a8a 55%, #1b2d6e 80%, #142157 100%);
+    background: transparent;
     position: relative;
 }
 
@@ -799,9 +792,9 @@ ul {
    ============================================ */
 .lineatiempo {
     background:
-        radial-gradient(ellipse 800px 500px at 20% 30%, rgba(247,148,30,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 600px 400px at 80% 70%, rgba(45,75,168,0.1) 0%, transparent 60%),
-        linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+        radial-gradient(ellipse 1200px 800px at 30% 50%, rgba(20,33,87,0.5) 0%, rgba(30,58,138,0.4) 50%, transparent 80%),
+        radial-gradient(ellipse 800px 600px at 80% 80%, rgba(247,148,30,0.1) 0%, transparent 60%),
+        linear-gradient(170deg, rgba(15,27,74,0.88) 0%, rgba(20,33,87,0.75) 40%, rgba(30,58,138,0.55) 70%, rgba(20,33,87,0.75) 100%),
         url("../img/bgTL.svg") center/cover fixed;
 }
 
@@ -936,10 +929,7 @@ ul {
    MINISTERIOS
    ============================================ */
 .ministerios {
-    background:
-        radial-gradient(ellipse 800px 500px at 50% 30%, rgba(247,148,30,0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 600px 400px at 80% 80%, rgba(45,75,168,0.1) 0%, transparent 60%),
-        linear-gradient(170deg, #0f1b4a 0%, #142157 50%, #1b2d6e 100%);
+    background: transparent;
 }
 
 .carousel-wrapper {
@@ -1047,10 +1037,7 @@ ul {
    SERVICIOS
    ============================================ */
 .servicios {
-    background:
-        radial-gradient(ellipse 900px 500px at 30% 0%, rgba(247,148,30,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 700px 500px at 70% 100%, rgba(45,75,168,0.1) 0%, transparent 60%),
-        linear-gradient(170deg, #0f1b4a 0%, #142157 25%, #1e3a8a 50%, #1b2d6e 75%, #0f1b4a 100%);
+    background: transparent;
     position: relative;
 }
 
@@ -1128,10 +1115,7 @@ ul {
    ESCUELA DOMINICAL
    ============================================ */
 .escuela-section {
-    background:
-        radial-gradient(ellipse 800px 500px at 30% 0%, rgba(247,148,30,0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 600px 400px at 70% 100%, rgba(45,75,168,0.1) 0%, transparent 60%),
-        linear-gradient(170deg, #0f1b4a 0%, #142157 40%, #1b2d6e 100%);
+    background: transparent;
 }
 
 .escuela-content {
@@ -1242,10 +1226,7 @@ ul {
    CELULAS
    ============================================ */
 .celulas-section {
-    background:
-        radial-gradient(ellipse 800px 500px at 50% 0%, rgba(247,148,30,0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 600px 600px at 20% 80%, rgba(45,75,168,0.12) 0%, transparent 60%),
-        linear-gradient(170deg, #0f1b4a 0%, #142157 40%, #1e3a8a 70%, #142157 100%);
+    background: transparent;
     position: relative;
 }
 
@@ -1291,10 +1272,7 @@ ul {
    PASTORES
    ============================================ */
 .pastores-section {
-    background:
-        radial-gradient(ellipse 700px 500px at 50% 0%, rgba(247,148,30,0.04) 0%, transparent 60%),
-        radial-gradient(ellipse 600px 400px at 80% 100%, rgba(30,58,138,0.2) 0%, transparent 60%),
-        linear-gradient(170deg, #0f1b4a 0%, #142157 50%, #1a2a6c 100%);
+    background: transparent;
 }
 
 .pastores-grid {
@@ -1356,10 +1334,7 @@ ul {
    UBICACION
    ============================================ */
 .ubicacion-section {
-    background:
-        radial-gradient(ellipse 700px 400px at 50% 0%, rgba(247,148,30,0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 500px 400px at 80% 100%, rgba(45,75,168,0.1) 0%, transparent 60%),
-        linear-gradient(170deg, #0f1b4a 0%, #142157 50%, #1b2d6e 100%);
+    background: transparent;
 }
 
 .map-container {
@@ -1376,10 +1351,7 @@ ul {
    CONTACTO
    ============================================ */
 .contact-section {
-    background:
-        radial-gradient(ellipse 800px 500px at 30% 50%, rgba(247,148,30,0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 600px 400px at 80% 50%, rgba(45,75,168,0.1) 0%, transparent 60%),
-        linear-gradient(170deg, #0f1b4a 0%, #142157 40%, #1b2d6e 100%);
+    background: transparent;
 }
 
 .contact-grid {
@@ -1554,7 +1526,7 @@ ul {
    FOOTER
    ============================================ */
 .footer {
-    background: var(--primary-dark);
+    background: transparent;
     color: rgba(255,255,255,0.8);
     padding: 4rem 0 0;
     position: relative;
@@ -1666,6 +1638,465 @@ ul {
 .footer-bottom p {
     font-size: 0.85rem;
     color: rgba(255,255,255,0.4);
+}
+
+/* ============================================
+   FLOATING COUNTER
+   ============================================ */
+.floating-counter {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 900;
+    background: rgba(15,27,74,0.92);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(247,148,30,0.3);
+    border-radius: 60px;
+    padding: 0.6rem 1.8rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.floating-counter.collapsed {
+    transform: translateX(-50%) translateY(120px);
+    opacity: 0;
+}
+
+.fc-inner {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    white-space: nowrap;
+}
+
+.fc-label {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.fc-digits {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.fc-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 28px;
+}
+
+.fc-item span {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+}
+
+.fc-item small {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.4);
+}
+
+.fc-sep {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: rgba(255,255,255,0.3);
+    line-height: 1;
+}
+
+.fc-fecha {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+}
+
+/* ============================================
+   FLOATING BUTTONS (WhatsApp + Theme)
+   ============================================ */
+.floating-buttons {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 901;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.fab-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--white);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.fab-btn:hover {
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+}
+
+.fab-btn:active {
+    transform: scale(0.95);
+}
+
+.fab-whatsapp {
+    background: #25D366;
+}
+
+.fab-whatsapp:hover {
+    background: #1da851;
+}
+
+.fab-theme {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.fab-theme:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+.fab-theme .fa-sun { display: none; }
+.fab-theme .fa-moon { display: inline-block; }
+
+/* ============================================
+   LIGHT MODE
+   ============================================ */
+html.light-mode {
+    --primary-dark: #e8edf5;
+    --primary: #3b82f6;
+    --primary-light: #60a5fa;
+    --accent: #f7941e;
+    --accent-light: #f97316;
+    --gold: #b8860b;
+    --gold-light: #d4af37;
+    --gold-dark: #8b6914;
+    --white: #111827;
+    --off-white: #f8fafc;
+    --light-gray: #e5e7eb;
+    --gray: #6b7280;
+    --text-dark: #0f172a;
+    --text-body: #1e293b;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+    --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+html.light-mode body {
+    background:
+        radial-gradient(ellipse 1200px 800px at 30% 50%, rgba(59,130,246,0.1) 0%, rgba(99,102,241,0.06) 50%, transparent 80%),
+        radial-gradient(ellipse 800px 600px at 80% 80%, rgba(247,148,30,0.06) 0%, transparent 60%),
+        linear-gradient(170deg, #f1f5f9 0%, #f8fafc 40%, #e2e8f0 70%, #f1f5f9 100%) fixed;
+    color: var(--text-body);
+}
+
+html.light-mode .navbar {
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+
+html.light-mode .navbar.scrolled {
+    background: rgba(255,255,255,0.96);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+}
+
+html.light-mode .nav-link {
+    color: var(--text-body);
+}
+
+html.light-mode .nav-link::after {
+    background: var(--accent);
+}
+
+html.light-mode .nav-btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    color: #fff;
+}
+
+html.light-mode .hero-title {
+    color: var(--text-dark);
+}
+
+html.light-mode .hero-subtitle {
+    color: rgba(15,23,42,0.7);
+}
+
+html.light-mode .section-title.light {
+    color: var(--text-dark);
+}
+
+html.light-mode .section-desc.light {
+    color: rgba(15,23,42,0.7);
+}
+
+html.light-mode .section-tag.light {
+    color: var(--accent);
+}
+
+html.light-mode .button {
+    color: var(--white);
+}
+
+html.light-mode .text-section p {
+    color: rgba(15,23,42,0.7);
+}
+
+html.light-mode .text-section blockquote {
+    background: rgba(0,0,0,0.04);
+    border-left-color: var(--accent);
+}
+
+html.light-mode .text-section blockquote em {
+    color: var(--accent);
+}
+
+html.light-mode .card {
+    background: rgba(255,255,255,0.85);
+    border-color: rgba(0,0,0,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+html.light-mode .card:hover {
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+html.light-mode .card h3 {
+    color: var(--text-dark);
+}
+
+html.light-mode .card p {
+    color: rgba(15,23,42,0.7);
+}
+
+html.light-mode .card .hora {
+    color: var(--accent);
+}
+
+html.light-mode .creencia-card {
+    background: rgba(255,255,255,0.85);
+    border-color: rgba(0,0,0,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+html.light-mode .creencia-card:hover {
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+html.light-mode .creencia-card h3 {
+    color: var(--text-dark);
+}
+
+html.light-mode .creencia-card p {
+    color: rgba(15,23,42,0.7);
+}
+
+html.light-mode .pastor-card {
+    background: rgba(255,255,255,0.85);
+    border-color: rgba(0,0,0,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+html.light-mode .pastor-card:hover {
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+html.light-mode .pastor-card h3 {
+    color: var(--text-dark);
+}
+
+html.light-mode .pastor-card p {
+    color: var(--accent);
+}
+
+html.light-mode .imagen-card {
+    background: rgba(255,255,255,0.85);
+    border-color: rgba(0,0,0,0.08);
+}
+
+html.light-mode .imagen-card:hover {
+    background: rgba(255,255,255,0.95);
+}
+
+html.light-mode .imagen-card span {
+    color: var(--text-dark);
+}
+
+html.light-mode .escuela-content .descripcion {
+    color: rgba(15,23,42,0.7);
+}
+
+html.light-mode .escuela-content .horario {
+    color: var(--accent);
+}
+
+html.light-mode .text-box {
+    background: rgba(255,255,255,0.95);
+}
+
+html.light-mode .timeline .text-box h2 {
+    color: var(--text-dark);
+}
+
+html.light-mode .timeline .text-box small {
+    color: var(--accent);
+}
+
+html.light-mode .timeline .text-box p {
+    color: var(--text-body);
+}
+
+html.light-mode .floating-counter {
+    background: rgba(255,255,255,0.92);
+    border-color: rgba(247,148,30,0.4);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+html.light-mode .fc-item span {
+    color: var(--text-dark);
+}
+
+html.light-mode .fc-fecha {
+    color: rgba(15,23,42,0.5);
+}
+
+html.light-mode .fab-theme {
+    background: rgba(0,0,0,0.08);
+    border-color: rgba(0,0,0,0.12);
+    color: var(--text-dark);
+}
+
+html.light-mode .fab-theme:hover {
+    background: rgba(0,0,0,0.14);
+}
+
+html.light-mode .fab-theme .fa-sun { display: inline-block; }
+html.light-mode .fab-theme .fa-moon { display: none; }
+
+html.light-mode .footer {
+    color: rgba(15,23,42,0.8);
+}
+
+html.light-mode .footer h4 {
+    color: var(--text-dark);
+}
+
+html.light-mode .footer-desc {
+    color: rgba(15,23,42,0.6);
+}
+
+html.light-mode .footer-links a {
+    color: rgba(15,23,42,0.6);
+}
+
+html.light-mode .footer-links a:hover {
+    color: var(--accent);
+}
+
+html.light-mode .footer-contact p {
+    color: rgba(15,23,42,0.6);
+}
+
+html.light-mode .footer-bottom {
+    border-top-color: rgba(0,0,0,0.08);
+}
+
+html.light-mode .footer-bottom p {
+    color: rgba(15,23,42,0.4);
+}
+
+html.light-mode .footer-logo {
+    filter: none;
+}
+
+html.light-mode .footer-social a {
+    background: rgba(0,0,0,0.06);
+    color: var(--text-dark);
+}
+
+html.light-mode .footer-social a:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+html.light-mode .input-group input,
+html.light-mode .input-group textarea {
+    background: rgba(0,0,0,0.03);
+    border-color: rgba(0,0,0,0.1);
+    color: var(--text-dark);
+}
+
+html.light-mode .input-group input::placeholder,
+html.light-mode .input-group textarea::placeholder {
+    color: rgba(15,23,42,0.35);
+}
+
+html.light-mode .input-group input:focus,
+html.light-mode .input-group textarea:focus {
+    background: rgba(0,0,0,0.05);
+    border-color: var(--accent);
+}
+
+html.light-mode .carousel-btn {
+    background: rgba(0,0,0,0.06);
+    color: var(--text-dark);
+    border-color: rgba(0,0,0,0.1);
+}
+
+html.light-mode .carousel-btn:hover {
+    background: rgba(0,0,0,0.12);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+html.light-mode .indicators button {
+    background: rgba(0,0,0,0.1);
+}
+
+html.light-mode .indicators button.active {
+    background: var(--accent);
+}
+
+html.light-mode .bar {
+    background: var(--text-dark);
+}
+
+/* Light mode: mobile nav */
+@media (max-width: 768px) {
+    html.light-mode .nav-menu {
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(20px);
+    }
+    html.light-mode .nav-link {
+        color: var(--text-body);
+    }
+    html.light-mode .nav-btn {
+        background: linear-gradient(135deg, var(--accent), var(--accent-light));
+        color: #fff;
+    }
 }
 
 /* ============================================

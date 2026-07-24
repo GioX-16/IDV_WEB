@@ -5,6 +5,48 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ----- THEME TOGGLE -----
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('fabTheme');
+    const savedTheme = localStorage.getItem('idv-theme');
+
+    if (savedTheme === 'light') {
+        html.classList.add('light-mode');
+    }
+
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            const isLight = html.classList.contains('light-mode');
+            localStorage.setItem('idv-theme', isLight ? 'light' : 'dark');
+        });
+    }
+
+    // ----- WHATSAPP FLOATING BUTTON -----
+    const fabWhatsapp = document.getElementById('fabWhatsapp');
+    if (fabWhatsapp) {
+        fabWhatsapp.addEventListener('click', () => {
+            window.open('https://wa.me/50589952187?text=Hola%20Dios%20les%20bendiga!', '_blank');
+        });
+    }
+
+    // ----- NAV CONTACT BUTTON -> WHATSAPP -----
+    const navContactBtn = document.getElementById('navContactBtn');
+    if (navContactBtn) {
+        navContactBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open('https://wa.me/50589952187?text=Hola%20Dios%20les%20bendiga!', '_blank');
+        });
+    }
+
+    // ----- FOOTER CONTACT LINK -> WHATSAPP -----
+    document.querySelectorAll('.footer-contact-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open('https://wa.me/50589952187?text=Hola%20Dios%20les%20bendiga!', '_blank');
+        });
+    });
+
     // ----- NAVBAR: Hamburger Menu -----
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -73,13 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     }
 
-    // ----- COUNTDOWN TIMER (51 ANIVERSARIO: Sep 14, 2026) -----
+    // ----- FLOATING COUNTDOWN TIMER (51 ANIVERSARIO: Sep 14, 2026) -----
     const fechaEvento = new Date('Sep 14, 2026 18:00:00').getTime();
     const diasEl = document.getElementById('dias');
     const horasEl = document.getElementById('horas');
     const minutosEl = document.getElementById('minutos');
     const segundosEl = document.getElementById('segundos');
-    const contadorEl = document.querySelector('.contador');
+    const floatingCounter = document.getElementById('floatingCounter');
 
     if (diasEl && horasEl && minutosEl && segundosEl) {
         const timer = setInterval(() => {
@@ -88,11 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (distancia < 0) {
                 clearInterval(timer);
-                if (contadorEl) {
-                    contadorEl.innerHTML = `
-                        <div class="contador-item" style="grid-column:1/-1">
-                            <span style="font-size:1.5rem;color:var(--gold)">¡El aniversario ha comenzado! 🎉</span>
-                        </div>
+                if (floatingCounter) {
+                    floatingCounter.querySelector('.fc-inner').innerHTML = `
+                        <span class="fc-label" style="font-size:1rem;color:var(--gold)">¡El aniversario ha comenzado!</span>
                     `;
                 }
                 return;
@@ -108,6 +148,19 @@ document.addEventListener('DOMContentLoaded', () => {
             minutosEl.textContent = String(minutos).padStart(2, '0');
             segundosEl.textContent = String(segundos).padStart(2, '0');
         }, 1000);
+
+        // Hide floating counter when scrolled to footer
+        const footer = document.querySelector('.footer');
+        if (footer && floatingCounter) {
+            window.addEventListener('scroll', () => {
+                const footerTop = footer.getBoundingClientRect().top;
+                if (footerTop < window.innerHeight + 100) {
+                    floatingCounter.classList.add('collapsed');
+                } else {
+                    floatingCounter.classList.remove('collapsed');
+                }
+            }, { passive: true });
+        }
     }
 
     // ----- MINISTERIOS CAROUSEL (con touch swipe) -----
