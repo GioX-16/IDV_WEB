@@ -36,12 +36,19 @@
                 <img loading="lazy" src="img/logoidv.svg" alt="Logo IDV" class="logo-image">
             </a>
             <ul class="nav-menu">
-                <li class="nav-item"><a href="#congregacionn" class="nav-link">Congregacion</a></li>
-                <li class="nav-item"><a href="#aniversarioo" class="nav-link">Iglesia</a></li>
-                <li class="nav-item"><a href="#ministerioss" class="nav-link">Ministerios</a></li>
-                <li class="nav-item"><a href="#servicioss" class="nav-link">Horarios</a></li>
-                <li class="nav-item"><a href="#ubicacionn" class="nav-link">Ubicacion</a></li>
-                <li class="nav-item"><a href="#" class="nav-link nav-btn" id="navContactBtn">Contactanos</a></li>
+                <li class="nav-menu-header">
+                    <img loading="lazy" src="img/logoidv.svg" alt="Logo IDV" class="nav-menu-logo">
+                    <button class="nav-menu-close" id="menuClose" aria-label="Cerrar menú">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </li>
+                <li class="nav-item"><a href="#inicio" class="nav-link"><i class="fas fa-home"></i> Inicio</a></li>
+                <li class="nav-item"><a href="#congregacionn" class="nav-link"><i class="fas fa-users"></i> Congregacion</a></li>
+                <li class="nav-item"><a href="#aniversarioo" class="nav-link"><i class="fas fa-church"></i> Iglesia</a></li>
+                <li class="nav-item"><a href="#ministerioss" class="nav-link"><i class="fas fa-hands-praying"></i> Ministerios</a></li>
+                <li class="nav-item"><a href="#servicioss" class="nav-link"><i class="far fa-clock"></i> Horarios</a></li>
+                <li class="nav-item"><a href="#ubicacionn" class="nav-link"><i class="fas fa-map-marker-alt"></i> Ubicacion</a></li>
+                <li class="nav-item"><a href="#" class="nav-link nav-btn" id="navContactBtn"><i class="fab fa-whatsapp"></i> Contactanos</a></li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -77,6 +84,29 @@
             <i class="fas fa-moon"></i>
         </button>
     </div>
+
+    <!-- ===================== MOBILE OVERLAY ===================== -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- ===================== MOBILE BOTTOM NAV ===================== -->
+    <nav class="bottom-nav" id="bottomNav">
+        <a href="#inicio" class="bn-item active" data-section="inicio">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="#aniversarioo" class="bn-item" data-section="aniversarioo">
+            <i class="fas fa-church"></i>
+            <span>Iglesia</span>
+        </a>
+        <a href="#servicioss" class="bn-item" data-section="servicioss">
+            <i class="far fa-clock"></i>
+            <span>Horarios</span>
+        </a>
+        <a href="#ubicacionn" class="bn-item" data-section="ubicacionn">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Ubicación</span>
+        </a>
+    </nav>
 
     <!-- ===================== HERO ===================== -->
     <section id="inicio" class="hero">
