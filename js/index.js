@@ -290,33 +290,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ----- CONTACT FORM (EmailJS) -----
-    emailjs.init('YOUR_PUBLIC_KEY');
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const sendBtn = this.querySelector('.send-btn');
-            const originalText = sendBtn.innerHTML;
-            sendBtn.disabled = true;
-            sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-
-            emailjs.sendForm('service_6qmzkop', 'template_oljtbxh', this)
-                .then(() => {
-                    showToast('¡Mensaje enviado con éxito!', 'success');
-                    this.reset();
-                })
-                .catch((error) => {
-                    console.error('EmailJS Error:', error);
-                    showToast('Hubo un error al enviar el mensaje. Intenta nuevamente.', 'error');
-                })
-                .finally(() => {
-                    sendBtn.disabled = false;
-                    sendBtn.innerHTML = originalText;
-        });
-    });
-
     // ----- BOTTOM NAV: Active State on Scroll -----
     const bottomNavItems = document.querySelectorAll('.bn-item');
     if (bottomNavItems.length) {
