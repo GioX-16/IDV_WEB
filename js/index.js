@@ -327,7 +327,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-    }
 
     // ----- TOAST NOTIFICATION -----
     function showToast(message, type = 'success') {
