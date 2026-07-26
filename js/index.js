@@ -291,6 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----- CONTACT FORM (EmailJS) -----
+    emailjs.init('YOUR_PUBLIC_KEY');
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function (e) {
