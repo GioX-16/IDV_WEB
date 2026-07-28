@@ -123,6 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const segundosEl = document.getElementById('segundos');
     const floatingCounter = document.getElementById('floatingCounter');
 
+    const modalDiasEl = document.getElementById('modal-dias');
+    const modalHorasEl = document.getElementById('modal-horas');
+    const modalMinutosEl = document.getElementById('modal-minutos');
+    const modalSegundosEl = document.getElementById('modal-segundos');
+
     if (diasEl && horasEl && minutosEl && segundosEl) {
         const timer = setInterval(() => {
             const ahora = new Date().getTime();
@@ -143,10 +148,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
             const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
 
-            diasEl.textContent = String(dias).padStart(2, '0');
-            horasEl.textContent = String(horas).padStart(2, '0');
-            minutosEl.textContent = String(minutos).padStart(2, '0');
-            segundosEl.textContent = String(segundos).padStart(2, '0');
+            const val = String(dias).padStart(2, '0');
+            diasEl.textContent = val;
+            if (modalDiasEl) modalDiasEl.textContent = val;
+
+            const valH = String(horas).padStart(2, '0');
+            horasEl.textContent = valH;
+            if (modalHorasEl) modalHorasEl.textContent = valH;
+
+            const valM = String(minutos).padStart(2, '0');
+            minutosEl.textContent = valM;
+            if (modalMinutosEl) modalMinutosEl.textContent = valM;
+
+            const valS = String(segundos).padStart(2, '0');
+            segundosEl.textContent = valS;
+            if (modalSegundosEl) modalSegundosEl.textContent = valS;
         }, 1000);
 
         // Hide floating counter when scrolled to footer
@@ -161,6 +177,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, { passive: true });
         }
+    }
+
+    // ----- COUNTER MODAL (click to open/close) -----
+    const counterModal = document.getElementById('counterModal');
+    const counterModalClose = document.getElementById('counterModalClose');
+
+    if (floatingCounter && counterModal) {
+        floatingCounter.style.cursor = 'pointer';
+        floatingCounter.addEventListener('click', () => {
+            counterModal.classList.add('open');
+        });
+    }
+
+    if (counterModalClose && counterModal) {
+        counterModalClose.addEventListener('click', () => {
+            counterModal.classList.remove('open');
+        });
+        counterModal.addEventListener('click', (e) => {
+            if (e.target === counterModal) counterModal.classList.remove('open');
+        });
     }
 
     // ----- MINISTERIOS CAROUSEL (con touch swipe) -----

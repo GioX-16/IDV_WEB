@@ -1716,6 +1716,113 @@ ul {
 }
 
 /* ============================================
+   COUNTER MODAL
+   ============================================ */
+.counter-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+.counter-modal.open { display: flex; }
+
+.counter-modal-content {
+    background: rgba(15,27,74,0.96);
+    border: 1px solid rgba(247,148,30,0.3);
+    border-radius: 24px;
+    padding: 2rem;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 16px 64px rgba(0,0,0,0.5);
+    animation: modalFadeIn 0.3s ease;
+}
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.counter-modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem;
+    transition: color 0.2s;
+}
+.counter-modal-close:hover { color: var(--white); }
+
+.counter-modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.counter-modal-label {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.counter-modal-digits {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.counter-modal-digits .fc-item span { font-size: 2rem; }
+.counter-modal-digits .fc-item small { font-size: 0.65rem; }
+.counter-modal-digits .fc-sep { font-size: 1.5rem; }
+
+.counter-modal-fecha {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+}
+
+.counter-modal-img {
+    width: 100%;
+    border-radius: 16px;
+    margin-top: 0.5rem;
+    border: 1px solid rgba(247,148,30,0.2);
+}
+
+@media (min-width: 768px) {
+    .counter-modal-img {
+        max-height: 350px;
+        object-fit: cover;
+    }
+}
+
+html.light-mode .counter-modal-content {
+    background: rgba(255,255,255,0.96);
+    border-color: rgba(247,148,30,0.4);
+}
+html.light-mode .counter-modal-fecha { color: rgba(0,0,0,0.5); }
+html.light-mode .counter-modal-close { color: rgba(0,0,0,0.4); }
+html.light-mode .counter-modal-close:hover { color: var(--text-dark); }
+html.light-mode .counter-modal-digits .fc-item span { color: var(--text-dark); }
+
+@media (max-width: 480px) {
+    .counter-modal-content { padding: 1.5rem; }
+    .counter-modal-digits .fc-item span { font-size: 1.5rem; }
+    .counter-modal-digits .fc-sep { font-size: 1.2rem; }
+    .counter-modal-label { font-size: 1.1rem; }
+}
+
+/* ============================================
    FLOATING BUTTONS (WhatsApp + Theme)
    ============================================ */
 .floating-buttons {
