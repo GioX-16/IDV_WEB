@@ -47,21 +47,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ----- NAVBAR: Hamburger Menu -----
+    // ----- NAVBAR: Hamburger Menu (Drawer) -----
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const menuClose = document.getElementById('menuClose');
+
+    function openMenu() {
+        hamburger.classList.add('active');
+        navMenu.classList.add('active');
+        if (mobileOverlay) mobileOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        if (mobileOverlay) mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 
     hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        if (navMenu.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
     });
+
+    if (menuClose) {
+        menuClose.addEventListener('click', closeMenu);
+    }
+
+    if (mobileOverlay) {
+        mobileOverlay.addEventListener('click', closeMenu);
+    }
 
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.style.overflow = '';
+            closeMenu();
         });
     });
 
@@ -302,30 +326,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ----- CONTACT FORM (EmailJS) -----
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
+    // ----- BOTTOM NAV: Active State on Scroll -----
+    const bottomNavItems = document.querySelectorAll('.bn-item');
+    if (bottomNavItems.length) {
+        const sectionIds = Array.from(bottomNavItems).map(item => item.getAttribute('data-section'));
 
-            const sendBtn = this.querySelector('.send-btn');
-            const originalText = sendBtn.innerHTML;
-            sendBtn.disabled = true;
-            sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+        function updateBottomNav() {
+            let currentSection = sectionIds[0];
+            const scrollPos = window.scrollY + navHeight + 100;
 
-            emailjs.sendForm('service_6qmzkop', 'template_oljtbxh', this)
-                .then(() => {
-                    showToast('¡Mensaje enviado con éxito!', 'success');
-                    this.reset();
-                })
-                .catch((error) => {
-                    console.error('EmailJS Error:', error);
-                    showToast('Hubo un error al enviar el mensaje. Intenta nuevamente.', 'error');
-                })
-                .finally(() => {
-                    sendBtn.disabled = false;
-                    sendBtn.innerHTML = originalText;
-                });
+            sectionIds.forEach(id => {
+                const section = document.getElementById(id);
+                if (section && section.offsetTop <= scrollPos) {
+                    currentSection = id;
+                }
+            });
+
+            bottomNavItems.forEach(item => {
+                item.classList.toggle('active', item.getAttribute('data-section') === currentSection);
+            });
+        }
+
+        window.addEventListener('scroll', updateBottomNav, { passive: true });
+        updateBottomNav();
+
+        // Smooth scroll from bottom nav
+        bottomNavItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                }
+            });
         });
     }
 

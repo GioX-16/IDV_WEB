@@ -11,7 +11,7 @@
 
     <title>Iglesia del Dios Viviente</title>
 
-    <link rel="icon" href="/img/Logo_Circular_ico.ico">
+    <link rel="icon" href="/img/logo_circular_ico.ico">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
 
     <!-- Main Styles -->
-    <link rel="stylesheet" href="Styles/Style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
 
@@ -36,12 +36,19 @@
                 <img loading="lazy" src="img/logoidv.svg" alt="Logo IDV" class="logo-image">
             </a>
             <ul class="nav-menu">
-                <li class="nav-item"><a href="#congregacionn" class="nav-link">Congregacion</a></li>
-                <li class="nav-item"><a href="#aniversarioo" class="nav-link">Iglesia</a></li>
-                <li class="nav-item"><a href="#ministerioss" class="nav-link">Ministerios</a></li>
-                <li class="nav-item"><a href="#servicioss" class="nav-link">Horarios</a></li>
-                <li class="nav-item"><a href="#ubicacionn" class="nav-link">Ubicacion</a></li>
-                <li class="nav-item"><a href="#" class="nav-link nav-btn" id="navContactBtn">Contactanos</a></li>
+                <li class="nav-menu-header">
+                    <img loading="lazy" src="img/logoidv.svg" alt="Logo IDV" class="nav-menu-logo">
+                    <button class="nav-menu-close" id="menuClose" aria-label="Cerrar menú">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </li>
+                <li class="nav-item"><a href="#inicio" class="nav-link"><i class="fas fa-home"></i> Inicio</a></li>
+                <li class="nav-item"><a href="#congregacionn" class="nav-link"><i class="fas fa-users"></i> Congregacion</a></li>
+                <li class="nav-item"><a href="#aniversarioo" class="nav-link"><i class="fas fa-church"></i> Iglesia</a></li>
+                <li class="nav-item"><a href="#ministerioss" class="nav-link"><i class="fas fa-hands-praying"></i> Ministerios</a></li>
+                <li class="nav-item"><a href="#servicioss" class="nav-link"><i class="far fa-clock"></i> Horarios</a></li>
+                <li class="nav-item"><a href="#ubicacionn" class="nav-link"><i class="fas fa-map-marker-alt"></i> Ubicacion</a></li>
+                <li class="nav-item"><a href="#" class="nav-link nav-btn" id="navContactBtn"><i class="fab fa-whatsapp"></i> Contactanos</a></li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -101,6 +108,29 @@
             <i class="fas fa-moon"></i>
         </button>
     </div>
+
+    <!-- ===================== MOBILE OVERLAY ===================== -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- ===================== MOBILE BOTTOM NAV ===================== -->
+    <nav class="bottom-nav" id="bottomNav">
+        <a href="#inicio" class="bn-item active" data-section="inicio">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="#aniversarioo" class="bn-item" data-section="aniversarioo">
+            <i class="fas fa-church"></i>
+            <span>Iglesia</span>
+        </a>
+        <a href="#servicioss" class="bn-item" data-section="servicioss">
+            <i class="far fa-clock"></i>
+            <span>Horarios</span>
+        </a>
+        <a href="#ubicacionn" class="bn-item" data-section="ubicacionn">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Ubicación</span>
+        </a>
+    </nav>
 
     <!-- ===================== HERO ===================== -->
     <section id="inicio" class="hero">
@@ -166,7 +196,7 @@
     <section class="section video-section" id="aniversarioo">
         <div class="video-overlay"></div>
         <video autoplay muted loop playsinline class="background-video">
-            <source src="/Videos/Armonia.mp4" type="video/mp4">
+            <source src="/videos/armonia.mp4" type="video/mp4">
         </video>
         <div class="video-content" data-aos="fade-up" data-aos-duration="1000">
             <h2>50 A&ntilde;os de fe, creciendo en su gracia</h2>
@@ -225,7 +255,7 @@
         </div>
         <div class="timeline" data-aos="fade-up" data-aos-duration="1000">
             <div class="container left-container">
-                <img src="/img/TLico1.svg" alt="imgIDV">
+                <img src="/img/tlico1.svg" alt="imgIDV">
                 <div class="text-box">
                     <h2>Iglesia del Dios Viviente</h2>
                     <small>1975 - 1985</small>
@@ -235,7 +265,7 @@
                 </div>
             </div>
             <div class="container right-container">
-                <img src="/img/TLico2.svg" alt="imgIDV">
+                <img src="/img/tlico2.svg" alt="imgIDV">
                 <div class="text-box">
                     <h2>Iglesia del Dios Viviente</h2>
                     <small>1985 - 1995</small>
@@ -245,7 +275,7 @@
                 </div>
             </div>
             <div class="container left-container">
-                <img src="/img/TLico3.svg" alt="imgIDV">
+                <img src="/img/tlico3.svg" alt="imgIDV">
                 <div class="text-box">
                     <h2>Iglesia del Dios Viviente</h2>
                     <small>1995 - 2005</small>
@@ -255,7 +285,7 @@
                 </div>
             </div>
             <div class="container right-container">
-                <img src="/img/TLico4.svg" alt="imgIDV">
+                <img src="/img/tlico4.svg" alt="imgIDV">
                 <div class="text-box">
                     <h2>Iglesia del Dios Viviente</h2>
                     <small>2005 - 2015</small>
@@ -265,7 +295,7 @@
                 </div>
             </div>
             <div class="container left-container">
-                <img src="/img/TLico5.svg" alt="imgIDV">
+                <img src="/img/tlico5.svg" alt="imgIDV">
                 <div class="text-box">
                     <h2>Iglesia del Dios Viviente</h2>
                     <small>2015 - 2025</small>
@@ -370,7 +400,7 @@
 
             <div class="escuela-imagenes" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                 <div class="imagen-card">
-                    <img loading="lazy" src="/img/MaestrosD.svg" alt="Maestros Escuela Dominical">
+                    <img loading="lazy" src="/img/maestrosd.svg" alt="Maestros Escuela Dominical">
                     <span>Maestros de Escuela Dominical</span>
                 </div>
                 <div class="imagen-card">
@@ -381,16 +411,16 @@
 
             <div class="collage-marquee" data-aos="fade-up" data-aos-duration="1000">
                 <div class="collage-track">
-                    <div class="collage-item"><img loading="lazy" src="/img/imgD1.svg" alt="Collage 1"></div>
-                    <div class="collage-item"><img loading="lazy" src="img/imgD2.svg" alt="Collage 2"></div>
-                    <div class="collage-item"><img loading="lazy" src="/img/imgD3.svg" alt="Collage 3"></div>
-                    <div class="collage-item"><img loading="lazy" src="img/imgD4.svg" alt="Collage 4"></div>
-                    <div class="collage-item"><img loading="lazy" src="/img/imgD5.svg" alt="Collage 5"></div>
-                    <div class="collage-item"><img loading="lazy" src="/img/imgD6.svg" alt="Collage 6"></div>
-                    <div class="collage-item"><img loading="lazy" src="/img/imgD1.svg" alt="Collage 1"></div>
-                    <div class="collage-item"><img loading="lazy" src="/img/imgD2.svg" alt="Collage 2"></div>
-                    <div class="collage-item"><img loading="lazy" src="/img/imgD3.svg" alt="Collage 3"></div>
-                    <div class="collage-item"><img loading="lazy" src="/img/imgD4.svg" alt="Collage 4"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgd1.svg" alt="Collage 1"></div>
+                    <div class="collage-item"><img loading="lazy" src="img/imgd2.svg" alt="Collage 2"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgd3.svg" alt="Collage 3"></div>
+                    <div class="collage-item"><img loading="lazy" src="img/imgd4.svg" alt="Collage 4"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgd5.svg" alt="Collage 5"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgd6.svg" alt="Collage 6"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgd1.svg" alt="Collage 1"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgd2.svg" alt="Collage 2"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgd3.svg" alt="Collage 3"></div>
+                    <div class="collage-item"><img loading="lazy" src="/img/imgd4.svg" alt="Collage 4"></div>
                 </div>
             </div>
         </div>
@@ -443,28 +473,28 @@
             <div class="pastores-grid" data-aos="fade-up" data-aos-duration="1000">
                 <div class="pastor-card">
                     <div class="pastor-img-wrapper">
-                        <img loading="lazy" src="/img/Rene.svg" alt="Pastor Rene Adolfo Garcia">
+                        <img loading="lazy" src="/img/rene.svg" alt="Pastor Rene Adolfo Garcia">
                     </div>
                     <h3>Rene Adolfo Garcia</h3>
                     <p>PASTOR</p>
                 </div>
                 <div class="pastor-card">
                     <div class="pastor-img-wrapper">
-                        <img loading="lazy" src="/img/Mallen.svg" alt="Pastora Mallen Luna Lopez">
+                        <img loading="lazy" src="/img/mallen.svg" alt="Pastora Mallen Luna Lopez">
                     </div>
                     <h3>Mallen Luna Lopez</h3>
                     <p>PASTORA</p>
                 </div>
                 <div class="pastor-card">
                     <div class="pastor-img-wrapper">
-                        <img loading="lazy" src="/img/Lester.svg" alt="Co. Pastor Lester Antonio Garcia">
+                        <img loading="lazy" src="/img/lester.svg" alt="Co. Pastor Lester Antonio Garcia">
                     </div>
                     <h3>Lester Antonio Garcia</h3>
                     <p>CO. PASTOR</p>
                 </div>
                 <div class="pastor-card">
                     <div class="pastor-img-wrapper">
-                        <img loading="lazy" src="/img/Ena.svg" alt="Co. Pastora Ena Alexa Perez">
+                        <img loading="lazy" src="/img/ena.svg" alt="Co. Pastora Ena Alexa Perez">
                     </div>
                     <h3>Ena Alexa Perez</h3>
                     <p>CO. PASTORA</p>
@@ -538,9 +568,8 @@
     </footer>
 
     <!-- ===================== SCRIPTS ===================== -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="JS/index.js"></script>
+    <script src="js/index.js"></script>
     <script>
         AOS.init({
             duration: 1000,
