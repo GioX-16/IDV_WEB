@@ -1,6 +1,5 @@
-# IDV_WEB
+# IDV_WEBSITE 
 
-<img width="881" height="512" alt="image" src="https://github.com/user-attachments/assets/72e0c299-ecd8-4e27-a48d-4e712b31fea7" />
-
+<img width="1600" height="889" alt="IDV" src="https://github.com/user-attachments/assets/c9024f57-998b-4214-9684-a01cc76067fb" />
 
 Repositorio para el Desarrollo de una Web Sencilla para una Iglesia
