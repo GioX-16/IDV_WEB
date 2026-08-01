@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1E2A67">
+  <title>Dashboard — IDV Admin</title>
+  <link rel="icon" href="../img/logo_circular_ico.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body" data-page="dashboard">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <img src="../img/logoidv.svg" alt="Logo IDV">
+        <div class="sidebar-logo-text">
+          IDV <small>Admin Panel</small>
+        </div>
+      </div>
+      <button class="sidebar-toggle" aria-label="Colapsar menú">
+        <i class="fas fa-angles-left" id="toggleIcon"></i>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Principal</div>
+        <a href="dashboard.html" class="nav-item active" data-page="dashboard">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="actividades.html" class="nav-item" data-page="actividades">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Actividades</span>
+        </a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Gestión</div>
+        <a href="programacion.html" class="nav-item" data-page="programacion">
+          <i class="fas fa-clock"></i>
+          <span>Programación Semanal</span>
+        </a>
+        <a href="usuarios.html" class="nav-item" data-page="usuarios">
+          <i class="fas fa-users-cog"></i>
+          <span>Usuarios</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="nav-logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Sidebar Overlay (mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <div class="main-content" id="mainContent">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-trigger" id="menuTrigger" aria-label="Abrir menú">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="topbar-title">Dashboard</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-search">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Buscar..." id="globalSearch">
+        </div>
+        <div class="topbar-user">
+          <div class="topbar-avatar">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <div class="topbar-info">
+            <div class="topbar-name" id="userName">Administrador</div>
+            <div class="topbar-role" id="userRole">Administrador</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fas fa-calendar-check"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="statActividades">0</div>
+            <div class="stat-label">Actividades</div>
+            <div class="stat-change up"><i class="fas fa-arrow-up"></i> 12% este mes</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon orange"><i class="fas fa-clock"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="statProgramacion">0</div>
+            <div class="stat-label">Programación Semanal</div>
+            <div class="stat-change up"><i class="fas fa-arrow-up"></i> 2 nuevas</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fas fa-users"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="statUsuarios">0</div>
+            <div class="stat-label">Usuarios Activos</div>
+            <div class="stat-change up"><i class="fas fa-arrow-up"></i> 100% activo</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon red"><i class="fas fa-hourglass-half"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="statPendientes">0</div>
+            <div class="stat-label">Pendientes</div>
+            <div class="stat-change down"><i class="fas fa-arrow-down"></i> Requieren atención</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activities Table -->
+      <div class="table-container">
+        <div class="table-header">
+          <h3><i class="fas fa-history"></i> Últimas Actividades</h3>
+          <a href="actividades.html" class="btn btn-outline btn-sm">Ver Todas <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="recentActivitiesBody">
+              <!-- Rendered by dashboard.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/admin-common.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = JSON.parse(localStorage.getItem('idv_admin_user') || '{}');
+      document.getElementById('userName').textContent = user.name || 'Admin';
+      document.getElementById('userRole').textContent = user.role || 'Administrador';
+
+      document.querySelector('.sidebar-toggle').addEventListener('click', function () {
+        document.querySelector('#toggleIcon').classList.toggle('fa-angles-left');
+        document.querySelector('#toggleIcon').classList.toggle('fa-angles-right');
+      });
+    });
+  </script>
+</body>
+</html>

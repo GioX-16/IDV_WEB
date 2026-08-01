@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1E2A67">
+  <title>Programación Semanal — IDV Admin</title>
+  <link rel="icon" href="../img/logo_circular_ico.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body" data-page="programacion">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <img src="../img/logoidv.svg" alt="Logo IDV">
+        <div class="sidebar-logo-text">IDV <small>Admin Panel</small></div>
+      </div>
+      <button class="sidebar-toggle" aria-label="Colapsar menú">
+        <i class="fas fa-angles-left" id="toggleIcon"></i>
+      </button>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Principal</div>
+        <a href="dashboard.html" class="nav-item" data-page="dashboard">
+          <i class="fas fa-tachometer-alt"></i><span>Dashboard</span>
+        </a>
+        <a href="actividades.html" class="nav-item" data-page="actividades">
+          <i class="fas fa-calendar-alt"></i><span>Actividades</span>
+        </a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Gestión</div>
+        <a href="programacion.html" class="nav-item active" data-page="programacion">
+          <i class="fas fa-clock"></i><span>Programación Semanal</span>
+        </a>
+        <a href="usuarios.html" class="nav-item" data-page="usuarios">
+          <i class="fas fa-users-cog"></i><span>Usuarios</span>
+        </a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="nav-logout"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <div class="main-content" id="mainContent">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-trigger" id="menuTrigger" aria-label="Abrir menú">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="topbar-title">Programación Semanal</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-user">
+          <div class="topbar-avatar"><i class="fas fa-user-shield"></i></div>
+          <div class="topbar-info">
+            <div class="topbar-name" id="userName">Admin</div>
+            <div class="topbar-role" id="userRole">Admin</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <div class="page-header">
+        <div>
+          <h2>Programación Semanal</h2>
+          <div class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Programación Semanal</span>
+          </div>
+        </div>
+        <div class="table-actions">
+          <button class="btn btn-outline btn-sm" id="btnResetImage">
+            <i class="fas fa-undo"></i> Restaurar
+          </button>
+          <button class="btn btn-accent" id="btnSaveImage" disabled>
+            <i class="fas fa-save"></i> Guardar
+          </button>
+        </div>
+      </div>
+
+      <!-- Preview Card -->
+      <div class="image-preview-card">
+        <div class="card-header">
+          <h3><i class="fas fa-image"></i> Vista Previa</h3>
+          <span id="fileName" style="font-size:0.82rem;color:var(--text-light);">Ningún archivo seleccionado</span>
+        </div>
+        <div class="image-preview-body">
+          <img id="previewImage" src="../img/mapacontac.svg" alt="Programación Semanal">
+        </div>
+      </div>
+
+      <!-- Upload Area -->
+      <div class="upload-area" id="uploadArea">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Arrastra y suelta una imagen aquí o <span>haz clic para seleccionar</span></p>
+        <small style="color:var(--text-muted);margin-top:0.3rem;display:block;">Formatos: PNG, JPG, SVG — Tamaño máximo: 5 MB</small>
+      </div>
+      <input type="file" id="uploadInput" accept="image/*">
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/admin-common.js"></script>
+  <script src="js/programacion.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = JSON.parse(localStorage.getItem('idv_admin_user') || '{}');
+      document.getElementById('userName').textContent = user.name || 'Admin';
+      document.getElementById('userRole').textContent = user.role || 'Administrador';
+    });
+  </script>
+</body>
+</html>

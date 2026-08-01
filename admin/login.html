@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panel Administrativo — Iglesia del Dios Viviente">
+  <meta name="theme-color" content="#1E2A67">
+  <title>Iniciar Sesión — IDV Admin</title>
+
+  <link rel="icon" href="../img/logo_circular_ico.ico">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Admin Styles -->
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="login-page">
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="login-navbar">
+    <a href="login.html" class="login-nav-logo">
+      <img src="../img/logoidv.svg" alt="Logo IDV">
+      <span>IDV Admin</span>
+    </a>
+    <a href="../index.html" class="login-nav-back">
+      <i class="fas fa-arrow-left"></i> Volver al sitio
+    </a>
+  </nav>
+
+  <div class="login-card">
+    <!-- Logo -->
+    <div class="login-logo">
+      <img src="../img/logoidv.svg" alt="Logo IDV">
+      <h1>Iglesia del Dios Viviente</h1>
+      <span>Panel Administrativo</span>
+    </div>
+
+    <!-- Form -->
+    <form class="login-form" id="loginForm" autocomplete="off" novalidate>
+      <div class="form-group">
+        <label for="email">Correo Electrónico</label>
+        <div class="input-wrapper">
+          <i class="fas fa-envelope"></i>
+          <input
+            type="email"
+            id="email"
+            placeholder="admin@idv.org.ni"
+            value="admin@idv.org.ni"
+            required
+            autocapitalize="off"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <div class="input-wrapper">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            id="password"
+            placeholder="••••••••"
+            value="admin123"
+            required
+          >
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div class="login-error" id="loginError" role="alert"></div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn btn-primary login-btn" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+      </button>
+    </form>
+
+    <!-- Footer -->
+    <div class="login-footer">
+      <a href="../index.html"><i class="fas fa-arrow-left"></i> Volver al sitio</a>
+    </div>
+  </div>
+
+  <!-- Auth Script -->
+  <script src="js/auth.js"></script>
+</body>
+</html>
