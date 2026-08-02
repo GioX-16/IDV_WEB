@@ -143,7 +143,7 @@
                     <span class="title-line">Fe y Amor</span>
                 </h1>
                 <p class="hero-subtitle">Iglesia del Dios Viviente · Managua, Nicaragua</p>
-                <a href="#lineatiempoo" class="hero-btn">
+                <a href="#actividades" class="hero-btn">
                     <span>Conoce Nuestra Iglesia</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -247,61 +247,44 @@
         </div>
     </section>
 
-    <!-- ===================== LINEA DE TIEMPO ===================== -->
-    <section class="section lineatiempo" id="lineatiempoo">
-        <div class="section-header" data-aos="fade-up" data-aos-duration="800">
-            <span class="section-tag light">Nuestra Historia</span>
-            <h2 class="section-title light">L&iacute;nea de Tiempo</h2>
-        </div>
-        <div class="timeline" data-aos="fade-up" data-aos-duration="1000">
-            <div class="container left-container">
-                <img src="/img/tlico1.svg" alt="imgIDV">
-                <div class="text-box">
-                    <h2>Iglesia del Dios Viviente</h2>
-                    <small>1975 - 1985</small>
-                    <p>Perseverancia en la fe: Mantenerse firme en el camino de Dios aun cuando las pruebas y dificultades quieran desviarnos.</p>
-                    <span class="verse">1 Corintios 2:9</span>
-                    <span class="left-container-arrow"></span>
-                </div>
+    <!-- ===================== ACTIVIDADES (TABS) ===================== -->
+    <section class="section actividades-section" id="actividades">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag light">Comunidad</span>
+                <h2 class="section-title light">ACTIVIDADES</h2>
+                <p class="section-desc light">
+                    Conoce las actividades de la iglesia y la programaci&oacute;n semanal de los hermanos.
+                </p>
             </div>
-            <div class="container right-container">
-                <img src="/img/tlico2.svg" alt="imgIDV">
-                <div class="text-box">
-                    <h2>Iglesia del Dios Viviente</h2>
-                    <small>1985 - 1995</small>
-                    <p>Amor verdadero: Mostrar un amor sincero que nace del coraz&oacute;n de Cristo y se refleja en nuestras acciones hacia los dem&aacute;s.</p>
-                    <span class="verse">Colosenses 3:14</span>
-                    <span class="right-container-arrow"></span>
-                </div>
+
+            <div class="actividades-tabs" role="tablist">
+                <button class="actividad-tab active" role="tab" aria-selected="true" aria-controls="tab-eventos" data-tab="eventos">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Actividades de la Iglesia</span>
+                </button>
+                <button class="actividad-tab" role="tab" aria-selected="false" aria-controls="tab-programacion" data-tab="programacion">
+                    <i class="far fa-clock"></i>
+                    <span>Programaci&oacute;n de la Iglesia</span>
+                </button>
             </div>
-            <div class="container left-container">
-                <img src="/img/tlico3.svg" alt="imgIDV">
-                <div class="text-box">
-                    <h2>Iglesia del Dios Viviente</h2>
-                    <small>1995 - 2005</small>
-                    <p>Entrega total a Dios: Rendir nuestra vida, talentos y tiempo para servirle con gratitud y fidelidad.</p>
-                    <span class="verse">Colosenses 3:23</span>
-                    <span class="left-container-arrow"></span>
-                </div>
+
+            <!-- Tab 1: Actividades de la Iglesia -->
+            <div class="actividad-panel active" id="tab-eventos" role="tabpanel">
+                <div class="actividades-grid" id="actividadesGrid"></div>
             </div>
-            <div class="container right-container">
-                <img src="/img/tlico4.svg" alt="imgIDV">
-                <div class="text-box">
-                    <h2>Iglesia del Dios Viviente</h2>
-                    <small>2005 - 2015</small>
-                    <p>Servicio a la iglesia: Trabajar con dedicaci&oacute;n por el bienestar espiritual y material de la congregaci&oacute;n.</p>
-                    <span class="verse">1 Pedro 4:10</span>
-                    <span class="right-container-arrow"></span>
-                </div>
-            </div>
-            <div class="container left-container">
-                <img src="/img/tlico5.svg" alt="imgIDV">
-                <div class="text-box">
-                    <h2>Iglesia del Dios Viviente</h2>
-                    <small>2015 - 2025</small>
-                    <p>Unidad en Cristo: Permanecer juntos como un solo cuerpo, fortaleciendo la fe de cada miembro y edificando la obra de Dios.</p>
-                    <span class="verse">Efesios 4:3</span>
-                    <span class="left-container-arrow"></span>
+
+            <!-- Tab 2: Programacion Semanal -->
+            <div class="actividad-panel" id="tab-programacion" role="tabpanel">
+                <div class="programacion-card">
+                    <div class="programacion-header">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>Programaci&oacute;n Semanal</h3>
+                        <p>Estas son las labores y roles asignados a los hermanos durante esta semana.</p>
+                    </div>
+                    <div class="programacion-img-wrap">
+                        <img id="programacionImg" src="img/mapacontac.svg" alt="Programaci&oacute;n Semanal de la Iglesia">
+                    </div>
                 </div>
             </div>
         </div>
@@ -570,6 +553,7 @@
     <!-- ===================== SCRIPTS ===================== -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/actividades.js"></script>
     <script>
         AOS.init({
             duration: 1000,
