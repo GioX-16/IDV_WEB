@@ -71,8 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
     }
 
-    /* ----- RENDER: Grid de actividades ----- */
-    const grid = document.getElementById('actividadesGrid');
+    /* ----- RENDER: Tabla de actividades ----- */
+    const tbody = document.getElementById('actividadesTableBody');
 
     const estadoInfo = {
         activo:    { label: 'Activo',    cls: 'act-estado-activo' },
@@ -81,40 +81,37 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function renderActividades() {
-        if (!grid) return;
+        if (!tbody) return;
 
         const sorted = [...actividades].sort((a, b) =>
             (a.fecha + ' ' + a.hora).localeCompare(b.fecha + ' ' + b.hora)
         );
 
         if (sorted.length === 0) {
-            grid.innerHTML = `
-                <div class="actividades-empty">
-                    <i class="fas fa-calendar-times"></i>
-                    <p>No hay actividades programadas por el momento.</p>
-                </div>`;
+            tbody.innerHTML = `
+                <tr class="actividades-empty-row">
+                    <td colspan="4">
+                        <div class="actividades-empty">
+                            <i class="fas fa-calendar-times"></i>
+                            <p>No hay actividades programadas por el momento.</p>
+                        </div>
+                    </td>
+                </tr>`;
             return;
         }
 
-        grid.innerHTML = '';
+        tbody.innerHTML = '';
 
         sorted.forEach(a => {
             const info = estadoInfo[a.estado] || estadoInfo.pendiente;
-            const card = document.createElement('article');
-            card.className = 'actividad-card';
-            card.innerHTML = `
-                <div class="actividad-card-top">
-                    <div class="actividad-icon"><i class="fas fa-calendar-day"></i></div>
-                    <span class="act-estado ${info.cls}"><span class="act-dot"></span>${info.label}</span>
-                </div>
-                <h3>${escapeHtml(a.titulo)}</h3>
-                ${a.descripcion ? `<p>${escapeHtml(a.descripcion)}</p>` : ''}
-                <div class="actividad-meta">
-                    <span><i class="far fa-calendar-alt"></i> ${formatFecha(a.fecha)}</span>
-                    <span><i class="far fa-clock"></i> ${formatHora(a.hora)}</span>
-                </div>
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td data-label="Fecha">${formatFecha(a.fecha)}</td>
+                <td data-label="Hora">${formatHora(a.hora)}</td>
+                <td data-label="Actividad"><strong>${escapeHtml(a.titulo)}</strong></td>
+                <td data-label="Estado"><span class="act-estado ${info.cls}"><span class="act-dot"></span>${info.label}</span></td>
             `;
-            grid.appendChild(card);
+            tbody.appendChild(tr);
         });
     }
 

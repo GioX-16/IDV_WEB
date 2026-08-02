@@ -45,6 +45,7 @@
                 <li class="nav-item"><a href="#inicio" class="nav-link"><i class="fas fa-home"></i> Inicio</a></li>
                 <li class="nav-item"><a href="#congregacionn" class="nav-link"><i class="fas fa-users"></i> Congregacion</a></li>
                 <li class="nav-item"><a href="#aniversarioo" class="nav-link"><i class="fas fa-church"></i> Iglesia</a></li>
+                <li class="nav-item"><a href="#actividades" class="nav-link"><i class="fas fa-calendar-alt"></i> Actividades</a></li>
                 <li class="nav-item"><a href="#ministerioss" class="nav-link"><i class="fas fa-hands-praying"></i> Ministerios</a></li>
                 <li class="nav-item"><a href="#servicioss" class="nav-link"><i class="far fa-clock"></i> Horarios</a></li>
                 <li class="nav-item"><a href="#ubicacionn" class="nav-link"><i class="fas fa-map-marker-alt"></i> Ubicacion</a></li>
@@ -121,6 +122,10 @@
         <a href="#aniversarioo" class="bn-item" data-section="aniversarioo">
             <i class="fas fa-church"></i>
             <span>Iglesia</span>
+        </a>
+        <a href="#actividades" class="bn-item" data-section="actividades">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Actividades</span>
         </a>
         <a href="#servicioss" class="bn-item" data-section="servicioss">
             <i class="far fa-clock"></i>
@@ -271,7 +276,19 @@
 
             <!-- Tab 1: Actividades de la Iglesia -->
             <div class="actividad-panel active" id="tab-eventos" role="tabpanel">
-                <div class="actividades-grid" id="actividadesGrid"></div>
+                <div class="actividades-table-wrap">
+                    <table class="actividades-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Actividad</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="actividadesTableBody"></tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Tab 2: Programacion Semanal -->
