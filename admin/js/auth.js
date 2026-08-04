@@ -1,25 +1,18 @@
 /* ============================================================
-   auth.js — Lógica de Login del Panel Admin
+   auth.js — Login del Panel Admin (autenticación real con Supabase)
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ---------- SIMULATED USERS ---------- */
-  const USERS = [
-    { email: 'admin@idv.org.ni', password: 'admin123', name: 'Administrador', role: 'Administrador' },
-    { email: 'pastor@idv.org.ni', password: 'pastor123', name: 'Pastor René García', role: 'Pastor' },
-    { email: 'editor@idv.org.ni',  password: 'editor123', name: 'Editor IDV',        role: 'Editor' },
-  ];
-
   /* ---------- DOM ---------- */
-  const form     = document.getElementById('loginForm');
-  const emailEl  = document.getElementById('email');
-  const passEl   = document.getElementById('password');
-  const errorEl  = document.getElementById('loginError');
-  const btn      = document.getElementById('loginBtn');
+  const form    = document.getElementById('loginForm');
+  const emailEl = document.getElementById('email');
+  const passEl  = document.getElementById('password');
+  const errorEl = document.getElementById('loginError');
+  const btn     = document.getElementById('loginBtn');
 
   /* ---------- SUBMIT ---------- */
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const email    = emailEl.value.trim();
@@ -33,28 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    /* Buscar usuario */
-    const user = USERS.find(u => u.email === email && u.password === password);
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando...';
+    btn.disabled  = true;
 
-    if (!user) {
+    /* Autenticación contra Supabase Auth */
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Iniciar Sesión';
+      btn.disabled  = false;
       showError('Correo o contraseña incorrectos. Intenta de nuevo.');
       return;
     }
 
-    /* Login exitoso */
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando...';
-    btn.disabled = true;
-
-    setTimeout(() => {
-      localStorage.setItem('idv_admin_user', JSON.stringify({
-        name: user.name,
-        role: user.role,
-        email: user.email,
-        loggedAt: new Date().toISOString(),
-      }));
-
-      window.location.href = 'dashboard.html';
-    }, 800);
+    /* Login exitoso: Supabase guarda la sesión automáticamente */
+    window.location.href = 'dashboard.html';
   });
 
   /* ---------- HELPERS ---------- */

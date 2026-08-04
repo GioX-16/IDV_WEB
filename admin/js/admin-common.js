@@ -11,15 +11,9 @@ APP.config = {
   defaultPageSize: 6,
 };
 
-/* ---------- SIMULATED CURRENT USER ---------- */
+/* ---------- CURRENT USER ----------
+   Lo carga auth-guard.js desde la sesión de Supabase + tabla profiles */
 APP.user = null;
-
-(function initApp() {
-  const stored = localStorage.getItem('idv_admin_user');
-  if (stored) {
-    try { APP.user = JSON.parse(stored); } catch (e) { /* ignorar */ }
-  }
-})();
 
 /* ============================================================
    SIDEBAR
@@ -94,8 +88,8 @@ APP.setActiveNav = function (page) {
 APP.setupLogout = function () {
   const logoutBtns = document.querySelectorAll('.nav-logout, #logoutBtn');
   logoutBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      localStorage.removeItem('idv_admin_user');
+    btn.addEventListener('click', async () => {
+      await supabase.auth.signOut();
       window.location.href = 'login.html';
     });
   });

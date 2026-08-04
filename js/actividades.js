@@ -42,10 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     let actividades = DEFAULT_ACTIVIDADES;
-    try {
-        const stored = JSON.parse(localStorage.getItem('idv_actividades'));
-        if (Array.isArray(stored) && stored.length) actividades = stored;
-    } catch (e) { /* usar fallback */ }
+
+    /* Cargar actividades desde Supabase (lectura pública).
+       Si la BD está vacía o no responde, se usa el fallback local. */
+    async function loadActividades() {
+        if (typeof supabase === 'undefined') return;
+        try {
+            const { data } = await supabase.from('actividades').select('*');
+            if (Array.isArray(data) && data.length) actividades = data;
+        } catch (e) {
+            console.error('Error al cargar actividades desde Supabase:', e);
+        }
+    }
 
     /* ----- HELPERS ----- */
     function escapeHtml(text) {
@@ -115,15 +123,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    renderActividades();
+    (async () => {
+        await loadActividades();
+        renderActividades();
+    })();
 
-    /* ----- PROGRAMACION SEMANAL: Imagen guardada por el admin ----- */
+    /* ----- PROGRAMACION SEMANAL: Imagen guardada por el admin en la BD ----- */
     const progImg = document.getElementById('programacionImg');
-    if (progImg) {
-        const savedImage = localStorage.getItem('idv_programacion_img');
-        if (savedImage) {
-            progImg.src = savedImage;
-        }
+    if (progImg && typeof supabase !== 'undefined') {
+        (async () => {
+            try {
+                const { data } = await supabase
+                    .from('programacion')
+                    .select('imagen_url')
+                    .order('updated_at', { ascending: false })
+                    .limit(1);
+                if (data && data.length && data[0].imagen_url) {
+                    progImg.src = data[0].imagen_url;
+                }
+            } catch (e) {
+                console.error('Error al cargar la programación desde Supabase:', e);
+            }
+        })();
     }
 
 });
