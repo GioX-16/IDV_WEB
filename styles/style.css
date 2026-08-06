@@ -953,6 +953,18 @@ ul {
     font-weight: 600;
 }
 
+.act-desc {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.4;
+    display: block;
+    max-width: 280px;
+}
+
+html.light-mode .act-desc {
+    color: var(--gray);
+}
+
 .act-estado {
     display: inline-flex;
     align-items: center;
@@ -1036,6 +1048,55 @@ ul {
     width: 100%;
     height: auto;
     object-fit: contain;
+}
+
+.programacion-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.25rem;
+}
+
+.btn-download-prog {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.btn-download-prog:hover {
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(247,148,30,0.3);
+}
+
+.btn-download-prog:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+html.light-mode .btn-download-prog {
+    color: var(--primary);
+    border-color: rgba(30,42,103,0.2);
+    background: rgba(30,42,103,0.06);
+}
+
+html.light-mode .btn-download-prog:hover {
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    color: var(--white);
 }
 
 /* ============================================
@@ -2792,6 +2853,18 @@ html.light-mode .actividades-section .section-desc.light {
     .actividades-tabs { gap: 0.6rem; margin-bottom: 1.75rem; }
     .actividad-tab { padding: 0.7rem 1.2rem; font-size: 0.82rem; }
     .programacion-card { padding: 1.5rem; }
+
+    .act-desc {
+        max-width: none;
+        font-size: 0.8rem;
+    }
+
+    .btn-download-prog {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.82rem;
+        padding: 0.65rem 1.25rem;
+    }
 
     /* Tabla apilada en movil */
     .actividades-table,

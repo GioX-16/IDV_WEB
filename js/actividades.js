@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sorted.length === 0) {
             tbody.innerHTML = `
                 <tr class="actividades-empty-row">
-                    <td colspan="4">
+                    <td colspan="5">
                         <div class="actividades-empty">
                             <i class="fas fa-calendar-times"></i>
                             <p>No hay actividades programadas por el momento.</p>
@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td data-label="Fecha">${formatFecha(a.fecha)}</td>
                 <td data-label="Hora">${formatHora(a.hora)}</td>
                 <td data-label="Actividad"><strong>${escapeHtml(a.titulo)}</strong></td>
+                <td data-label="Descripción"><span class="act-desc">${escapeHtml(a.descripcion || '')}</span></td>
                 <td data-label="Estado"><span class="act-estado ${info.cls}"><span class="act-dot"></span>${info.label}</span></td>
             `;
             tbody.appendChild(tr);
@@ -130,21 +131,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ----- PROGRAMACION SEMANAL: Imagen guardada por el admin en la BD ----- */
     const progImg = document.getElementById('programacionImg');
+    const btnDownload = document.getElementById('btnDownloadProg');
+    let currentProgUrl = progImg ? progImg.src : '';
+
     if (progImg && typeof supabase !== 'undefined') {
         (async () => {
             try {
                 const { data } = await supabase
                     .from('programacion')
-                    .select('imagen_url')
+                    .select('imagen_url, nombre_archivo')
                     .order('updated_at', { ascending: false })
                     .limit(1);
                 if (data && data.length && data[0].imagen_url) {
                     progImg.src = data[0].imagen_url;
+                    currentProgUrl = data[0].imagen_url;
+                    progImg.dataset.filename = data[0].nombre_archivo || 'programacion-semanal';
                 }
             } catch (e) {
                 console.error('Error al cargar la programación desde Supabase:', e);
             }
         })();
+    }
+
+    if (btnDownload) {
+        btnDownload.addEventListener('click', async () => {
+            const url = currentProgUrl;
+            if (!url || url === window.location.origin + '/img/mapacontac.svg' || url.endsWith('mapacontac.svg')) {
+                APP && APP.showToast ? APP.showToast('No hay una programación disponible para descargar.', 'info') : alert('No hay una programación disponible para descargar.');
+                return;
+            }
+
+            btnDownload.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Descargando...';
+            btnDownload.disabled = true;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('No se pudo descargar la imagen.');
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = blobUrl;
+                a.download = progImg.dataset.filename || 'programacion-semanal.jpg';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(blobUrl);
+            } catch (err) {
+                console.error('Error al descargar:', err);
+                window.open(url, '_blank');
+            } finally {
+                btnDownload.innerHTML = '<i class="fas fa-download"></i> Descargar Programación';
+                btnDownload.disabled = false;
+            }
+        });
     }
 
 });
