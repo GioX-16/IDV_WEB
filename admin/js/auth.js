@@ -29,8 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando...';
     btn.disabled  = true;
 
-    /* Autenticación contra Supabase Auth */
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    /* Autenticación contra Supabase Auth usando el cliente global */
+    const { error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
+
 
     if (error) {
       btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Iniciar Sesión';
