@@ -29,6 +29,9 @@
 </head>
 <body>
 
+    <a class="skip-link" href="#inicio">Saltar al contenido</a>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
     <!-- ===================== NAVBAR ===================== -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -103,6 +106,9 @@
 
     <!-- ===================== FLOATING BUTTONS ===================== -->
     <div class="floating-buttons">
+        <button class="fab-btn fab-top" id="fabTop" aria-label="Volver arriba" title="Volver arriba">
+            <i class="fas fa-arrow-up"></i>
+        </button>
         <button class="fab-btn fab-whatsapp" id="fabWhatsapp" aria-label="WhatsApp" title="Contactar por WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </button>
@@ -143,22 +149,60 @@
         <div class="hero-overlay"></div>
         <div class="hero-container">
             <div class="hero-content" data-aos="fade-right" data-aos-duration="1200">
+                <span class="hero-eyebrow">
+                    <span class="hero-eyebrow-dot"></span>
+                    Bienvenido a casa
+                </span>
                 <h1 class="hero-title">
                     <span class="title-line">Un Lugar Para</span>
                     <span class="title-line highlight">Crecer en</span>
                     <span class="title-line">Fe y Amor</span>
                 </h1>
                 <p class="hero-subtitle">Iglesia del Dios Viviente · Managua, Nicaragua</p>
-                <a href="#actividades" class="hero-btn">
-                    <span>Conoce Nuestra Iglesia</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="hero-actions">
+                    <a href="#actividades" class="hero-btn">
+                        <span>Conoce Nuestra Iglesia</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#servicioss" class="hero-btn hero-btn--ghost">
+                        <i class="far fa-clock"></i>
+                        <span>Ver horarios</span>
+                    </a>
+                </div>
+                <div class="hero-quick" aria-label="Información rápida">
+                    <div class="hero-quick-item">
+                        <span class="hero-quick-icon"><i class="fas fa-location-dot"></i></span>
+                        <div class="hero-quick-text">
+                            <small>Ubicación</small>
+                            <strong>Villa Venezuela, Managua</strong>
+                        </div>
+                    </div>
+                    <div class="hero-quick-item">
+                        <span class="hero-quick-icon"><i class="far fa-calendar-check"></i></span>
+                        <div class="hero-quick-text">
+                            <small>Próximo servicio</small>
+                            <strong id="heroNextService">Domingo · 4:00 PM</strong>
+                        </div>
+                    </div>
+                </div>
                 <div class="church-seal">
                     <img loading="lazy" src="/img/convencionlogo.svg" alt="Sello Iglesia" class="seal-image">
                 </div>
             </div>
             <div class="hero-visual" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                <div class="hero-orbit" aria-hidden="true">
+                    <span class="hero-blob hero-blob--1"></span>
+                    <span class="hero-blob hero-blob--2"></span>
+                    <span class="hero-ring"></span>
+                </div>
                 <img loading="lazy" src="img/pastoreshome.svg" alt="Familia de la Iglesia" class="hero-photo">
+                <div class="hero-float-card" aria-hidden="true">
+                    <span class="hero-float-icon"><i class="fas fa-heart"></i></span>
+                    <span class="hero-float-text">
+                        <strong>51 años</strong>
+                        <small>de fe y servicio</small>
+                    </span>
+                </div>
             </div>
         </div>
         <div class="hero-scroll-indicator">

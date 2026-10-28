@@ -430,4 +430,94 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ----- SCROLL PROGRESS -----
+    const scrollProgress = document.getElementById('scrollProgress');
+
+    // ----- BACK TO TOP -----
+    const fabTop = document.getElementById('fabTop');
+    if (fabTop) {
+        fabTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // ----- ACTIVE NAV LINK ON SCROLL -----
+    const navSections = Array.from(document.querySelectorAll('.nav-link[href^="#"]'))
+        .map(link => ({
+            link,
+            section: document.querySelector(link.getAttribute('href'))
+        }))
+        .filter(item => item.section);
+
+    function updateScrollUI() {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+        if (scrollProgress) scrollProgress.style.width = `${progress}%`;
+
+        if (fabTop) fabTop.classList.toggle('visible', window.scrollY > 500);
+
+        const marker = window.scrollY + navHeight + 120;
+        let current = null;
+        navSections.forEach(({ section }) => {
+            if (section.offsetTop <= marker) current = section;
+        });
+        navSections.forEach(({ link, section }) => {
+            link.classList.toggle('active', current === section);
+        });
+    }
+
+    let scrollTicking = false;
+    window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            window.requestAnimationFrame(() => {
+                updateScrollUI();
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    }, { passive: true });
+    updateScrollUI();
+
+    // ----- NEXT SERVICE (Héroe) -----
+    const heroNextService = document.getElementById('heroNextService');
+    if (heroNextService) {
+        const servicios = [
+            { dia: 2, nombre: 'Culto de Oración', hora: '6:00 PM', h: 18, m: 0 },
+            { dia: 3, nombre: 'Ayuno Congregacional', hora: '9:00 AM', h: 9, m: 0 },
+            { dia: 4, nombre: 'Estudios SEAN', hora: '6:00 PM', h: 18, m: 0 },
+            { dia: 5, nombre: 'Culto de Dorcas', hora: '6:00 PM', h: 18, m: 0 },
+            { dia: 6, nombre: 'Culto de Jóvenes', hora: '6:00 PM', h: 18, m: 0 },
+            { dia: 0, nombre: 'Culto Evangelístico', hora: '4:00 PM', h: 16, m: 0 }
+        ];
+
+        const ahora = new Date();
+        let proximo = null;
+
+        servicios.forEach(servicio => {
+            const fecha = new Date(ahora);
+            fecha.setHours(servicio.h, servicio.m, 0, 0);
+
+            let diff = (servicio.dia - ahora.getDay() + 7) % 7;
+            if (diff === 0 && fecha <= ahora) diff = 7;
+            fecha.setDate(fecha.getDate() + diff);
+
+            if (!proximo || fecha < proximo.fecha) {
+                proximo = { ...servicio, fecha };
+            }
+        });
+
+        if (proximo) {
+            heroNextService.textContent = `${proximo.nombre} · ${proximo.hora}`;
+        }
+    }
+
+    // ----- CERRAR MODAL DEL CONTADOR CON ESC -----
+    if (counterModal) {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && counterModal.classList.contains('open')) {
+                counterModal.classList.remove('open');
+            }
+        });
+    }
+
 });
