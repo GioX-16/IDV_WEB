@@ -16,9 +16,9 @@ create table if not exists public.profiles (
   email      text not null unique,
   nombre     text not null default '',
   rol        text not null default 'Editor'
-             check (rol in ('Administrador', 'Pastor', 'Editor')),
+            check (rol in ('Administrador', 'Pastor', 'Editor')),
   estado     text not null default 'activo'
-             check (estado in ('activo', 'inactivo')),
+            check (estado in ('activo', 'inactivo')),
   created_at timestamptz not null default now()
 );
 
