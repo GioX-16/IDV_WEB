@@ -45,8 +45,9 @@
                 <li class="nav-item"><a href="#inicio" class="nav-link"><i class="fas fa-home"></i> Inicio</a></li>
                 <li class="nav-item"><a href="#congregacionn" class="nav-link"><i class="fas fa-users"></i> Congregacion</a></li>
                 <li class="nav-item"><a href="#aniversarioo" class="nav-link"><i class="fas fa-church"></i> Iglesia</a></li>
-                <li class="nav-item"><a href="#actividades" class="nav-link"><i class="fas fa-calendar-alt"></i> Actividades</a></li>
-                <li class="nav-item"><a href="#ministerioss" class="nav-link"><i class="fas fa-hands-praying"></i> Ministerios</a></li>
+                        <li class="nav-item"><a href="#actividades" class="nav-link"><i class="fas fa-calendar-alt"></i> Actividades</a></li>
+                        <li class="nav-item"><a href="#avisos" class="nav-link"><i class="fas fa-bullhorn"></i> Avisos</a></li>
+                        <li class="nav-item"><a href="#ministerioss" class="nav-link"><i class="fas fa-hands-praying"></i> Ministerios</a></li>
                 <li class="nav-item"><a href="#servicioss" class="nav-link"><i class="far fa-clock"></i> Horarios</a></li>
                 <li class="nav-item"><a href="#ubicacionn" class="nav-link"><i class="fas fa-map-marker-alt"></i> Ubicacion</a></li>
                 <li class="nav-item"><a href="admin/login.html" class="nav-link nav-btn" id="navLoginBtn"><i class="fas fa-sign-in-alt"></i> Iniciar Sesi&oacute;n</a></li>
@@ -308,6 +309,26 @@
                             <i class="fas fa-download"></i> Descargar Programación
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== AVISOS ===================== -->
+    <section class="section avisos-section" id="avisos">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag light">Comunidad</span>
+                <h2 class="section-title light">AVISOS</h2>
+                <p class="section-desc light">
+                    Mantente informado con las comunicaciones y novedades de la iglesia.
+                </p>
+            </div>
+
+            <div class="avisos-grid" id="avisosGrid" data-aos="fade-up" data-aos-duration="1000">
+                <div class="avisos-loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Cargando avisos...</p>
                 </div>
             </div>
         </div>
@@ -579,6 +600,7 @@
     <script src="js/supabase-config.js"></script>
     <script src="js/index.js"></script>
     <script src="js/actividades.js"></script>
+    <script src="js/avisos.js"></script>
     <script>
         AOS.init({
             duration: 1000,

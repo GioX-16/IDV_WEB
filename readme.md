@@ -16,7 +16,7 @@ Sitio web oficial de la **Iglesia del Dios Viviente**, una comunidad cristiana m
   - **Actividades** con sistema de pestañas:
     - *Actividades de la Iglesia* — tabla con los eventos guardados desde el panel admin.
     - *Programación de la Iglesia* — imagen semanal subida por el admin para que los hermanos vean sus labores.
-  - Ministerios (carrusel), días de servicio, escuela dominical, células, pastores y ubicación.
+  - **Avisos** debajo de Actividades, con comunicaciones escritas e imagen opcional publicadas desde el panel.
 - Navegación superior + **barra inferior fija en móvil** con detección de sección activa.
 - Botones flotantes: WhatsApp directo y cambio de tema.
 
@@ -24,7 +24,9 @@ Sitio web oficial de la **Iglesia del Dios Viviente**, una comunidad cristiana m
 - Login simulado con roles (**Administrador**, **Pastor**, **Editor**).
 - **Dashboard** con estadísticas resumidas.
 - **Actividades**: CRUD completo (crear, editar, eliminar, buscar) de los eventos de la iglesia.
+- **Avisos**: CRUD de comunicaciones con imagen opcional y estado activo/inactivo.
 - **Programación Semanal**: subir la imagen que se publica en la sección de Actividades del sitio.
+- **Reportes**: resumen de actividades y programación con filtros, impresión/PDF y exportación CSV.
 - **Usuarios**: gestión simulada de cuentas.
 - Interfaz con sidebar colapsable, modales, toasts y paginación.
 
@@ -60,13 +62,35 @@ IDV_WEB/
 │   ├── login.html          # Inicio de sesión
 │   ├── dashboard.html      # Estadísticas
 │   ├── actividades.html    # CRUD de actividades
+│   ├── avisos.html         # CRUD de avisos
 │   ├── programacion.html   # Subida de imagen semanal
+│   ├── reportes.html       # Reporte de actividades y programación
 │   ├── usuarios.html       # Gestión de usuarios
 │   ├── css/admin.css       # Estilos del panel
 │   └── js/                 # Lógica del panel (auth, common, etc.)
+├── JS/
+│   ├── index.js            # Interacciones del sitio público
+│   ├── actividades.js      # Actividades y programación semanal
+│   ├── avisos.js           # Avisos públicos
+│   └── supabase-config.js  # Configuración de Supabase
+├── supabase/
+│   ├── schema.sql          # Esquema completo
+│   └── avisos.sql          # Migración del módulo de avisos
 ├── img/                    # Imágenes y recursos SVG
 └── videos/                 # Vídeos institucionales
 ```
+
+---
+
+## 🗄️ Migración: Módulo de Avisos
+
+Si tu proyecto de Supabase ya existe, ejecuta la migración antes de usar la sección de Avisos:
+
+1. Abre el proyecto en [Supabase](https://supabase.com/dashboard).
+2. Ve a **SQL Editor**.
+3. Pega el contenido de `supabase/avisos.sql` y pulsa **Run**.
+
+Esto crea la tabla `avisos`, las políticas RLS y el bucket público `avisos` para las imágenes. Para instalaciones nuevas, `supabase/schema.sql` ya incluye todo.
 
 ---
 

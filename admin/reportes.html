@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1E2A67">
+  <title>Reportes — IDV Admin</title>
+  <link rel="icon" href="../img/logo_circular_ico.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body" data-page="reportes">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <img src="../img/logoidv.svg" alt="Logo IDV">
+        <div class="sidebar-logo-text">IDV <small>Admin Panel</small></div>
+      </div>
+      <button class="sidebar-toggle" aria-label="Colapsar menú">
+        <i class="fas fa-angles-left" id="toggleIcon"></i>
+      </button>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Principal</div>
+        <a href="dashboard.html" class="nav-item" data-page="dashboard">
+          <i class="fas fa-tachometer-alt"></i><span>Dashboard</span>
+        </a>
+        <a href="actividades.html" class="nav-item" data-page="actividades">
+          <i class="fas fa-calendar-alt"></i><span>Actividades</span>
+        </a>
+        <a href="avisos.html" class="nav-item" data-page="avisos">
+          <i class="fas fa-bullhorn"></i><span>Avisos</span>
+        </a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Gestión</div>
+        <a href="programacion.html" class="nav-item" data-page="programacion">
+          <i class="fas fa-clock"></i><span>Programación Semanal</span>
+        </a>
+        <a href="reportes.html" class="nav-item active" data-page="reportes">
+          <i class="fas fa-chart-line"></i><span>Reportes</span>
+        </a>
+        <a href="usuarios.html" class="nav-item" data-page="usuarios">
+          <i class="fas fa-users-cog"></i><span>Usuarios</span>
+        </a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="nav-logout"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <div class="main-content" id="mainContent">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-trigger" id="menuTrigger" aria-label="Abrir menú">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="topbar-title">Reportes</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-user">
+          <div class="topbar-avatar"><i class="fas fa-user-shield"></i></div>
+          <div class="topbar-info">
+            <div class="topbar-name" id="userName">Admin</div>
+            <div class="topbar-role" id="userRole">Admin</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <div class="page-header">
+        <div>
+          <h2>Reporte de Actividades y Programación</h2>
+          <div class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Reportes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="report-print-header">
+        <h1>Iglesia del Dios Viviente</h1>
+        <p>Reporte de actividades y programación</p>
+        <p id="printRange"></p>
+      </div>
+
+      <form class="report-filters" id="reportFilters">
+        <div class="report-filter-grid">
+          <div class="form-group">
+            <label for="reportFrom">Desde</label>
+            <input type="date" id="reportFrom" name="from">
+          </div>
+          <div class="form-group">
+            <label for="reportTo">Hasta</label>
+            <input type="date" id="reportTo" name="to">
+          </div>
+          <div class="form-group">
+            <label for="reportEstado">Estado</label>
+            <select id="reportEstado" name="estado">
+              <option value="">Todos</option>
+              <option value="activo">Activo</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="quickRange">Periodo rápido</label>
+            <select id="quickRange">
+              <option value="ano">Año actual</option>
+              <option value="mes">Mes actual</option>
+              <option value="proximos30">Próximos 30 días</option>
+              <option value="ultimos90">Últimos 90 días</option>
+              <option value="todo">Todo</option>
+              <option value="custom">Personalizado</option>
+            </select>
+          </div>
+        </div>
+        <div class="report-actions">
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-rotate"></i> Generar reporte
+          </button>
+          <button type="button" class="btn btn-outline" id="btnPrintReport">
+            <i class="fas fa-print"></i> Imprimir / PDF
+          </button>
+          <button type="button" class="btn btn-outline" id="btnExportCsv">
+            <i class="fas fa-file-csv"></i> Exportar CSV
+          </button>
+        </div>
+      </form>
+
+      <div class="report-summary-grid">
+        <div class="report-kpi">
+          <div class="report-kpi-label">Total actividades</div>
+          <div class="report-kpi-value" id="kpiTotal">0</div>
+          <div class="report-kpi-note" id="kpiTotalNote">En el periodo seleccionado</div>
+        </div>
+        <div class="report-kpi success">
+          <div class="report-kpi-label">Activas</div>
+          <div class="report-kpi-value" id="kpiActivas">0</div>
+          <div class="report-kpi-note" id="kpiActivasNote">Listas para ejecutarse</div>
+        </div>
+        <div class="report-kpi warning">
+          <div class="report-kpi-label">Pendientes</div>
+          <div class="report-kpi-value" id="kpiPendientes">0</div>
+          <div class="report-kpi-note">Requieren seguimiento</div>
+        </div>
+        <div class="report-kpi danger">
+          <div class="report-kpi-label">Canceladas</div>
+          <div class="report-kpi-value" id="kpiCanceladas">0</div>
+          <div class="report-kpi-note">No se realizarán</div>
+        </div>
+        <div class="report-kpi">
+          <div class="report-kpi-label">Próximos 30 días</div>
+          <div class="report-kpi-value" id="kpiProximas">0</div>
+          <div class="report-kpi-note">Actividades por venir</div>
+        </div>
+        <div class="report-kpi">
+          <div class="report-kpi-label">Programación semanal</div>
+          <div class="report-kpi-value" id="kpiProgramacion">—</div>
+          <div class="report-kpi-note" id="kpiProgramacionNote">Sin actualizar</div>
+        </div>
+      </div>
+
+      <div class="report-grid">
+        <div class="report-card">
+          <h3><i class="fas fa-chart-pie"></i> Distribución por estado</h3>
+          <div id="estadoBars"></div>
+        </div>
+        <div class="report-card">
+          <h3><i class="fas fa-calendar-days"></i> Actividades por mes</h3>
+          <div id="mesBars"></div>
+        </div>
+        <div class="report-card">
+          <h3><i class="fas fa-calendar-week"></i> Actividades por día</h3>
+          <div id="diaBars"></div>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <div class="table-header">
+          <h3><i class="fas fa-calendar-check"></i> Próximas actividades</h3>
+        </div>
+        <div class="table-wrapper">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Actividad</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="upcomingBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <div class="table-header">
+          <h3><i class="fas fa-triangle-exclamation"></i> Actividades que requieren atención</h3>
+        </div>
+        <div class="table-wrapper">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Actividad</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="attentionBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script src="js/auth-guard.js"></script>
+  <script src="js/reportes.js"></script>
+</body>
+</html>
