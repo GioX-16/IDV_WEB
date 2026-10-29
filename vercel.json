@@ -29,7 +29,7 @@
       ]
     },
     {
-      "source": "/Videos/(.*)",
+      "source": "/videos/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "source": "/Styles/(.*)",
+      "source": "/styles/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -47,7 +47,7 @@
       ]
     },
     {
-      "source": "/JS/(.*)",
+      "source": "/js/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <td>${statusBadge(a.estado)}</td>
         <td>
           <div class="action-btns">
-            <a href="actividades.html" class="btn-icon" title="Ver"><i class="fas fa-eye"></i></a>
+            <a href="actividades" class="btn-icon" title="Ver"><i class="fas fa-eye"></i></a>
           </div>
         </td>
       `;

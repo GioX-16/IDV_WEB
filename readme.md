@@ -99,13 +99,17 @@ Esto crea la tabla `avisos`, las políticas RLS y el bucket público `avisos` pa
 El proyecto es estático: **no requiere instalación de dependencias ni build**.
 
 ```bash
-# Opción 1: abrir directamente
-#   Simplemente abre index.html en tu navegador.
-
-# Opción 2: servidor local (recomendado para desarrollo)
+# Servidor local (recomendado). `serve.json` replica las URLs limpias de Vercel,
+# así los enlaces sin `.html` funcionan igual que en producción.
 npx serve .
 # Luego visita http://localhost:3000
+
+# También puedes usar `npx vercel dev`, que respeta vercel.json.
 ```
+
+> Abrir `index.html` directamente con doble clic ya no es suficiente: los enlaces
+> internos usan URLs limpias (`/admin/login`, no `/admin/login.html`), por lo que
+> necesitas un servidor que las resuelva.
 
 ---
 
