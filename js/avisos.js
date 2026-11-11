@@ -1,9 +1,31 @@
+/* ============================================================
+   IDV_WEB — Avisos públicos
+   Iglesia del Dios Viviente
+
+   Responsabilidades:
+     - Cargar y renderizar las tarjetas de avisos.
+     - Modal de detalle.
+     - Compartir por WhatsApp (enlace profundo ?aviso=<id>).
+     - Campana con contador de avisos nuevos (estado en localStorage).
+   ============================================================ */
+
 document.addEventListener('DOMContentLoaded', async () => {
 
   const grid = document.getElementById('avisosGrid');
   if (!grid) return;
 
-  /* ---------- MODAL DE DETALLE ---------- */
+  /* ---------- CONFIG ---------- */
+
+  // Clave de localStorage donde se guarda el id del último aviso visto.
+  const STORAGE_KEY = 'idv_avisos_vistos';
+
+  // URL pública del sitio. Se puede sobreescribir con window.IDV_SITE_URL
+  // para que los enlaces compartidos apunten al dominio real
+  // incluso si el sitio se está sirviendo desde otro host.
+  const SITE_URL = (window.IDV_SITE_URL || window.location.origin).replace(/\/+$/, '');
+
+  /* ---------- ELEMENTOS ---------- */
+
   const modal     = document.getElementById('avisoModal');
   const dialog    = modal ? modal.querySelector('.aviso-modal-dialog') : null;
   const mediaEl   = document.getElementById('avisoModalMedia');
@@ -12,9 +34,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   const titleEl   = document.getElementById('avisoModalTitle');
   const textEl    = document.getElementById('avisoModalText');
   const closeBtn  = modal ? modal.querySelector('.aviso-modal-close') : null;
+  const shareBtn  = document.getElementById('avisoModalShare');
+  const copyBtn   = document.getElementById('avisoModalCopy');
+
+  const bellBtn   = document.getElementById('navBell');
+  const badgeEl   = document.getElementById('navBadge');
 
   let avisos = [];
   let lastFocused = null;
+  let currentAviso = null;
+
+  /* ---------- UTILIDADES ---------- */
 
   function escapeHtml(text) {
     const el = document.createElement('div');
@@ -30,6 +60,158 @@ document.addEventListener('DOMContentLoaded', async () => {
       day: '2-digit', month: 'long', year: 'numeric',
     });
   }
+
+  function notify(message, type = 'success') {
+    if (typeof window.showToast === 'function') {
+      window.showToast(message, type);
+      return;
+    }
+    console.info('[avisos]', message);
+  }
+
+  /* ---------- WHATSAPP ---------- */
+
+  // Enlace profundo: abre el sitio en el aviso exacto.
+  function avisoUrl(aviso) {
+    if (!aviso || aviso.id == null) return `${SITE_URL}/#avisos`;
+    return `${SITE_URL}/?aviso=${encodeURIComponent(aviso.id)}#avisos`;
+  }
+
+  // Texto listo para enviar por WhatsApp.
+  function buildShareText(aviso) {
+    if (!aviso) return '';
+    const partes = [
+      '🔥 *Iglesia del Dios Viviente*',
+      '',
+      `📢 ${aviso.titulo || 'Aviso'}`,
+    ];
+
+    if (aviso.fecha_publicacion) {
+      partes.push(`📅 ${formatFecha(aviso.fecha_publicacion)}`);
+    }
+
+    partes.push('');
+
+    if (aviso.contenido) {
+      partes.push(aviso.contenido);
+      partes.push('');
+    }
+
+    partes.push(`🌐 ${avisoUrl(aviso)}`);
+
+    return partes.join('\n');
+  }
+
+  // wa.me sin número: abre WhatsApp con el selector de contactos,
+  // para que cada hermano elija a quién se lo reenvía.
+  function buildShareUrl(aviso) {
+    return `https://wa.me/?text=${encodeURIComponent(buildShareText(aviso))}`;
+  }
+
+  function shareAviso(aviso) {
+    if (!aviso) return;
+    window.open(buildShareUrl(aviso), '_blank', 'noopener');
+  }
+
+  async function copyAvisoLink(aviso) {
+    if (!aviso) return;
+    const url = avisoUrl(aviso);
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        const helper = document.createElement('textarea');
+        helper.value = url;
+        helper.setAttribute('readonly', '');
+        helper.style.position = 'fixed';
+        helper.style.opacity = '0';
+        document.body.appendChild(helper);
+        helper.select();
+        document.execCommand('copy');
+        helper.remove();
+      }
+      notify('Enlace del aviso copiado.', 'success');
+    } catch (e) {
+      console.error('No se pudo copiar el enlace:', e);
+      notify('No se pudo copiar el enlace.', 'error');
+    }
+  }
+
+  /* ---------- ESTADO DE LECTURA ---------- */
+
+  function readVistos() {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      const value = parseInt(raw, 10);
+      return Number.isFinite(value) ? value : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function writeVistos(id) {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, String(id));
+    } catch (_) {
+      /* Modo privado o storage bloqueado: la campana simplemente no marca. */
+    }
+  }
+
+  function maxAvisoId() {
+    return avisos.reduce((max, a) => Math.max(max, Number(a.id) || 0), 0);
+  }
+
+  function countUnread() {
+    const vistos = readVistos();
+    if (vistos === null) return 0;
+    return avisos.filter(a => Number(a.id) > vistos).length;
+  }
+
+  function showBadge(count) {
+    if (!badgeEl || !bellBtn) return;
+    badgeEl.textContent = String(count);
+    badgeEl.hidden = false;
+    bellBtn.setAttribute('aria-label', `${count} aviso${count === 1 ? '' : 's'} nuevo${count === 1 ? '' : 's'}`);
+  }
+
+  function hideBadge() {
+    if (!badgeEl || !bellBtn) return;
+    badgeEl.hidden = true;
+    badgeEl.textContent = '0';
+    bellBtn.setAttribute('aria-label', 'Ver avisos');
+  }
+
+  function markAllSeen() {
+    writeVistos(maxAvisoId());
+    hideBadge();
+  }
+
+  function updateBadge() {
+    if (!bellBtn) return;
+
+    // La campana solo aparece si el módulo de avisos se cargó bien.
+    bellBtn.hidden = false;
+
+    const vistos = readVistos();
+    const maxId = maxAvisoId();
+
+    // Primera visita: todo lo que ya existe se marca como visto para no
+    // inundar al hermano con un badge de "12 avisos nuevos".
+    if (vistos === null) {
+      writeVistos(maxId);
+      hideBadge();
+      return;
+    }
+
+    const unread = countUnread();
+    if (unread > 0) {
+      showBadge(unread);
+    } else {
+      hideBadge();
+    }
+  }
+
+  /* ---------- RENDER ---------- */
 
   function renderEmpty() {
     grid.innerHTML = `
@@ -53,6 +235,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!aviso || !modal || !dialog) return;
 
     lastFocused = trigger || document.activeElement;
+    currentAviso = aviso;
     dialog.classList.remove('no-media');
 
     if (titleEl) titleEl.textContent = aviso.titulo || 'Aviso';
@@ -90,6 +273,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       lastFocused.focus({ preventScroll: true });
     }
     lastFocused = null;
+    currentAviso = null;
   }
 
   if (modal) {
@@ -138,6 +322,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const card = document.createElement('article');
       card.className = 'aviso-card' + (a.imagen_url ? '' : ' no-image');
       card.dataset.index = String(index);
+      card.dataset.id = String(a.id);
       card.tabIndex = 0;
       card.setAttribute('role', 'button');
       card.setAttribute('aria-label', `Ver el aviso completo: ${a.titulo || 'Aviso'}`);
@@ -155,10 +340,16 @@ document.addEventListener('DOMContentLoaded', async () => {
           <span class="aviso-date"><i class="far fa-calendar"></i> ${formatFecha(a.fecha_publicacion)}</span>
           <h3 class="aviso-title">${escapeHtml(a.titulo)}</h3>
           <p class="aviso-text">${escapeHtml(a.contenido)}</p>
-          <span class="aviso-more">
-            Ver aviso completo
-            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </span>
+          <div class="aviso-actions">
+            <span class="aviso-more">
+              Ver aviso completo
+              <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </span>
+            <button type="button" class="aviso-share" data-share="${escapeHtml(a.id)}"
+                    aria-label="Compartir este aviso por WhatsApp" title="Compartir por WhatsApp">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
       `;
 
@@ -172,6 +363,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* Delegación: funciona incluso si la grilla se vuelve a pintar. */
   grid.addEventListener('click', (event) => {
+    // El botón de compartir tiene prioridad: no debe abrir el modal.
+    const shareTrigger = event.target.closest('[data-share]');
+    if (shareTrigger) {
+      event.preventDefault();
+      event.stopPropagation();
+      const id = parseInt(shareTrigger.dataset.share, 10);
+      const aviso = avisos.find(a => Number(a.id) === id);
+      shareAviso(aviso);
+      return;
+    }
+
     const card = event.target.closest('.aviso-card');
     if (!card || !grid.contains(card)) return;
     openAviso(Number(card.dataset.index), card);
@@ -180,12 +382,81 @@ document.addEventListener('DOMContentLoaded', async () => {
   grid.addEventListener('keydown', (event) => {
     if (event.key !== 'Enter' && event.key !== ' ' && event.key !== 'Spacebar') return;
 
+    const shareTrigger = event.target.closest('[data-share]');
+    if (shareTrigger) return;
+
     const card = event.target.closest('.aviso-card');
     if (!card || !grid.contains(card)) return;
 
     event.preventDefault();
     openAviso(Number(card.dataset.index), card);
   });
+
+  /* ---------- ACCIONES DEL MODAL ---------- */
+
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => shareAviso(currentAviso));
+  }
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => copyAvisoLink(currentAviso));
+  }
+
+  /* ---------- CAMPANA DE AVISOS NUEVOS ---------- */
+
+  if (bellBtn) {
+    bellBtn.addEventListener('click', () => {
+      markAllSeen();
+
+      const section = document.getElementById('avisos');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
+  // Al ver la sección de avisos, lo leído deja de contar como pendiente.
+  const avisosSection = document.getElementById('avisos');
+  if (avisosSection && typeof IntersectionObserver !== 'undefined') {
+    const seenObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          markAllSeen();
+        }
+      });
+    }, { threshold: 0.4 });
+
+    seenObserver.observe(avisosSection);
+  }
+
+  /* ---------- ENLACE PROFUNDO (?aviso=<id>) ---------- */
+
+  function handleDeepLink() {
+    let id;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      id = parseInt(params.get('aviso'), 10);
+    } catch (_) {
+      return;
+    }
+
+    if (!Number.isFinite(id)) return;
+
+    const index = avisos.findIndex(a => Number(a.id) === id);
+    if (index === -1) return;
+
+    const card = grid.querySelector(`.aviso-card[data-id="${id}"]`);
+    if (card) {
+      card.classList.add('aviso-destacado');
+      try {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (_) {
+        card.scrollIntoView();
+      }
+    }
+
+    openAviso(index, card);
+  }
 
   /* ---------- CARGA ---------- */
 
@@ -199,8 +470,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (error) throw error;
     renderAvisos(data || []);
+
+    updateBadge();
+
+    const unread = countUnread();
+    if (unread > 0) {
+      notify(`Hay ${unread} aviso${unread === 1 ? '' : 's'} nuevo${unread === 1 ? '' : 's'}.`);
+    }
+
+    handleDeepLink();
   } catch (e) {
     console.error('Error al cargar los avisos:', e);
     renderEmpty();
+    if (bellBtn) bellBtn.hidden = true;
   }
 });

@@ -1842,6 +1842,82 @@ tbody tr:last-child td { border-bottom: none; }
   max-width: 340px;
 }
 
+/* ============================================================
+   NOTIFICACIONES A LOS HERMANOS (WhatsApp)
+   ============================================================ */
+.btn-whatsapp {
+  background: #25d366;
+  color: #062d16;
+  align-self: flex-start;
+}
+
+.btn-whatsapp:hover {
+  background: #1eb455;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+  transform: translateY(-1px);
+}
+
+.notif-group {
+  padding: 1rem;
+  gap: 0.55rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.notif-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.2px;
+}
+
+.notif-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.notif-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.notif-check[hidden] {
+  display: none;
+}
+
+.notif-check input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  margin: 2px 0 0;
+  accent-color: var(--success);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.notif-check-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.notif-check-text strong {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.action-btns .btn-icon.share:hover {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
 @media (max-width: 560px) {
   .form-row { grid-template-columns: 1fr; }
   .aviso-cell-text small { max-width: 190px; }

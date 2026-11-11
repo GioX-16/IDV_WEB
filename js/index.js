@@ -410,6 +410,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     }
 
+    // Se expone globalmente para reutilizar el mismo toast desde otros
+    // módulos (avisos.js) sin duplicar estilos.
+    window.showToast = showToast;
+
     // ----- INTERSECTION OBSERVER FOR HERO ELEMENTS -----
     const heroElements = document.querySelectorAll('.hero-title, .hero-btn, .hero-photo, .church-seal, .hero-subtitle');
     if (heroElements.length) {

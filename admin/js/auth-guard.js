@@ -45,6 +45,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (nameEl) nameEl.textContent = APP.user.nombre || APP.user.email || 'Usuario';
   if (roleEl) roleEl.textContent = APP.user.rol || '';
 
+  // Evento para que otros módulos esperen al perfil real (con su rol)
+  // antes de tomar decisiones que dependen de los permisos.
+  document.dispatchEvent(new CustomEvent('idv:user-ready', { detail: APP.user }));
+
   supabase.auth.onAuthStateChange((event) => {
     if (event === 'SIGNED_OUT') window.location.href = 'login.html';
   });

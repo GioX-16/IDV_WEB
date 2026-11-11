@@ -9,7 +9,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   const btnRemoveImg = document.getElementById('btnQuitarImagen');
   const btnSave      = document.getElementById('btnSaveAviso');
 
+  /* ---------- NOTIFICACIONES ---------- */
+  const btnPrepararWA   = document.getElementById('btnPrepararWhatsapp');
+  const notifCheckWrap  = document.getElementById('notifCheckWrap');
+  const notifCheck      = document.getElementById('avNotificado');
+  const notifHint       = document.getElementById('notifHint');
+  const thNotificado    = document.getElementById('thNotificado');
+
   const bucket = window.AVISOS_BUCKET || 'avisos';
+
+  // URL pública del sitio para los enlaces profundos que se comparten.
+  const SITE_URL = (window.IDV_SITE_URL || window.location.origin).replace(/\/+$/, '');
 
   let avisos = [];
   let editingId = null;
@@ -17,6 +27,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   let originalImageUrl = '';
   let originalStoragePath = '';
   let removeImage = false;
+
+  // ¿La tabla 'avisos' tiene la columna notificado_at? Se comprueba en
+  // caliente para que el panel funcione aunque la migración no se aplique.
+  let hayColumnaNotificado = false;
+  // Solo el rol Administrador puede marcar el estado de notificación.
+  let esAdministrador = false;
 
   const saveHtml = '<i class="fas fa-save"></i> Guardar';
   const spinHtml = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
@@ -67,6 +83,102 @@ document.addEventListener('DOMContentLoaded', async () => {
     previewWrap.hidden = false;
   }
 
+  /* ============================================================
+     NOTIFICACIONES A LOS HERMANOS
+     ============================================================ */
+
+  // Espera a que auth-guard cargue el perfil real (con su rol).
+  function waitForUser() {
+    return new Promise((resolve) => {
+      const onReady = (event) => {
+        document.removeEventListener('idv:user-ready', onReady);
+        resolve(event.detail || APP.user);
+      };
+
+      document.addEventListener('idv:user-ready', onReady);
+
+      // Red de seguridad: si el evento no llega, se usa lo que haya.
+      setTimeout(() => {
+        document.removeEventListener('idv:user-ready', onReady);
+        resolve(APP.user);
+      }, 4000);
+    });
+  }
+
+  // Comprueba si la columna notificado_at existe en la base de datos.
+  // Si la migración no se ha aplicado, el panel sigue funcionando igual.
+  async function detectNotificadoColumn() {
+    try {
+      const { error } = await supabase
+        .from('avisos')
+        .select('notificado_at')
+        .limit(1);
+
+      return !error;
+    } catch (e) {
+      console.warn('No se pudo verificar la columna notificado_at:', e);
+      return false;
+    }
+  }
+
+  // El check "Notificado" solo se muestra si la columna existe Y el
+  // usuario es Administrador. No se oculta nada que el usuario pueda usar.
+  function updateNotifControls() {
+    const visible = hayColumnaNotificado && esAdministrador;
+
+    if (notifCheckWrap) {
+      notifCheckWrap.hidden = !visible;
+    }
+    if (thNotificado) {
+      thNotificado.hidden = !hayColumnaNotificado;
+    }
+  }
+
+  // Enlace profundo hacia un aviso concreto.
+  function avisoUrl(id) {
+    if (!id) return `${SITE_URL}/#avisos`;
+    return `${SITE_URL}/?aviso=${encodeURIComponent(id)}#avisos`;
+  }
+
+  // Texto listo para enviar por WhatsApp.
+  function buildShareText({ titulo, contenido, fecha, id }) {
+    const partes = [
+      '🔥 *Iglesia del Dios Viviente*',
+      '',
+      `📢 ${titulo || 'Aviso'}`,
+    ];
+
+    if (fecha) {
+      partes.push(`📅 ${APP.formatDate(fecha)}`);
+    }
+
+    partes.push('');
+
+    if (contenido) {
+      partes.push(contenido);
+      partes.push('');
+    }
+
+    partes.push(`🌐 ${avisoUrl(id)}`);
+
+    return partes.join('\n');
+  }
+
+  function shareToWhatsApp({ titulo, contenido, fecha, id }) {
+    const texto = buildShareText({ titulo, contenido, fecha, id });
+    window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
+  }
+
+  // Datos del formulario (para preparar el mensaje antes de guardar).
+  function currentFormData() {
+    return {
+      titulo: form.querySelector('[name="titulo"]').value.trim(),
+      contenido: form.querySelector('[name="contenido"]').value.trim(),
+      fecha: form.querySelector('[name="fecha_publicacion"]').value,
+      id: editingId,
+    };
+  }
+
   async function loadAvisos() {
     try {
       const { data, error } = await supabase
@@ -84,13 +196,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  function notificadoBadge(a) {
+    if (a.notificado_at) {
+      return '<span class="status-badge active"><span class="status-dot"></span> Notificado</span>';
+    }
+    return '<span class="status-badge inactive"><span class="status-dot"></span> Sin notificar</span>';
+  }
+
   function renderTable() {
     tbody.innerHTML = '';
+
+    const colspan = hayColumnaNotificado ? 5 : 4;
 
     if (!avisos.length) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="4">
+          <td colspan="${colspan}">
             <div class="empty-state">
               <i class="fas fa-bullhorn"></i>
               <p>No hay avisos registrados. Crea el primero con el botón "Nuevo Aviso".</p>
@@ -108,6 +229,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         ? `<img class="aviso-thumb" src="${escapeHtml(a.imagen_url)}" alt="">`
         : '<span class="aviso-thumb-empty"><i class="fas fa-image"></i></span>';
 
+      const notifCell = hayColumnaNotificado
+        ? `<td>${notificadoBadge(a)}</td>`
+        : '';
+
       tr.innerHTML = `
         <td>
           <div class="aviso-cell">
@@ -120,8 +245,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         </td>
         <td>${a.fecha_publicacion ? APP.formatDate(a.fecha_publicacion) : '-'}</td>
         <td>${statusBadge(a.estado)}</td>
+        ${notifCell}
         <td>
           <div class="action-btns">
+            <button class="btn-icon share" title="Compartir por WhatsApp" data-share="${a.id}"><i class="fab fa-whatsapp"></i></button>
             <button class="btn-icon edit" title="Editar" data-edit="${a.id}"><i class="fas fa-pen-to-square"></i></button>
             <button class="btn-icon delete" title="Eliminar" data-delete="${a.id}"><i class="fas fa-trash-can"></i></button>
           </div>
@@ -137,8 +264,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     tbody.querySelectorAll('[data-edit]').forEach(btn => {
       btn.addEventListener('click', () => openEditModal(parseInt(btn.dataset.edit, 10)));
     });
+
     tbody.querySelectorAll('[data-delete]').forEach(btn => {
       btn.addEventListener('click', () => deleteAviso(parseInt(btn.dataset.delete, 10)));
+    });
+
+    tbody.querySelectorAll('[data-share]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const a = avisos.find(item => item.id === parseInt(btn.dataset.share, 10));
+        if (!a) return;
+        shareToWhatsApp({
+          titulo: a.titulo,
+          contenido: a.contenido,
+          fecha: a.fecha_publicacion,
+          id: a.id,
+        });
+      });
     });
   }
 
@@ -149,6 +290,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     resetImageState();
     form.querySelector('[name="estado"]').value = 'activo';
     form.querySelector('[name="fecha_publicacion"]').value = todayISO();
+    if (notifCheck) notifCheck.checked = false;
+    if (notifHint) {
+      notifHint.textContent = 'Guárdalo primero para que el enlace llegue directo al aviso.';
+    }
     APP.openModal('avisoModal');
   }
 
@@ -166,6 +311,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     form.querySelector('[name="contenido"]').value = a.contenido || '';
     form.querySelector('[name="fecha_publicacion"]').value = a.fecha_publicacion || '';
     form.querySelector('[name="estado"]').value = a.estado || 'activo';
+    if (notifCheck) notifCheck.checked = !!a.notificado_at;
+    if (notifHint) {
+      notifHint.textContent = 'Abre WhatsApp con el mensaje listo para enviar al grupo.';
+    }
     showPreview(originalImageUrl);
     APP.openModal('avisoModal');
   }
@@ -213,6 +362,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!record.titulo || !record.contenido || !record.fecha_publicacion) {
       APP.showToast('Completa los campos obligatorios: Título, Contenido y Fecha.', 'warning');
       return;
+    }
+
+    // El estado de notificación solo lo controla el Administrador y solo
+    // si la columna existe en la base de datos.
+    if (hayColumnaNotificado && esAdministrador && notifCheck) {
+      record.notificado_at = notifCheck.checked ? new Date().toISOString() : null;
     }
 
     btnSave.innerHTML = spinHtml;
@@ -314,8 +469,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     showPreview('');
   });
 
+  /* ---------- PREPARAR MENSAJE PARA WHATSAPP ---------- */
+
+  if (btnPrepararWA) {
+    btnPrepararWA.addEventListener('click', () => {
+      const data = currentFormData();
+
+      if (!data.titulo) {
+        APP.showToast('Escribe el título del aviso antes de preparar el mensaje.', 'warning');
+        return;
+      }
+
+      shareToWhatsApp(data);
+    });
+  }
+
   APP.setupSearch('#searchAvisos', '#avisosBody tr');
   APP.setupModalClose('avisoModal');
+
+  /* ---------- INICIO ---------- */
+
+  // El rol real llega desde auth-guard; sin él no se decide nada.
+  const user = await waitForUser();
+  esAdministrador = !!(user && user.rol === 'Administrador');
+
+  // Si la migración no está aplicada, el panel sigue funcionando igual.
+  hayColumnaNotificado = await detectNotificadoColumn();
+  updateNotifControls();
 
   await loadAvisos();
   renderTable();
