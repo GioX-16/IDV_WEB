@@ -1,19 +1,31 @@
+/* ============================================================
+   reportes.js — Reporte de actividades y programación
+   ============================================================
+   Consume METRICAS para que los números coincidan con el Dashboard.
+   La distribución por estado siempre se calcula sobre el período
+   completo; el filtro de estado solo afecta a las tablas y al CSV.
+   ============================================================ */
+
 document.addEventListener('DOMContentLoaded', async () => {
 
-  const form        = document.getElementById('reportFilters');
-  const fromInput   = document.getElementById('reportFrom');
-  const toInput     = document.getElementById('reportTo');
-  const estadoInput = document.getElementById('reportEstado');
-  const quickRange  = document.getElementById('quickRange');
-  const printRange  = document.getElementById('printRange');
+  const form         = document.getElementById('reportFilters');
+  const fromInput    = document.getElementById('reportFrom');
+  const toInput      = document.getElementById('reportTo');
+  const estadoInput  = document.getElementById('reportEstado');
+  const quickRange   = document.getElementById('quickRange');
+  const printRange   = document.getElementById('printRange');
 
-  const kpiTotal          = document.getElementById('kpiTotal');
-  const kpiActivas        = document.getElementById('kpiActivas');
-  const kpiPendientes     = document.getElementById('kpiPendientes');
-  const kpiCanceladas     = document.getElementById('kpiCanceladas');
-  const kpiProximas       = document.getElementById('kpiProximas');
-  const kpiProgramacion   = document.getElementById('kpiProgramacion');
+  const kpiTotal           = document.getElementById('kpiTotal');
+  const kpiActivas         = document.getElementById('kpiActivas');
+  const kpiPendientes      = document.getElementById('kpiPendientes');
+  const kpiCanceladas      = document.getElementById('kpiCanceladas');
+  const kpiProximas        = document.getElementById('kpiProximas');
+  const kpiProgramacion    = document.getElementById('kpiProgramacion');
   const kpiProgramacionNote = document.getElementById('kpiProgramacionNote');
+  const kpiUsuarios        = document.getElementById('kpiUsuarios');
+  const kpiUsuariosNote    = document.getElementById('kpiUsuariosNote');
+  const kpiAvisos          = document.getElementById('kpiAvisos');
+  const kpiAvisosNote      = document.getElementById('kpiAvisosNote');
 
   const estadoBars  = document.getElementById('estadoBars');
   const mesBars     = document.getElementById('mesBars');
@@ -21,40 +33,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   const upcomingBody = document.getElementById('upcomingBody');
   const attentionBody = document.getElementById('attentionBody');
 
-  let actividades = [];
-  let programacion = null;
+  let currentData = null;
 
   function escapeHtml(text) {
     const el = document.createElement('div');
     el.textContent = text == null ? '' : text;
     return el.innerHTML;
-  }
-
-  function toLocalISO(date) {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, '0');
-    const d = String(date.getDate()).padStart(2, '0');
-    return `${y}-${m}-${d}`;
-  }
-
-  function startOfDay(date) {
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-  }
-
-  function formatDate(fecha) {
-    if (!fecha) return '';
-    const d = new Date(fecha.length > 10 ? fecha : fecha + 'T00:00:00');
-    if (isNaN(d)) return fecha;
-    return d.toLocaleDateString('es-NI', {
-      day: '2-digit', month: 'short', year: 'numeric',
-    });
-  }
-
-  function formatMonth(key) {
-    const d = new Date(key + '-01T00:00:00');
-    if (isNaN(d)) return key;
-    const label = d.toLocaleDateString('es-NI', { month: 'short', year: 'numeric' });
-    return label.charAt(0).toUpperCase() + label.slice(1);
   }
 
   function statusBadge(estado) {
@@ -67,26 +51,27 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function setQuickRange(value) {
-    const today = startOfDay(new Date());
+    const today = METRICAS.todayLocal();
     let from = '';
     let to = '';
 
     if (value === 'mes') {
-      from = toLocalISO(new Date(today.getFullYear(), today.getMonth(), 1));
-      to = toLocalISO(new Date(today.getFullYear(), today.getMonth() + 1, 0));
+      from = METRICAS.toLocalISO(new Date(today.getFullYear(), today.getMonth(), 1));
+      to = METRICAS.toLocalISO(new Date(today.getFullYear(), today.getMonth() + 1, 0));
     } else if (value === 'ano') {
-      from = toLocalISO(new Date(today.getFullYear(), 0, 1));
-      to = toLocalISO(new Date(today.getFullYear(), 11, 31));
+      from = METRICAS.toLocalISO(new Date(today.getFullYear(), 0, 1));
+      to = METRICAS.toLocalISO(new Date(today.getFullYear(), 11, 31));
     } else if (value === 'proximos30') {
-      from = toLocalISO(today);
-      const end = new Date(today);
-      end.setDate(end.getDate() + 30);
-      to = toLocalISO(end);
+      from = METRICAS.toLocalISO(today);
+      to = METRICAS.toLocalISO(METRICAS.addDays(today, 30));
     } else if (value === 'ultimos90') {
-      const start = new Date(today);
-      start.setDate(start.getDate() - 90);
-      from = toLocalISO(start);
-      to = toLocalISO(today);
+      from = METRICAS.toLocalISO(METRICAS.addDays(today, -90));
+      to = METRICAS.toLocalISO(today);
+    } else if (value === 'todo') {
+      from = '';
+      to = '';
+    } else {
+      return;
     }
 
     fromInput.value = from;
@@ -94,17 +79,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     quickRange.value = value;
   }
 
-  function rangeLabel() {
+  function rangeLabel(includeEstado) {
     const desde = fromInput.value;
     const hasta = toInput.value;
     let label;
 
-    if (desde && hasta) label = `${formatDate(desde)} al ${formatDate(hasta)}`;
-    else if (desde) label = `Desde ${formatDate(desde)}`;
-    else if (hasta) label = `Hasta ${formatDate(hasta)}`;
+    if (desde && hasta) label = `${METRICAS.formatDate(desde)} al ${METRICAS.formatDate(hasta)}`;
+    else if (desde) label = `Desde ${METRICAS.formatDate(desde)}`;
+    else if (hasta) label = `Hasta ${METRICAS.formatDate(hasta)}`;
     else label = 'Todas las fechas';
 
-    if (estadoInput.value) {
+    if (includeEstado !== false && estadoInput.value) {
       label += ` · Estado: ${estadoInput.options[estadoInput.selectedIndex].text}`;
     }
 
@@ -112,6 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function renderBars(container, items) {
+    if (!container) return;
     const max = Math.max(...items.map(item => item.value), 0);
 
     if (!max) {
@@ -132,128 +118,136 @@ document.addEventListener('DOMContentLoaded', async () => {
     }).join('');
   }
 
-  function renderSummary() {
-    const counts = { activo: 0, pendiente: 0, cancelado: 0 };
-    actividades.forEach(a => {
-      if (counts[a.estado] !== undefined) counts[a.estado] += 1;
-    });
+  function renderSummary(data) {
+    const metrics = data.activities;
 
-    const today = startOfDay(new Date());
-    const in30 = new Date(today);
-    in30.setDate(in30.getDate() + 30);
-    const todayISO = toLocalISO(today);
-    const in30ISO = toLocalISO(in30);
-
-    const proximas = actividades.filter(a => a.fecha >= todayISO && a.fecha <= in30ISO);
-
-    kpiTotal.textContent = actividades.length;
-    kpiActivas.textContent = counts.activo;
-    kpiPendientes.textContent = counts.pendiente;
-    kpiCanceladas.textContent = counts.cancelado;
-    kpiProximas.textContent = proximas.length;
-    document.getElementById('kpiTotalNote').textContent = rangeLabel();
+    kpiTotal.textContent = metrics.total;
+    kpiActivas.textContent = metrics.byState.activo;
+    kpiPendientes.textContent = metrics.byState.pendiente;
+    kpiCanceladas.textContent = metrics.byState.cancelado;
+    kpiProximas.textContent = metrics.proximas30.length;
+    const filtroEstado = estadoInput.value
+      ? ` · Tablas filtradas por: ${estadoInput.options[estadoInput.selectedIndex].text}`
+      : '';
+    document.getElementById('kpiTotalNote').textContent = `${rangeLabel(false)}${filtroEstado}`;
 
     renderBars(estadoBars, [
-      { label: 'Activas', value: counts.activo, className: 'success' },
-      { label: 'Pendientes', value: counts.pendiente, className: 'warning' },
-      { label: 'Canceladas', value: counts.cancelado, className: 'danger' },
+      { label: 'Activas', value: metrics.byState.activo, className: 'success' },
+      { label: 'Pendientes', value: metrics.byState.pendiente, className: 'warning' },
+      { label: 'Canceladas', value: metrics.byState.cancelado, className: 'danger' },
     ]);
 
     const monthMap = new Map();
-    actividades.forEach(a => {
-      if (!a.fecha) return;
-      const key = a.fecha.slice(0, 7);
+    data.periodRows.forEach((item) => {
+      if (!item.fecha) return;
+      const key = item.fecha.slice(0, 7);
       monthMap.set(key, (monthMap.get(key) || 0) + 1);
     });
     const monthItems = Array.from(monthMap.entries())
       .sort((a, b) => a[0].localeCompare(b[0]))
       .slice(-12)
-      .map(([key, value]) => ({ label: formatMonth(key), value }));
+      .map(([key, value]) => ({ label: METRICAS.formatMonth(key), value }));
     renderBars(mesBars, monthItems);
 
     const dayLabels = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
     const dayCounts = [0, 0, 0, 0, 0, 0, 0];
-    actividades.forEach(a => {
-      if (!a.fecha) return;
-      const d = new Date(a.fecha + 'T00:00:00');
-      if (isNaN(d)) return;
-      dayCounts[(d.getDay() + 6) % 7] += 1;
+    data.periodRows.forEach((item) => {
+      if (!item.fecha) return;
+      const date = METRICAS.parseDateOnly(item.fecha);
+      if (!date) return;
+      dayCounts[(date.getDay() + 6) % 7] += 1;
     });
-    renderBars(diaBars, dayLabels.map((label, i) => ({ label, value: dayCounts[i] })));
+    renderBars(diaBars, dayLabels.map((label, index) => ({ label, value: dayCounts[index] })));
   }
 
-  function renderProgramacion() {
-    if (!programacion || !programacion.imagen_url) {
+  function renderProgramacion(state, error) {
+    if (error) {
       kpiProgramacion.textContent = '—';
+      kpiProgramacionNote.textContent = 'No se pudo consultar';
+      return;
+    }
+
+    if (!state.publicada) {
+      kpiProgramacion.textContent = 'Sin publicar';
       kpiProgramacionNote.textContent = 'Sin programación publicada';
       return;
     }
 
-    const updated = new Date(programacion.updated_at || programacion.created_at);
-    if (isNaN(updated)) {
-      kpiProgramacion.textContent = 'Publicada';
-      kpiProgramacionNote.textContent = 'Programación disponible';
+    kpiProgramacion.textContent = state.label;
+    kpiProgramacionNote.textContent = state.stale
+      ? `${state.note} · desactualizada`
+      : state.note;
+  }
+
+  function renderUsuarios(users) {
+    if (users.total === null) {
+      kpiUsuarios.textContent = '—';
+      kpiUsuariosNote.textContent = 'No se pudo consultar';
       return;
     }
 
-    const today = startOfDay(new Date());
-    const updatedDay = startOfDay(updated);
-    const days = Math.max(0, Math.round((today - updatedDay) / 86400000));
-
-    kpiProgramacion.textContent = days === 0 ? 'Hoy' : `${days} d`;
-    kpiProgramacionNote.textContent = `Actualizada el ${formatDate(updated.toISOString())}`;
+    kpiUsuarios.textContent = users.activos;
+    kpiUsuariosNote.textContent = `${users.pct === null ? '—' : users.pct + '%'} · ${users.total} registrado${users.total === 1 ? '' : 's'}`;
   }
 
-  function renderTables() {
-    const todayISO = toLocalISO(startOfDay(new Date()));
+  function renderAvisos(avisos) {
+    if (avisos.visibles === null) {
+      kpiAvisos.textContent = '—';
+      kpiAvisosNote.textContent = 'No se pudo consultar';
+      return;
+    }
 
-    const upcoming = actividades
-      .filter(a => a.fecha >= todayISO)
+    kpiAvisos.textContent = avisos.visibles;
+    kpiAvisosNote.textContent = avisos.thisMonth > 0
+      ? `${avisos.thisMonth} publicado${avisos.thisMonth === 1 ? '' : 's'} este mes`
+      : 'Publicados';
+  }
+
+  function renderTables(data) {
+    const todayISO = METRICAS.toLocalISO(METRICAS.todayLocal());
+
+    const upcoming = data.filteredRows
+      .filter((item) => item.fecha >= todayISO && item.estado !== METRICAS.ESTADOS.CANCELADO)
+      .sort((a, b) => `${a.fecha} ${a.hora || ''}`.localeCompare(`${b.fecha} ${b.hora || ''}`))
       .slice(0, 8);
 
     if (!upcoming.length) {
       upcomingBody.innerHTML = '<tr><td colspan="4"><div class="empty-state"><i class="fas fa-calendar-xmark"></i><p>No hay próximas actividades en el periodo seleccionado.</p></div></td></tr>';
     } else {
-      upcomingBody.innerHTML = upcoming.map(a => `
+      upcomingBody.innerHTML = upcoming.map(item => `
         <tr>
-          <td>${formatDate(a.fecha)}</td>
-          <td>${APP.formatTime(a.hora)}</td>
-          <td><strong>${escapeHtml(a.titulo)}</strong></td>
-          <td>${statusBadge(a.estado)}</td>
+          <td>${METRICAS.formatDate(item.fecha)}</td>
+          <td>${METRICAS.formatTime(item.hora)}</td>
+          <td><strong>${escapeHtml(item.titulo)}</strong></td>
+          <td>${statusBadge(item.estado)}</td>
         </tr>`).join('');
     }
 
-    const attention = actividades
-      .filter(a => a.estado === 'pendiente' || a.estado === 'cancelado')
+    const attention = data.filteredRows
+      .filter((item) => item.estado === METRICAS.ESTADOS.PENDIENTE)
+      .sort((a, b) => `${a.fecha} ${a.hora || ''}`.localeCompare(`${b.fecha} ${b.hora || ''}`))
       .slice(0, 12);
 
     if (!attention.length) {
-      attentionBody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><i class="fas fa-circle-check"></i><p>No hay actividades pendientes ni canceladas.</p></div></td></tr>';
+      attentionBody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><i class="fas fa-circle-check"></i><p>No hay actividades pendientes.</p></div></td></tr>';
     } else {
-      attentionBody.innerHTML = attention.map(a => `
+      attentionBody.innerHTML = attention.map(item => `
         <tr>
-          <td>${formatDate(a.fecha)}</td>
-          <td>${APP.formatTime(a.hora)}</td>
-          <td><strong>${escapeHtml(a.titulo)}</strong></td>
-          <td class="report-description">${escapeHtml(a.descripcion || '')}</td>
-          <td>${statusBadge(a.estado)}</td>
+          <td>${METRICAS.formatDate(item.fecha)}</td>
+          <td>${METRICAS.formatTime(item.hora)}</td>
+          <td><strong>${escapeHtml(item.titulo)}</strong></td>
+          <td class="report-description">${escapeHtml(item.descripcion || '')}</td>
+          <td>${statusBadge(item.estado)}</td>
         </tr>`).join('');
     }
   }
 
-  async function loadProgramacion() {
-    try {
-      const { data } = await supabase
-        .from('programacion')
-        .select('imagen_url, updated_at, created_at')
-        .order('updated_at', { ascending: false })
-        .limit(1);
-
-      programacion = data && data.length ? data[0] : null;
-    } catch (e) {
-      console.error('Error al cargar la programación:', e);
-      programacion = null;
-    }
+  function renderAll(data) {
+    renderSummary(data);
+    renderProgramacion(data.programacion, data.programacionError);
+    renderUsuarios(data.users);
+    renderAvisos(data.avisos);
+    renderTables(data);
   }
 
   async function loadReport() {
@@ -266,32 +260,34 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-      let query = supabase.from('actividades').select('*');
-
-      if (desde) query = query.gte('fecha', desde);
-      if (hasta) query = query.lte('fecha', hasta);
-      if (estadoInput.value) query = query.eq('estado', estadoInput.value);
-
-      const { data, error } = await query
-        .order('fecha', { ascending: true })
-        .order('hora', { ascending: true });
-
-      if (error) throw error;
-      actividades = data || [];
-    } catch (e) {
-      console.error('Error al generar el reporte:', e);
+      currentData = await METRICAS.getReportData({
+        desde,
+        hasta,
+        estado: estadoInput.value || null,
+      });
+      renderAll(currentData);
+    } catch (error) {
+      console.error('Error al generar el reporte:', error);
       APP.showToast('Error al generar el reporte. Intenta de nuevo.', 'error');
-      actividades = [];
+      currentData = null;
+      kpiTotal.textContent = '—';
+      kpiActivas.textContent = '—';
+      kpiPendientes.textContent = '—';
+      kpiCanceladas.textContent = '—';
+      kpiProximas.textContent = '—';
+      kpiProgramacion.textContent = '—';
+      kpiProgramacionNote.textContent = 'Error de consulta';
+      kpiUsuarios.textContent = '—';
+      kpiUsuariosNote.textContent = 'Error de consulta';
+      kpiAvisos.textContent = '—';
+      kpiAvisosNote.textContent = 'Error de consulta';
     }
-
-    await loadProgramacion();
-    renderSummary();
-    renderProgramacion();
-    renderTables();
   }
 
   function exportCsv() {
-    if (!actividades.length) {
+    const rowsData = currentData ? currentData.filteredRows : [];
+
+    if (!rowsData.length) {
       APP.showToast('No hay actividades para exportar con los filtros actuales.', 'info');
       return;
     }
@@ -301,12 +297,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const cell = (value) => `"${String(value == null ? '' : value).replace(/"/g, '""')}"`;
 
-    const rows = actividades.map(a => [
-      a.fecha || '',
-      a.hora || '',
-      a.titulo || '',
-      a.descripcion || '',
-      stateLabel[a.estado] || a.estado || '',
+    const rows = rowsData.map(item => [
+      item.fecha || '',
+      item.hora || '',
+      item.titulo || '',
+      item.descripcion || '',
+      stateLabel[item.estado] || item.estado || '',
     ].map(cell).join(';'));
 
     const csv = '\uFEFF' + [headers.map(cell).join(';'), ...rows].join('\r\n');
@@ -314,7 +310,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `reporte-actividades-${toLocalISO(new Date())}.csv`;
+    link.download = `reporte-actividades-${METRICAS.toLocalISO(METRICAS.todayLocal())}.csv`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -323,23 +319,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     APP.showToast('Reporte exportado en CSV.', 'success');
   }
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
     loadReport();
   });
 
   quickRange.addEventListener('change', () => {
-    if (quickRange.value !== 'custom') {
-      setQuickRange(quickRange.value);
-      loadReport();
-    }
+    if (quickRange.value === 'custom') return;
+    setQuickRange(quickRange.value);
+    loadReport();
   });
 
   fromInput.addEventListener('change', () => { quickRange.value = 'custom'; });
   toInput.addEventListener('change', () => { quickRange.value = 'custom'; });
 
   document.getElementById('btnPrintReport').addEventListener('click', () => {
-    printRange.textContent = `${rangeLabel()} · Generado el ${new Date().toLocaleString('es-NI')}`;
+    printRange.textContent = `${rangeLabel(true)} · Generado el ${new Date().toLocaleString('es-NI')}`;
     window.print();
   });
 

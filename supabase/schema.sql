@@ -69,6 +69,30 @@ create table if not exists public.programacion (
   updated_by    uuid references auth.users (id) on delete set null
 );
 
+-- Una sola fila: la programación semanal se reemplaza, no se acumula.
+create unique index if not exists programacion_singleton_idx
+  on public.programacion ((true));
+
+-- Mantiene updated_at con la fecha real de la última sustitución de imagen.
+create or replace function public.set_updated_at()
+returns trigger
+language plpgsql
+as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+drop trigger if exists programacion_set_updated_at on public.programacion;
+create trigger programacion_set_updated_at
+  before update on public.programacion
+  for each row execute function public.set_updated_at();
+
+-- Índice para las métricas de actividades por fecha y estado.
+create index if not exists actividades_fecha_estado_idx
+  on public.actividades (fecha, estado);
+
 -- ============================================================
 -- 4. ROW LEVEL SECURITY
 -- ============================================================
@@ -214,6 +238,11 @@ create table if not exists public.avisos (
 
 create index if not exists avisos_publicados_idx
   on public.avisos (estado, fecha_publicacion desc);
+
+drop trigger if exists avisos_set_updated_at on public.avisos;
+create trigger avisos_set_updated_at
+  before update on public.avisos
+  for each row execute function public.set_updated_at();
 
 alter table public.avisos enable row level security;
 

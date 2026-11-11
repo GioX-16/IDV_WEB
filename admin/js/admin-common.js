@@ -90,7 +90,7 @@ APP.setupLogout = function () {
   logoutBtns.forEach(btn => {
     btn.addEventListener('click', async () => {
       await supabase.auth.signOut();
-      window.location.href = 'login';
+      window.location.href = 'login.html';
     });
   });
 };
@@ -170,7 +170,21 @@ APP.showToast = function (message, type = 'success') {
    FORMATTERS
    ============================================================ */
 APP.formatDate = function (dateStr) {
-  const d = new Date(dateStr);
+  if (!dateStr) return '';
+
+  // Las columnas DATE de Supabase llegan como YYYY-MM-DD. Si se pasan
+  // directamente a new Date(), el navegador las interpreta como UTC y en
+  // Nicaragua (UTC-6) muestran el día anterior. Se parsean como locales.
+  let d;
+  if (typeof dateStr === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+    const [year, month, day] = dateStr.split('-').map(Number);
+    d = new Date(year, month - 1, day);
+  } else {
+    d = new Date(dateStr);
+  }
+
+  if (isNaN(d.getTime())) return String(dateStr);
+
   return d.toLocaleDateString('es-NI', {
     year: 'numeric', month: 'long', day: 'numeric',
   });

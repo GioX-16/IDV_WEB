@@ -21,13 +21,13 @@ Sitio web oficial de la **Iglesia del Dios Viviente**, una comunidad cristiana m
 - Botones flotantes: WhatsApp directo y cambio de tema.
 
 ### 🔐 Panel de Administración (`admin/`)
-- Login simulado con roles (**Administrador**, **Pastor**, **Editor**).
+- Autenticación real con Supabase Auth y roles (**Administrador**, **Pastor**, **Editor**).
 - **Dashboard** con estadísticas resumidas.
 - **Actividades**: CRUD completo (crear, editar, eliminar, buscar) de los eventos de la iglesia.
 - **Avisos**: CRUD de comunicaciones con imagen opcional y estado activo/inactivo.
 - **Programación Semanal**: subir la imagen que se publica en la sección de Actividades del sitio.
 - **Reportes**: resumen de actividades y programación con filtros, impresión/PDF y exportación CSV.
-- **Usuarios**: gestión simulada de cuentas.
+- **Usuarios**: vista de los perfiles reales de Supabase Auth (`profiles`).
 - Interfaz con sidebar colapsable, modales, toasts y paginación.
 
 ---
@@ -38,12 +38,14 @@ Sitio web oficial de la **Iglesia del Dios Viviente**, una comunidad cristiana m
 |---|---|
 | **Frontend** | HTML5, CSS3 (variables, Grid/Flexbox, animaciones) |
 | **JavaScript** | Vanilla JS (ES6+) — sin frameworks |
-| **Persistencia** | `localStorage` (simulación de base de datos) |
+| **Persistencia** | Supabase (PostgreSQL + Auth + Storage) |
 | **Librerías CDN** | AOS (animaciones), Font Awesome (iconos), Google Fonts (Playfair Display + Inter) |
 | **Imágenes/Media** | SVG optimizado + vídeo institucional |
 | **Deploy** | Vercel (config: `vercel.json`) |
 
-> **Nota de arquitectura:** el proyecto corre **100% en el navegador** sin servidor propio. Los datos (actividades, programación, usuarios) se guardan en `localStorage`, por lo que la persistencia es local al dispositivo. Está preparado para migrar a una API/backend real en una siguiente fase.
+> **Nota de arquitectura:** el frontend es estático (HTML + JavaScript vanilla) y consume
+> Supabase directamente desde el navegador. Las métricas del panel se calculan en
+> `admin/js/metricas.js`, que es la fuente única para Dashboard y Reportes.
 
 ---
 
@@ -57,7 +59,9 @@ IDV_WEB/
 │   └── style.css           # Estilos del sitio público
 ├── js/
 │   ├── index.js            # Interacciones generales del sitio
-│   └── actividades.js      # Pestañas, tabla de actividades y programación semanal
+│   ├── actividades.js      # Actividades y programación semanal
+│   ├── avisos.js           # Avisos públicos
+│   └── supabase-config.js  # Configuración de Supabase
 ├── admin/                  # Panel de administración
 │   ├── login.html          # Inicio de sesión
 │   ├── dashboard.html      # Estadísticas
@@ -65,17 +69,14 @@ IDV_WEB/
 │   ├── avisos.html         # CRUD de avisos
 │   ├── programacion.html   # Subida de imagen semanal
 │   ├── reportes.html       # Reporte de actividades y programación
-│   ├── usuarios.html       # Gestión de usuarios
+│   ├── usuarios.html       # Perfiles reales de usuarios
 │   ├── css/admin.css       # Estilos del panel
-│   └── js/                 # Lógica del panel (auth, common, etc.)
-├── JS/
-│   ├── index.js            # Interacciones del sitio público
-│   ├── actividades.js      # Actividades y programación semanal
-│   ├── avisos.js           # Avisos públicos
-│   └── supabase-config.js  # Configuración de Supabase
+│   └── js/                 # Lógica del panel (auth, métricas, etc.)
 ├── supabase/
 │   ├── schema.sql          # Esquema completo
-│   └── avisos.sql          # Migración del módulo de avisos
+│   ├── avisos.sql          # Migración del módulo de avisos
+│   └── migrations/
+│       └── 20261111_metricas.sql  # Triggers, backfill e índices
 ├── img/                    # Imágenes y recursos SVG
 └── videos/                 # Vídeos institucionales
 ```
@@ -94,34 +95,52 @@ Esto crea la tabla `avisos`, las políticas RLS y el bucket público `avisos` pa
 
 ---
 
+## 🗄️ Migración: Consistencia de Métricas
+
+Ejecuta también `supabase/migrations/20261111_metricas.sql` en **Supabase → SQL Editor**.
+La migración es idempotente y corrige:
+
+- `updated_at` automático en `programacion` y `avisos` (fecha real de la última imagen/edición).
+- Una sola fila de programación (singleton), sin duplicados.
+- Backfill de `profiles` para usuarios de Auth que no tengan perfil.
+- Índices para las consultas de Dashboard y Reportes.
+
+Sin esta migración el panel sigue funcionando, pero la fecha de la programación
+depende de que el navegador envíe `updated_at` al guardar y los usuarios sin
+perfil no aparecerán en el conteo.
+
+---
+
 ## 🚀 Cómo Ejecutarlo Localmente
 
 El proyecto es estático: **no requiere instalación de dependencias ni build**.
 
 ```bash
-# Servidor local (recomendado). `serve.json` replica las URLs limpias de Vercel,
-# así los enlaces sin `.html` funcionan igual que en producción.
+# Servidor local (recomendado). `serve.json` replica las URLs limpias de Vercel.
 npx serve .
 # Luego visita http://localhost:3000
 
 # También puedes usar `npx vercel dev`, que respeta vercel.json.
+
+# O cualquier servidor estático, por ejemplo:
+python -m http.server 3000
 ```
 
-> Abrir `index.html` directamente con doble clic ya no es suficiente: los enlaces
-> internos usan URLs limpias (`/admin/login`, no `/admin/login.html`), por lo que
-> necesitas un servidor que las resuelva.
+> Los enlaces internos incluyen `.html` (`/admin/login.html`), así que funcionan en
+> cualquier servidor estático. En Vercel, `cleanUrls` los redirige a la URL limpia
+> (`/admin/login`). Abrir `index.html` con doble clic sigue sin recomendarse por las
+> políticas de origen de Supabase Auth.
 
 ---
 
-## 🔑 Credenciales de Demostración (Admin)
+## 🔑 Credenciales de Acceso (Admin)
 
-| Rol | Correo | Contraseña |
-|---|---|---|
-| Administrador | `admin@idv.org.ni` | `admin123` |
-| Pastor | `pastor@idv.org.ni` | `pastor123` |
-| Editor | `editor@idv.org.ni` | `editor123` |
+Los usuarios se crean y administran en **Supabase → Authentication → Users**.
+La tabla `profiles` guarda nombre, rol y estado de cada cuenta. No se almacenan
+contraseñas en el frontend ni en `localStorage`.
 
-> ⚠️ Solo para fines de demostración. El login es simulado (front-end puro).
+> Las credenciales de ejemplo del `schema.sql` son solo para instalaciones nuevas.
+> En producción, cada administrador debe usar su propia cuenta de Supabase Auth.
 
 ---
 
@@ -134,13 +153,13 @@ vercel          # Despliegue en ambiente de prueba
 vercel --prod   # Despliegue a producción
 ```
 
-`vercel.json` incluye URLs limpias, cabeceras de seguridad (nosniff, X-Frame-Options) y cacheo inmutable para los recursos estáticos (`/img`, `/videos`, `/styles`, `/js`).
+`vercel.json` incluye URLs limpias, cabeceras de seguridad (nosniff, X-Frame-Options), `no-cache` para HTML/JS/CSS del panel y caché corta para imágenes.
 
 ---
 
 ## 🔭 Roadmap Sugerido
 
-- [ ] Migrar `localStorage` a un backend real (API REST + base de datos).
+- [x] Migrar `localStorage` a un backend real (Supabase PostgreSQL + Auth + Storage).
 - [ ] Autenticación real con sesiones y permisos por rol.
 - [ ] Subida de imágenes al servidor en lugar de datos en base64.
 - [ ] Notificaciones a los hermanos (WhatsApp / correo) al actualizar la programación semanal.

@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* Login exitoso: Supabase guarda la sesión automáticamente */
-    window.location.href = 'dashboard';
+    window.location.href = 'dashboard.html';
   });
 
   /* ---------- HELPERS ---------- */

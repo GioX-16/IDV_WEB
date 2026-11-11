@@ -24,15 +24,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const { data } = await supabase
       .from('programacion')
-      .select('id, imagen_url, nombre_archivo')
+      .select('id, imagen_url, nombre_archivo, updated_at')
       .order('updated_at', { ascending: false })
+      .order('id', { ascending: false })
       .limit(1);
 
-    if (data && data.length && data[0].imagen_url) {
+    if (data && data.length) {
+      // La fila existe aunque todavía no tenga imagen. Guardarla evita
+      // insertar duplicados en el siguiente guardado.
       rowId = data[0].id;
-      storedFile = data[0].nombre_archivo || null;
-      previewEl.src = data[0].imagen_url;
-      if (data[0].nombre_archivo) fileNameEl.textContent = data[0].nombre_archivo;
+
+      if (data[0].imagen_url) {
+        storedFile = data[0].nombre_archivo || null;
+        previewEl.src = data[0].imagen_url;
+        if (data[0].nombre_archivo) fileNameEl.textContent = data[0].nombre_archivo;
+      }
     }
   } catch (e) {
     console.error('Error al cargar la programación:', e);
@@ -117,6 +123,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const record = {
         imagen_url: publicUrl,
         nombre_archivo: pendingFile.name,
+        updated_at: new Date().toISOString(),
         updated_by: user?.id || null,
       };
 

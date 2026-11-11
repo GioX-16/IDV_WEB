@@ -27,29 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => activateTab(btn));
     });
 
-    /* ----- DATOS: Actividades (fallback si el admin no guardo nada) ----- */
-    const DEFAULT_ACTIVIDADES = [
-        { id: 1,  titulo: 'Culto de Oración',         fecha: '2026-07-30', hora: '18:00', descripcion: 'Culto dedicado a la adoración y oración.', estado: 'activo' },
-        { id: 2,  titulo: 'Culto de Dorcas',           fecha: '2026-08-01', hora: '18:00', descripcion: 'Culto dirigido por mujeres.', estado: 'activo' },
-        { id: 3,  titulo: 'Ayuno Congregacional',      fecha: '2026-07-30', hora: '09:00', descripcion: 'Ayuno para crecimiento espiritual.', estado: 'activo' },
-        { id: 4,  titulo: 'Culto de Jóvenes',          fecha: '2026-08-02', hora: '18:00', descripcion: 'Servicio para jóvenes y adolescentes.', estado: 'pendiente' },
-        { id: 5,  titulo: 'Estudios SEAN',             fecha: '2026-07-31', hora: '18:00', descripcion: 'Estudios sobre la Vida en Cristo.', estado: 'activo' },
-        { id: 6,  titulo: 'Culto Evangelístico',       fecha: '2026-08-03', hora: '16:00', descripcion: 'Culto de adoración y alabanza.', estado: 'activo' },
-        { id: 7,  titulo: 'Escuela Dominical',         fecha: '2026-08-03', hora: '09:00', descripcion: 'Clases para todas las edades.', estado: 'pendiente' },
-        { id: 8,  titulo: 'Reunión de Líderes',        fecha: '2026-08-05', hora: '17:00', descripcion: 'Coordinación de ministerios.', estado: 'cancelado' },
-        { id: 9,  titulo: 'Vigilia de Oración',        fecha: '2026-08-08', hora: '22:00', descripcion: 'Noche de oración y alabanza.', estado: 'pendiente' },
-        { id: 10, titulo: 'Bautismos',                 fecha: '2026-08-10', hora: '10:00', descripcion: 'Celebración de bautismos.', estado: 'pendiente' },
-    ];
+    /* ----- DATOS: Actividades desde Supabase -----
+       No se usa un fallback ficticio: si la base está vacía o falla,
+       el sitio muestra el estado vacío real para no inventar métricas. */
+    let actividades = [];
 
-    let actividades = DEFAULT_ACTIVIDADES;
-
-    /* Cargar actividades desde Supabase (lectura pública).
-       Si la BD está vacía o no responde, se usa el fallback local. */
     async function loadActividades() {
         if (typeof supabase === 'undefined') return;
         try {
-            const { data } = await supabase.from('actividades').select('*');
-            if (Array.isArray(data) && data.length) actividades = data;
+            const { data, error } = await supabase.from('actividades').select('*');
+            if (error) throw error;
+            if (Array.isArray(data)) actividades = data;
         } catch (e) {
             console.error('Error al cargar actividades desde Supabase:', e);
         }
@@ -139,8 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const { data } = await supabase
                     .from('programacion')
-                    .select('imagen_url, nombre_archivo')
+                    .select('imagen_url, nombre_archivo, updated_at')
                     .order('updated_at', { ascending: false })
+                    .order('id', { ascending: false })
                     .limit(1);
                 if (data && data.length && data[0].imagen_url) {
                     progImg.src = data[0].imagen_url;
