@@ -638,6 +638,37 @@
         </div>
     </footer>
 
+    <!-- ===================== MODAL: DETALLE DE AVISO ===================== -->
+    <div class="aviso-modal" id="avisoModal" aria-hidden="true">
+        <div class="aviso-modal-backdrop" data-close-aviso></div>
+
+        <div class="aviso-modal-dialog" role="dialog" aria-modal="true"
+             aria-labelledby="avisoModalTitle" aria-describedby="avisoModalText">
+            <button type="button" class="aviso-modal-close" data-close-aviso aria-label="Cerrar aviso">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+
+            <div class="aviso-modal-media" id="avisoModalMedia">
+                <img id="avisoModalImage" alt="">
+            </div>
+
+            <div class="aviso-modal-content">
+                <p class="aviso-modal-eyebrow">
+                    <i class="far fa-calendar" aria-hidden="true"></i>
+                    <span id="avisoModalDate"></span>
+                </p>
+
+                <h2 class="aviso-modal-title" id="avisoModalTitle"></h2>
+                <div class="aviso-modal-text" id="avisoModalText"></div>
+
+                <div class="aviso-modal-footer">
+                    <span class="aviso-modal-brand">Iglesia del Dios Viviente</span>
+                    <button type="button" class="aviso-modal-action" data-close-aviso>Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ===================== SCRIPTS ===================== -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
