@@ -3291,6 +3291,19 @@ html.light-mode .avisos-section .section-desc.light {
     .aviso-text {
         font-size: 0.86rem;
     }
+
+    /* En móvil la tarjeta ocupa todo el ancho, así que el botón de
+       compartir quedaba debajo de los botones flotantes fijos de la
+       esquina inferior derecha. Se mueve al lado izquierdo para que
+       nunca quede tapado. */
+    .aviso-actions {
+        justify-content: flex-start;
+    }
+
+    .aviso-share {
+        order: -1;
+        margin-right: auto;
+    }
 }
 
 /* ============================================================
