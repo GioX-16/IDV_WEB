@@ -216,10 +216,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       upcomingBody.innerHTML = upcoming.map(item => `
         <tr>
-          <td>${METRICAS.formatDate(item.fecha)}</td>
-          <td>${METRICAS.formatTime(item.hora)}</td>
-          <td><strong>${escapeHtml(item.titulo)}</strong></td>
-          <td>${statusBadge(item.estado)}</td>
+          <td data-label="Fecha">${METRICAS.formatDate(item.fecha)}</td>
+          <td data-label="Hora">${METRICAS.formatTime(item.hora)}</td>
+          <td data-label=""><strong>${escapeHtml(item.titulo)}</strong></td>
+          <td data-label="Estado">${statusBadge(item.estado)}</td>
         </tr>`).join('');
     }
 
@@ -233,11 +233,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       attentionBody.innerHTML = attention.map(item => `
         <tr>
-          <td>${METRICAS.formatDate(item.fecha)}</td>
-          <td>${METRICAS.formatTime(item.hora)}</td>
-          <td><strong>${escapeHtml(item.titulo)}</strong></td>
-          <td class="report-description">${escapeHtml(item.descripcion || '')}</td>
-          <td>${statusBadge(item.estado)}</td>
+          <td data-label="Fecha">${METRICAS.formatDate(item.fecha)}</td>
+          <td data-label="Hora">${METRICAS.formatTime(item.hora)}</td>
+          <td data-label=""><strong>${escapeHtml(item.titulo)}</strong></td>
+          <td data-label="Descripción" class="report-description">${escapeHtml(item.descripcion || '')}</td>
+          <td data-label="Estado">${statusBadge(item.estado)}</td>
         </tr>`).join('');
     }
   }

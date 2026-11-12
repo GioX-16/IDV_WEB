@@ -230,11 +230,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         : '<span class="aviso-thumb-empty"><i class="fas fa-image"></i></span>';
 
       const notifCell = hayColumnaNotificado
-        ? `<td>${notificadoBadge(a)}</td>`
+        ? `<td data-label="Notificado">${notificadoBadge(a)}</td>`
         : '';
 
       tr.innerHTML = `
-        <td>
+        <td data-label="">
           <div class="aviso-cell">
             ${thumb}
             <div class="aviso-cell-text">
@@ -243,10 +243,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>
           </div>
         </td>
-        <td>${a.fecha_publicacion ? APP.formatDate(a.fecha_publicacion) : '-'}</td>
-        <td>${statusBadge(a.estado)}</td>
+        <td data-label="Publicación">${a.fecha_publicacion ? APP.formatDate(a.fecha_publicacion) : '-'}</td>
+        <td data-label="Estado">${statusBadge(a.estado)}</td>
         ${notifCell}
-        <td>
+        <td data-label="">
           <div class="action-btns">
             <button class="btn-icon share" title="Compartir por WhatsApp" data-share="${a.id}"><i class="fab fa-whatsapp"></i></button>
             <button class="btn-icon edit" title="Editar" data-edit="${a.id}"><i class="fas fa-pen-to-square"></i></button>

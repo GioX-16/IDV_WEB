@@ -166,11 +166,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         data.recent.forEach((item) => {
           const row = document.createElement('tr');
           row.innerHTML = `
-            <td><strong>${escapeHtml(item.titulo)}</strong></td>
-            <td>${METRICAS.formatDate(item.fecha)}</td>
-            <td>${METRICAS.formatTime(item.hora)}</td>
-            <td>${statusBadge(item.estado)}</td>
-            <td>
+            <td data-label=""><strong>${escapeHtml(item.titulo)}</strong></td>
+            <td data-label="Fecha">${METRICAS.formatDate(item.fecha)}</td>
+            <td data-label="Hora">${METRICAS.formatTime(item.hora)}</td>
+            <td data-label="Estado">${statusBadge(item.estado)}</td>
+            <td data-label="">
               <div class="action-btns">
                 <a href="actividades.html" class="btn-icon" title="Ver"><i class="fas fa-eye"></i></a>
               </div>

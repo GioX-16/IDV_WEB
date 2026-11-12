@@ -69,11 +69,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       const tr = document.createElement('tr');
       tr.setAttribute('data-id', a.id);
       tr.innerHTML = `
-        <td><strong>${escapeHtml(a.titulo)}</strong></td>
-        <td>${APP.formatDate(a.fecha)}</td>
-        <td>${APP.formatTime(a.hora)}</td>
-        <td>${statusBadge(a.estado)}</td>
-        <td>
+        <td data-label=""><strong>${escapeHtml(a.titulo)}</strong></td>
+        <td data-label="Fecha">${APP.formatDate(a.fecha)}</td>
+        <td data-label="Hora">${APP.formatTime(a.hora)}</td>
+        <td data-label="Estado">${statusBadge(a.estado)}</td>
+        <td data-label="">
           <div class="action-btns">
             <button class="btn-icon edit" title="Editar" data-edit="${a.id}"><i class="fas fa-pen-to-square"></i></button>
             <button class="btn-icon delete" title="Eliminar" data-delete="${a.id}"><i class="fas fa-trash-can"></i></button>

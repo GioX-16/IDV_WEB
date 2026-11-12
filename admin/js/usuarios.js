@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const row = document.createElement('tr');
       row.setAttribute('data-id', usuario.id);
       row.innerHTML = `
-        <td>
+        <td data-label="">
           <div style="display:flex;align-items:center;gap:0.6rem;">
             <div class="topbar-avatar" style="width:32px;height:32px;font-size:0.75rem;">
               ${escapeHtml(getInitials(usuario.nombre || usuario.email))}
@@ -63,13 +63,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             <strong>${escapeHtml(usuario.nombre || 'Sin nombre')}</strong>
           </div>
         </td>
-        <td>${escapeHtml(usuario.email || '')}</td>
-        <td>
+        <td data-label="Correo">${escapeHtml(usuario.email || '')}</td>
+        <td data-label="Rol">
           <span style="background:var(--primary-bg);color:var(--primary);padding:0.2rem 0.6rem;border-radius:20px;font-size:0.75rem;font-weight:600;">
             ${escapeHtml(usuario.rol || 'Editor')}
           </span>
         </td>
-        <td>${statusBadge(usuario.estado)}</td>
+        <td data-label="Estado">${statusBadge(usuario.estado)}</td>
       `;
       tbody.appendChild(row);
     });
