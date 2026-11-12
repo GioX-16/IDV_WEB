@@ -337,19 +337,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       card.innerHTML = `
         ${image}
         <div class="aviso-body">
-          <span class="aviso-date"><i class="far fa-calendar"></i> ${formatFecha(a.fecha_publicacion)}</span>
-          <h3 class="aviso-title">${escapeHtml(a.titulo)}</h3>
-          <p class="aviso-text">${escapeHtml(a.contenido)}</p>
-          <div class="aviso-actions">
-            <span class="aviso-more">
-              Ver aviso completo
-              <i class="fas fa-arrow-right" aria-hidden="true"></i>
-            </span>
+          <div class="aviso-head">
+            <span class="aviso-date"><i class="far fa-calendar"></i> ${formatFecha(a.fecha_publicacion)}</span>
             <button type="button" class="aviso-share" data-share="${escapeHtml(a.id)}"
                     aria-label="Compartir este aviso por WhatsApp" title="Compartir por WhatsApp">
               <i class="fab fa-whatsapp" aria-hidden="true"></i>
             </button>
           </div>
+          <h3 class="aviso-title">${escapeHtml(a.titulo)}</h3>
+          <p class="aviso-text">${escapeHtml(a.contenido)}</p>
+          <span class="aviso-more">
+            Ver aviso completo
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </span>
         </div>
       `;
 
